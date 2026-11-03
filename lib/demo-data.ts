@@ -1,4 +1,4 @@
-'use client'
+'use client' 
 
 import type { DiagnosticEvaluationResult } from './fln-scoring-engine'
 
