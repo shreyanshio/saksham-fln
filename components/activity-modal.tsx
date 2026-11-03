@@ -72,8 +72,8 @@ export function ActivityModal({ student, activity, onClose, onCompleteActivity }
           <p className="mt-2 text-xs leading-5 text-[#526273]">{activity.description}</p>
 
           <div className="mt-4 rounded-xl border border-[#bfe2da] bg-[#dff4ef]/50 p-3.5 text-xs leading-5 text-[#087f75]">
-            <strong>Teacher Classroom Guide:</strong> Provide Aarav with 35 drinking straws and 4 rubber bands.
-            Prompt him: &ldquo;Bundle ten straws into a bundle. How many bundles can you make? How many loose straws are
+            <strong>Teacher Classroom Guide:</strong> Provide {student.name} with 35 drinking straws and 4 rubber bands.
+            Prompt: &ldquo;Bundle ten straws into a bundle. How many bundles can you make? How many loose straws are
             left?&rdquo;
           </div>
         </div>
@@ -92,7 +92,7 @@ export function ActivityModal({ student, activity, onClose, onCompleteActivity }
             value={observation}
             onChange={(e) => setObservation(e.target.value)}
             className="mt-1.5 w-full rounded-xl border border-[#cbd9d5] bg-white p-3 text-xs text-[#17324d] outline-none transition focus:border-[#0d9488] focus:ring-2 focus:ring-[#0d9488]/20"
-            placeholder="Record Aarav's engagement, independence, and conceptual grasp…"
+            placeholder={`Record ${student.name}'s engagement, independence, and conceptual grasp…`}
           />
         </div>
 

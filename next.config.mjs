@@ -2,9 +2,6 @@
 const nextConfig = {
   output: 'standalone',
   devIndicators: false,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: { 
     unoptimized: true,
   },

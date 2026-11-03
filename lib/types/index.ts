@@ -104,6 +104,7 @@ export interface StudentRecord {
   nextRecommendedAction: string
   completedActivitiesCount: number
   assignedActivitiesCount: number
+  completedActivityIds?: string[]
 }
 
 // Alias

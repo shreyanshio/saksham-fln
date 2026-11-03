@@ -1,4 +1,7 @@
-import { LearningActivityItem, LearningPlanRecord } from '@/lib/types'
+import { LearningActivity, LearningActivityItem, LearningPlanRecord } from '@/lib/types'
+import { studentService } from '@/lib/services/studentService'
+import { teacherActionService } from '@/lib/services/teacherActionService'
+import { auditService } from '@/lib/services/auditService'
 
 export const INITIAL_PLANS: LearningPlanRecord[] = [
   {
@@ -280,6 +283,43 @@ export const learningPlanService = {
         // Ignore
       }
     }
+
+    if (updatedPlan) {
+      // Sync student record
+      const student = studentService.getStudentById(updatedPlan.studentId)
+      if (student) {
+        studentService.updateStudent({
+          ...student,
+          planStatus: 'Approved',
+          planTitle: updatedPlan.title,
+          nextRecommendedAction: updatedPlan.activities[0]?.title
+            ? `Begin Step 1: ${updatedPlan.activities[0].title}`
+            : student.nextRecommendedAction,
+        })
+      }
+
+      // Sync teacher actions
+      const actions = teacherActionService.getActions()
+      const matchingAction = actions.find(
+        (a) =>
+          (a.relatedStudentId === updatedPlan?.studentId || a.id === 'act-002') &&
+          a.status !== 'Completed'
+      )
+      if (matchingAction) {
+        teacherActionService.updateActionStatus(matchingAction.id, 'Completed')
+      }
+
+      auditService.logEvent({
+        actorId: 'usr-tea-01',
+        actorName: 'Asha Shah',
+        role: 'teacher',
+        eventType: 'plan_approved',
+        entityType: 'plan',
+        entityId: updatedPlan.id,
+        summary: `Approved 5-day foundational learning plan for ${updatedPlan.studentName}`,
+      })
+    }
+
     return updatedPlan
   },
 
@@ -288,6 +328,12 @@ export const learningPlanService = {
     let updatedPlan: LearningPlanRecord | undefined
     const nextList = list.map((p) => {
       if (p.id === planId) {
+        const targetAct = p.activities.find((a) => a.id === activityId)
+        if (targetAct && targetAct.status === 'completed') {
+          updatedPlan = p
+          return p
+        }
+
         const actIndex = p.activities.findIndex((a) => a.id === activityId)
         const updatedActivities = p.activities.map((act, idx) => {
           if (act.id === activityId) {
@@ -307,10 +353,11 @@ export const learningPlanService = {
           return act
         })
 
+        const allCompleted = updatedActivities.every((a) => a.status === 'completed')
         updatedPlan = {
           ...p,
           activities: updatedActivities,
-          status: updatedActivities.every((a) => a.status === 'completed') ? ('Completed' as const) : ('In progress' as const),
+          status: allCompleted ? ('Completed' as const) : ('In progress' as const),
         }
         return updatedPlan
       }
@@ -324,6 +371,116 @@ export const learningPlanService = {
         // Ignore
       }
     }
+
+    if (updatedPlan) {
+      studentService.recordActivityCompletion(updatedPlan.studentId, activityId)
+      auditService.logEvent({
+        actorId: 'usr-tea-01',
+        actorName: 'Asha Shah',
+        role: 'teacher',
+        eventType: 'activity_completed',
+        entityType: 'activity',
+        entityId: activityId,
+        summary: `Completed remediation step for ${updatedPlan.studentName}: "${observation || 'Activity completed'}"`,
+      })
+    }
+
     return updatedPlan
+  },
+
+  assignActivityToPlan: (studentId: string, activity: LearningActivity): LearningPlanRecord => {
+    let plan = learningPlanService.getPlanByStudentId(studentId)
+    const student = studentService.getStudentById(studentId)
+    const studentName = student ? student.fullName : 'Student'
+    const classId = student ? student.classId : 'class-std-3a'
+
+    const newActivityItem: LearningActivityItem = {
+      id: activity.id,
+      title: activity.title,
+      titleGu: activity.titleGu,
+      titleHi: activity.titleHi,
+      subject: activity.subjectId,
+      targetSkillId: activity.skillId,
+      targetSkillName: activity.targetSkillName,
+      prerequisiteSkillName: activity.prerequisiteSkillName,
+      gradeRange: activity.gradeRange,
+      format: (activity.format || 'guided_math') as any,
+      duration: activity.duration || `${activity.durationMinutes} mins`,
+      curriculumMapping: activity.curriculumMapping,
+      description: activity.description,
+      materialsNeeded: activity.materialsNeeded,
+      teacherScriptGu: activity.teacherScriptGu,
+      teacherScriptEn: activity.teacherScriptEn,
+      status: 'ready',
+    }
+
+    if (!plan) {
+      plan = {
+        id: `plan-${studentId}-${Date.now()}`,
+        studentId,
+        studentName,
+        classId,
+        title: `${activity.targetSkillName} Remedial Pathway`,
+        titleGu: `${activity.titleGu} પાયાનો માર્ગ`,
+        status: 'In progress',
+        targetSkill: activity.targetSkillName,
+        prerequisiteGap: activity.prerequisiteSkillName,
+        teacherNotes: 'Directly assigned from FLN resource library.',
+        startDate: 'Today',
+        targetCompletionDate: 'Next week',
+        weeklySchedule: [],
+        activities: [newActivityItem],
+      }
+    } else {
+      const alreadyHas = plan.activities.some((a) => a.id === activity.id)
+      if (!alreadyHas) {
+        plan = {
+          ...plan,
+          activities: [...plan.activities, newActivityItem],
+        }
+      }
+    }
+
+    learningPlanService.createOrUpdatePlan(plan)
+
+    // Update student assigned count and next action
+    if (student) {
+      studentService.updateStudent({
+        ...student,
+        assignedActivitiesCount: Math.max((student.assignedActivitiesCount || 0) + 1, plan.activities.length),
+        nextRecommendedAction: `Complete assigned activity: ${activity.title}`,
+      })
+    }
+
+    // Add teacher action for conducting this assigned activity
+    teacherActionService.addAction({
+      id: `act-assign-${Date.now()}`,
+      title: `Guide ${studentName} with ${activity.title}`,
+      titleGu: `${studentName} સાથે "${activity.titleGu}" પ્રવૃત્તિ કરાવો`,
+      titleHi: `${studentName} के साथ "${activity.titleHi || activity.title}" गतिविधि कराएं`,
+      description: `Remedial activity assigned from resource library. Focus: ${activity.targetSkillName}.`,
+      reason: `Support foundational prerequisite: ${activity.prerequisiteSkillName}.`,
+      relatedSkill: activity.targetSkillName,
+      relatedStudentId: studentId,
+      relatedStudentName: studentName,
+      relatedClassId: classId,
+      className: 'Standard 3 - A',
+      priority: 'Medium',
+      dueDate: 'This Week',
+      status: 'Pending',
+      recommendedNextStep: `Prepare ${activity.materialsNeeded || 'concrete classroom manipulatives'}.`,
+    })
+
+    auditService.logEvent({
+      actorId: 'usr-tea-01',
+      actorName: 'Asha Shah',
+      role: 'teacher',
+      eventType: 'activity_completed',
+      entityType: 'activity',
+      entityId: activity.id,
+      summary: `Assigned remedial activity "${activity.title}" to ${studentName}`,
+    })
+
+    return plan
   },
 }

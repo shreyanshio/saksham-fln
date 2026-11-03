@@ -259,17 +259,32 @@ export const studentService = {
     }
   },
 
-  recordActivityCompletion: (studentId: string, activityTitle?: string): StudentRecord | undefined => {
+  recordActivityCompletion: (studentId: string, activityIdOrTitle?: string): StudentRecord | undefined => {
     const list = studentService.getStudents()
     let updated: StudentRecord | undefined
     const nextList = list.map((s) => {
       if (s.id === studentId || s.studentId === studentId) {
-        const nextCompleted = (s.completedActivitiesCount || 0) + 1
+        // Prevent duplicate increments if this specific activity is already marked complete
+        const currentCompletedIds = s.completedActivityIds || []
+        if (activityIdOrTitle && currentCompletedIds.includes(activityIdOrTitle)) {
+          updated = s
+          return s
+        }
+
+        const nextCompletedIds = activityIdOrTitle
+          ? [...currentCompletedIds, activityIdOrTitle]
+          : currentCompletedIds
+        const nextCompleted = activityIdOrTitle
+          ? nextCompletedIds.length
+          : (s.completedActivitiesCount || 0) + 1
+
         const totalAssigned = Math.max(s.assignedActivitiesCount || 3, nextCompleted)
         const nextPercent = Math.min(100, Math.round((nextCompleted / totalAssigned) * 100))
         const nextStatus = nextPercent >= 80 ? 'Demonstrated' : nextPercent >= 50 ? 'Developing' : s.overallStatus
+
         updated = {
           ...s,
+          completedActivityIds: nextCompletedIds,
           completedActivitiesCount: nextCompleted,
           assignedActivitiesCount: totalAssigned,
           progressPercent: nextPercent,

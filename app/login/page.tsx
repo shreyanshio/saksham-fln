@@ -22,10 +22,11 @@ import { Role } from '@/lib/types'
 import { LanguageSelector } from '@/components/language-selector'
 
 const roleOptions: Array<{ id: Role; labelKey: string; defaultLabel: string; email: string }> = [
-  { id: 'teacher', labelKey: 'teacher', defaultLabel: 'Classroom Teacher (Class 3A)', email: 'asha.shah@primary-school.demo' },
-  { id: 'head_teacher', labelKey: 'head_teacher', defaultLabel: 'Head Teacher (School Principal)', email: 'headmaster@primary-school.demo' },
-  { id: 'crc_coordinator', labelKey: 'crc_coordinator', defaultLabel: 'CRC Cluster Coordinator', email: 'crc.coordinator@district-fln.demo' },
-  { id: 'deo', labelKey: 'deo', defaultLabel: 'District Education Officer (DEO)', email: 'deo.dwarka@education.demo' },
+  { id: 'teacher', labelKey: 'teacher', defaultLabel: 'Classroom Teacher (Class 3A)', email: 'asha.shah@ashaprimary.demo' },
+  { id: 'head_teacher', labelKey: 'head_teacher', defaultLabel: 'Head Teacher (School Principal)', email: 'headmaster@ashaprimary.demo' },
+  { id: 'crc_coordinator', labelKey: 'crc_coordinator', defaultLabel: 'CRC Cluster Coordinator (Khambhalia)', email: 'crc.khambhalia@education.demo' },
+  { id: 'deo', labelKey: 'deo', defaultLabel: 'District Education Officer (DEO - Devbhumi Dwarka)', email: 'deo.dwarka@gujarat.gov.demo' },
+  { id: 'admin', labelKey: 'admin', defaultLabel: 'District Collectorate Education Cell', email: 'admin.collector@dwarka.gov.demo' },
   { id: 'parent', labelKey: 'parent', defaultLabel: 'Parent / Guardian (Aarav K.)', email: 'parent.aarav@guardian.demo' },
 ]
 
@@ -35,12 +36,12 @@ export default function LoginPage() {
 
   const [selectedRole, setSelectedRole] = useState<Role>('teacher')
   const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState('asha.shah@primary-school.demo')
+  const [email, setEmail] = useState('asha.shah@ashaprimary.demo')
   const [password, setPassword] = useState('demo-access')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [modalType, setModalType] = useState<'forgot' | 'support' | null>(null)
+  const [modalType, setModalType] = useState<'info' | null>(null)
 
   function handleRoleChange(newRole: Role) {
     setSelectedRole(newRole)
@@ -66,8 +67,10 @@ export default function LoginPage() {
     setTimeout(() => {
       if (selectedRole === 'parent') {
         router.push('/app/parent')
-      } else if (selectedRole === 'crc_coordinator' || selectedRole === 'deo') {
+      } else if (selectedRole === 'crc_coordinator') {
         router.push('/app/reports')
+      } else if (selectedRole === 'deo' || selectedRole === 'admin') {
+        router.push('/district/overview')
       } else {
         router.push('/app/dashboard')
       }
@@ -80,8 +83,10 @@ export default function LoginPage() {
     setTimeout(() => {
       if (selectedRole === 'parent') {
         router.push('/app/parent')
-      } else if (selectedRole === 'crc_coordinator' || selectedRole === 'deo') {
+      } else if (selectedRole === 'crc_coordinator') {
         router.push('/app/reports')
+      } else if (selectedRole === 'deo' || selectedRole === 'admin') {
+        router.push('/district/overview')
       } else {
         router.push('/app/dashboard')
       }
@@ -245,7 +250,7 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => setModalType('forgot')}
+                onClick={() => setModalType('info')}
                 className="font-semibold text-[#0D9488] hover:underline"
               >
                 {t.login.forgotPassword}
@@ -283,10 +288,10 @@ export default function LoginPage() {
           <div className="text-center pt-2">
             <button
               type="button"
-              onClick={() => setModalType('support')}
+              onClick={() => setModalType('info')}
               className="text-xs text-[#64748B] hover:text-[#0D9488] hover:underline"
             >
-              {t.login.helpdeskSupport}
+              Prototype Preview Details & Architecture Notice
             </button>
           </div>
 
@@ -298,13 +303,13 @@ export default function LoginPage() {
         </div>
       </section>
 
-      {/* Help / Password Recovery Modal */}
+      {/* Prototype Preview Information Modal */}
       {modalType && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-sm rounded-xl border border-[#CBD5E1] bg-white p-5 shadow-lg">
-            <div className="flex items-center justify-between pb-3">
+          <div className="w-full max-w-md rounded-2xl border border-[#CBD5E1] bg-white p-6 shadow-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
               <span className="font-bold text-[#17324D] text-sm">
-                {modalType === 'forgot' ? 'Demo Password Access' : 'Teacher Helpdesk'}
+                Prototype Evaluation Environment Notice
               </span>
               <button
                 type="button"
@@ -315,27 +320,22 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <div className="text-xs text-[#64748B] leading-relaxed">
-              {modalType === 'forgot' ? (
-                <p>
-                  In this synthetic demonstration phase, any password or the default{' '}
-                  <code className="rounded bg-[#F1F5F3] px-1 py-0.5 text-[#17324D]">demo-access</code>{' '}
-                  can be used to enter the role-specific workspace. In production, password verification is done via SMS OTP on the registered mobile number.
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  <p><strong>Devbhumi Dwarka FLN Support Line:</strong></p>
-                  <p>• Phone: +91 2833 232000</p>
-                  <p>• Support Hours: Mon–Sat, 8:00 AM – 5:00 PM</p>
-                  <p>• Collectorate EdTech Coordinator: edtech.dwarka@gujarat.gov.in</p>
-                </div>
-              )}
+            <div className="mt-3 text-xs text-[#526273] space-y-2.5 leading-relaxed">
+              <p>
+                <strong>Problem ID PS000034:</strong> AI-Assisted Diagnostic and Adaptive Remedial Learning System for Primary Classrooms.
+              </p>
+              <p>
+                <strong>Jury Evaluation Mode:</strong> This frontend application provides pre-configured authentic demonstration roles (Teacher, Head Teacher, CRC Coordinator, DEO, District Admin, and Guardian) using a deterministic client repository.
+              </p>
+              <p>
+                No external API or mock server is claimed as production authentication; all role transitions simulate governance hierarchies honestly and safely offline.
+              </p>
             </div>
 
-            <div className="mt-4 flex justify-end">
+            <div className="mt-5 flex justify-end">
               <Button
                 onClick={() => setModalType(null)}
-                className="h-8 rounded-lg bg-[#0D9488] px-3 text-xs font-semibold text-white hover:bg-[#087F75]"
+                className="h-9 rounded-xl bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75]"
               >
                 {t.common.close}
               </Button>

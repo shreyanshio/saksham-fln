@@ -90,7 +90,7 @@ export function DiagnosticModal({
                 </span>
               </div>
               <h3 className="mt-1 text-xl font-bold text-[#17324d]">
-                નિદાન પરિણામ પત્રક: {student.fullName} (Aarav Kumar)
+                નિદાન પરિણામ પત્રક: {student.fullName}
               </h3>
             </div>
           </div>
@@ -135,14 +135,21 @@ export function DiagnosticModal({
         </div>
 
         {/* Score & Primary Summary Banner */}
-        <div className="mt-5 grid gap-4 sm:grid-cols-[1.1fr_1.9fr]">
+        <div className="mt-5 grid gap-4 sm:grid-cols-[1.2fr_1.8fr]">
           <div className="flex flex-col items-center justify-center rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-5 text-center">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#64748b]">Overall Baseline Score</span>
-            <div className="mt-2 text-4xl font-extrabold text-[#0d9488]">{result.overallScore}%</div>
-            <span className="mt-1.5 rounded-full bg-[#dff4ef] px-3 py-0.5 text-xs font-semibold text-[#087f75]">
-              {result.correctAnswersCount} of {result.totalQuestions} Questions Correct
-            </span>
-            <p className="mt-2 text-[11px] text-[#94a3b8]">Evaluated from submitted student responses</p>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#64748b]">Accuracy on Attempted Items</span>
+            <div className="mt-2 text-4xl font-extrabold text-[#0d9488]">
+              {result.attemptedQuestionsCount > 0 ? `${result.overallScore}%` : 'N/A'}
+            </div>
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
+              <span className="rounded-full bg-[#dff4ef] px-2.5 py-0.5 text-xs font-semibold text-[#087f75]">
+                {result.correctAnswersCount} of {result.attemptedQuestionsCount} Correct
+              </span>
+              <span className="rounded-full bg-[#edf2f0] px-2.5 py-0.5 text-xs font-medium text-[#526273]">
+                Coverage: {result.evidenceCoveragePercent ?? Math.round((result.attemptedQuestionsCount / result.totalQuestions) * 100)}% ({result.attemptedQuestionsCount}/{result.totalQuestions})
+              </span>
+            </div>
+            <p className="mt-2 text-[11px] text-[#94a3b8]">Separates student accuracy from evidence coverage</p>
           </div>
 
           <div className="rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-5">
@@ -172,7 +179,7 @@ export function DiagnosticModal({
               </div>
               <h4 className="mt-1 text-base font-bold sm:text-lg">{result.clearNextStep.title}</h4>
               <p className="mt-0.5 text-xs text-white/75 leading-relaxed">
-                Conduct this 12-minute hands-on bundling session with Aarav to validate his grouping intuition before moving to 2-digit column worksheets.
+                Conduct this targeted hands-on session with {student.name} to validate grouping intuition before moving to advanced worksheets.
               </p>
             </div>
             <Button
