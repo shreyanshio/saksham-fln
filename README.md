@@ -113,13 +113,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📚 Documentation & Evaluation Runbooks
-
-- **[Jury Demonstration Runbook & Screen Recording Script](docs/jury-demo-runbook.md)**: 5-minute winning presentation walkthrough, step-by-step click order, and role-switching instructions.
-- **[Comprehensive Audit & Quality Upgrade Report](docs/audit-and-fix-report.md)**: In-depth technical breakdown of state unification, scoring engine correctness, trilingual Indic typography, and glassmorphism redesign.
-
----
-
 ## 📄 License
 
 This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
