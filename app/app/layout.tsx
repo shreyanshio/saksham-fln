@@ -52,6 +52,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     authService.setRole(newRole)
     if (newRole === 'parent') {
       router.push('/app/parent')
+    } else if (newRole === 'crc_coordinator') {
+      router.push('/app/reports')
+    } else if (newRole === 'deo' || newRole === 'admin') {
+      router.push('/district/overview')
+    } else {
+      router.push('/app/dashboard')
     }
   }
 

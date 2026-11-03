@@ -34,6 +34,14 @@ import { DiagnosticModal } from '@/components/diagnostic-modal'
 import { LearningPlanModal } from '@/components/learning-plan-modal'
 import { ActivityModal } from '@/components/activity-modal'
 import { useI18n } from '@/lib/i18n/context'
+import { studentService } from '@/lib/services/studentService'
+import { classService } from '@/lib/services/classService'
+import { learningPlanService } from '@/lib/services/learningPlanService'
+import { teacherActionService } from '@/lib/services/teacherActionService'
+import { assessmentService } from '@/lib/services/assessmentService'
+import { auditService } from '@/lib/services/auditService'
+import { syncService } from '@/lib/services/syncService'
+import { localStore } from '@/lib/storage'
 
 export default function DashboardPage() {
   const { t } = useI18n()
@@ -61,11 +69,12 @@ export default function DashboardPage() {
   }
 
   function handleReset() {
+    localStore.resetWorkspace()
     const fresh = resetDemoState()
     setState(fresh)
     setSelectedStudent(null)
     setModalMode('none')
-    setFeedbackToast('Demo state reset to initial baseline.')
+    setFeedbackToast('Demo and canonical workspace reset to initial baseline.')
     setTimeout(() => setFeedbackToast(null), 3000)
   }
 
@@ -111,6 +120,66 @@ export default function DashboardPage() {
       })),
     }
 
+    // Synchronize canonical storage layers
+    assessmentService.saveAttempt({
+      id: `att-${Date.now()}`,
+      assessmentId: 'asmt-3a-num-01',
+      studentId: selectedStudent.id,
+      answers,
+      currentQuestionIndex: evaluation.totalQuestions,
+      teacherNotes: notes,
+      status: 'Completed',
+      lastSavedAt: 'Just now',
+    })
+
+    const canonicalStudent = studentService.getStudentById(selectedStudent.id)
+    if (canonicalStudent) {
+      studentService.updateStudent({
+        ...canonicalStudent,
+        diagnosticScore: evaluation.overallScore,
+        overallStatus:
+          evaluation.overallScore < 70
+            ? 'Needs Support'
+            : evaluation.overallScore < 85
+            ? 'Developing'
+            : 'Demonstrated',
+        lastAssessedDate: 'Today',
+        planStatus: 'Pending approval',
+        prerequisiteGap:
+          evaluation.probableGapsCount > 0
+            ? evaluation.pedagogicalSummary
+            : canonicalStudent.prerequisiteGap,
+      })
+    }
+
+    teacherActionService.addAction({
+      id: `act-asmt-${Date.now()}`,
+      title: `Approve remedial plan for ${selectedStudent.fullName}`,
+      titleGu: `${selectedStudent.fullName} માટે ઉપચાર અધ્યયન યોજના મંજૂર કરો`,
+      titleHi: `${selectedStudent.fullName} के लिए उपचारात्मक शिक्षण योजना स्वीकृत करें`,
+      description: `Diagnostic screening scored ${evaluation.overallScore}%. Review 5-day pathway for ${evaluation.probableGapsCount} identified gap(s).`,
+      reason: 'Diagnostic check identified prerequisite gap requiring structured intervention.',
+      relatedSkill: 'Place Value Bundling',
+      relatedStudentId: selectedStudent.id,
+      relatedStudentName: selectedStudent.fullName,
+      relatedClassId: 'class-std-3a',
+      className: 'Standard 3 - A',
+      priority: evaluation.overallScore < 70 ? 'High' : 'Medium',
+      dueDate: 'Today',
+      status: 'Pending',
+      recommendedNextStep: 'Sign off on daily micro-intervention plan.',
+    })
+
+    auditService.logEvent({
+      actorId: 'usr-tea-01',
+      actorName: 'Asha Shah',
+      role: 'teacher',
+      eventType: 'assessment_completed',
+      entityType: 'assessment',
+      entityId: 'asmt-3a-num-01',
+      summary: `Completed FLN diagnostic for ${selectedStudent.fullName}: Score ${evaluation.overallScore}%, ${evaluation.probableGapsCount} gaps identified.`,
+    })
+
     updateStudent(updated)
     setState((prev) => ({
       ...prev,
@@ -139,6 +208,8 @@ export default function DashboardPage() {
         : student.pedagogicalInsight,
     }
 
+    learningPlanService.approvePlan('plan-' + student.id, notes)
+
     updateStudent(updated)
     setState((prev) => ({
       ...prev,
@@ -146,7 +217,7 @@ export default function DashboardPage() {
       activePlansCount: prev.activePlansCount + 1,
     }))
     setModalMode('profile')
-    setFeedbackToast('Learning Plan approved for Aarav K. Activity 1 is now active.')
+    setFeedbackToast(`Learning Plan approved for ${student.fullName}. Day 1 activity is now active.`)
     setTimeout(() => setFeedbackToast(null), 4000)
   }
 
@@ -187,6 +258,9 @@ export default function DashboardPage() {
       activities: updatedActivities,
     }
 
+    learningPlanService.completeActivity('plan-' + selectedStudent.id, activityId, teacherNote)
+    studentService.recordActivityCompletion(selectedStudent.id, activityId)
+
     updateStudent(updated)
     setState((prev) => ({
       ...prev,
@@ -194,7 +268,7 @@ export default function DashboardPage() {
       milestonesThisWeek: prev.milestonesThisWeek + 1,
     }))
     setModalMode('profile')
-    setFeedbackToast('Milestone recorded! Progress updated to 50% for Aarav K.')
+    setFeedbackToast(`Milestone recorded! Activity 1 marked complete for ${selectedStudent.fullName}.`)
     setTimeout(() => setFeedbackToast(null), 5000)
   }
 
@@ -339,63 +413,63 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 4 Primary Metric Cards */}
+      {/* 4 Primary Metric Cards with Calm Glassmorphism */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-4.5 shadow-xs backdrop-blur-md transition hover:shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#64748B]">{t.dashboard.metrics.studentsAssessed}</span>
-            <div className="flex size-7 items-center justify-center rounded-lg bg-[#DFF4EF] text-[#0D9488]">
-              <Users size={15} />
+            <span className="text-xs font-semibold text-[#64748B]">{t.dashboard.metrics.studentsAssessed}</span>
+            <div className="flex size-8 items-center justify-center rounded-xl bg-[#DFF4EF] text-[#0D9488]">
+              <Users size={16} />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
+          <div className="mt-2.5 flex items-baseline gap-2">
             <span className="text-2xl font-bold tracking-tight text-[#17324D]">
-              {state.studentsAssessedCount}
+              {Math.max(studentService.getStudents().filter((s) => s.diagnosticScore !== undefined || s.lastAssessedDate).length, state.studentsAssessedCount)}
             </span>
             <span className="text-xs text-[#64748B]">
-              / {state.totalStudentsCount} ({Math.round((state.studentsAssessedCount / state.totalStudentsCount) * 100)}%)
+              / {Math.max(studentService.getStudents().length, state.totalStudentsCount)} ({Math.round((Math.max(studentService.getStudents().filter((s) => s.diagnosticScore !== undefined || s.lastAssessedDate).length, state.studentsAssessedCount) / Math.max(studentService.getStudents().length, state.totalStudentsCount)) * 100)}%)
             </span>
           </div>
           <p className="mt-1 text-[11px] text-[#64748B]">Class 3A Enrolled Cohort</p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-4.5 shadow-xs backdrop-blur-md transition hover:shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#64748B]">{t.dashboard.metrics.activeSupportPlans}</span>
-            <div className="flex size-7 items-center justify-center rounded-lg bg-[#DFF4EF] text-[#0D9488]">
-              <BookOpen size={15} />
+            <span className="text-xs font-semibold text-[#64748B]">{t.dashboard.metrics.activeSupportPlans}</span>
+            <div className="flex size-8 items-center justify-center rounded-xl bg-[#DFF4EF] text-[#0D9488]">
+              <BookOpen size={16} />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
+          <div className="mt-2.5 flex items-baseline gap-2">
             <span className="text-2xl font-bold tracking-tight text-[#17324D]">
-              {state.activePlansCount}
+              {Math.max(learningPlanService.getPlans().filter((p) => p.status !== 'Completed').length, state.activePlansCount)}
             </span>
-            <span className="text-xs text-[#15803D]">Active</span>
+            <span className="text-xs font-semibold text-[#15803D]">Active Pathways</span>
           </div>
           <p className="mt-1 text-[11px] text-[#64748B]">Targeted 5-day micro-pathways</p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-4.5 shadow-xs backdrop-blur-md transition hover:shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#64748B]">{t.dashboard.metrics.milestonesThisWeek}</span>
-            <div className="flex size-7 items-center justify-center rounded-lg bg-[#DFF4EF] text-[#0D9488]">
-              <CheckCircle2 size={15} />
+            <span className="text-xs font-semibold text-[#64748B]">{t.dashboard.metrics.milestonesThisWeek}</span>
+            <div className="flex size-8 items-center justify-center rounded-xl bg-[#DFF4EF] text-[#0D9488]">
+              <CheckCircle2 size={16} />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
+          <div className="mt-2.5 flex items-baseline gap-2">
             <span className="text-2xl font-bold tracking-tight text-[#17324D]">
               {state.milestonesThisWeek}
             </span>
-            <span className="text-xs text-[#15803D]">+2 this week</span>
+            <span className="text-xs font-semibold text-[#15803D]">+2 this week</span>
           </div>
           <p className="mt-1 text-[11px] text-[#64748B]">Hands-on activities signed off</p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-4.5 shadow-xs backdrop-blur-md transition hover:shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#64748B]">{t.dashboard.metrics.awaitingSync}</span>
-            <div className="flex size-7 items-center justify-center rounded-lg bg-[#DFF4EF] text-[#0D9488]">
-              <Wifi size={15} />
+            <span className="text-xs font-semibold text-[#64748B]">{t.dashboard.metrics.awaitingSync}</span>
+            <div className="flex size-8 items-center justify-center rounded-xl bg-[#DFF4EF] text-[#0D9488]">
+              <Wifi size={16} />
             </div>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
@@ -413,7 +487,7 @@ export default function DashboardPage() {
       {/* Progress Chart & Skill-Gap Distribution Grid */}
       <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
         {/* Class Milestone Trend Chart */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-5 shadow-xs backdrop-blur-md sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h2 className="text-sm font-bold text-[#17324D]">Class FLN Milestone Completion</h2>
@@ -423,7 +497,7 @@ export default function DashboardPage() {
               value={state.timeFilter}
               onChange={(e) => setState((prev) => ({ ...prev, timeFilter: e.target.value as DemoState['timeFilter'] }))}
               aria-label="Filter timeframe"
-              className="rounded-lg border border-[#CBD5E1] bg-white px-2 py-1 text-xs font-medium text-[#263238] outline-none focus:border-[#0D9488]"
+              className="rounded-lg border border-[#CBD5E1] bg-white px-2.5 py-1 text-xs font-medium text-[#263238] outline-none focus:border-[#0D9488]"
             >
               <option value="6w">Last 6 weeks</option>
               <option value="4w">Last 4 weeks</option>
@@ -456,7 +530,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Skill-Gap Distribution */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-5 shadow-xs backdrop-blur-md sm:p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-sm font-bold text-[#17324D]">Prerequisite Gap Distribution</h2>
@@ -495,7 +569,7 @@ export default function DashboardPage() {
       {/* Learners Needing Follow-up & Today's Teacher Actions Grid */}
       <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
         {/* Learners Needing Follow-up */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-5 shadow-xs backdrop-blur-md sm:p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-sm font-bold text-[#17324D]">Learners Needing Immediate Support</h2>
@@ -559,7 +633,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Today's Teacher Actions Checklist */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-[#E2E8F0]/80 bg-white/80 p-5 shadow-xs backdrop-blur-md sm:p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-sm font-bold text-[#17324D]">{t.dashboard.todaysActions}</h2>

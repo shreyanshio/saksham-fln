@@ -22,7 +22,7 @@ const STAGES = [
 
 export function DemoJourneyBanner({ currentStage, onReset, onQuickJump }: DemoJourneyBannerProps) {
   return (
-    <div className="border-b border-[#d4e4df] bg-[#eef7f4] px-4 py-2.5 text-xs text-[#17324d]">
+    <div className="border-b border-[#BFE2DA]/80 bg-[#DFF4EF]/75 px-4 py-2.5 text-xs text-[#17324d] backdrop-blur-md shadow-xs">
       <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-5 items-center justify-center rounded-full bg-[#0d9488] text-[10px] font-bold text-white">

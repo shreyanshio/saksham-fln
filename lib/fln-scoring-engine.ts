@@ -299,6 +299,7 @@ export interface SkillResult {
   attemptedCount: number
   correctCount: number
   scorePercent: number
+  coveragePercent?: number
   status: 'Mastered' | 'Emerging' | 'Probable Gap' | 'Insufficient Evidence'
   statusBadge: string
   isProbableGap: boolean
@@ -334,6 +335,8 @@ export interface RecommendedActivity {
 
 export interface DiagnosticEvaluationResult {
   overallScore: number
+  accuracyPercent: number
+  evidenceCoveragePercent: number
   totalQuestions: number
   attemptedQuestionsCount: number
   correctAnswersCount: number
@@ -434,14 +437,17 @@ export function evaluateFLNDiagnostic(
     })
   })
 
-  const overallScore = attemptedCount > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0
+  const accuracyPercent = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0
+  const evidenceCoveragePercent = totalQuestions > 0 ? Math.round((attemptedCount / totalQuestions) * 100) : 0
+  const overallScore = accuracyPercent
 
   // Compute skill-level results
   const skills: SkillResult[] = Object.entries(skillMap).map(([sId, data]) => {
     const qCount = data.questions.length
     const sAttempted = data.attempted
     const sCorrect = data.correct
-    const sPercent = sAttempted > 0 ? Math.round((sCorrect / qCount) * 100) : 0
+    const sPercent = sAttempted > 0 ? Math.round((sCorrect / sAttempted) * 100) : 0
+    const sCoverage = qCount > 0 ? Math.round((sAttempted / qCount) * 100) : 0
 
     let status: SkillResult['status'] = 'Mastered'
     let statusBadge = 'Demonstrated Mastery'
@@ -480,6 +486,7 @@ export function evaluateFLNDiagnostic(
       attemptedCount: sAttempted,
       correctCount: sCorrect,
       scorePercent: sPercent,
+      coveragePercent: sCoverage,
       status,
       statusBadge,
       isProbableGap,
@@ -491,6 +498,47 @@ export function evaluateFLNDiagnostic(
 
   const probableGapsCount = skills.filter((s) => s.isProbableGap).length
   const insufficientEvidenceCount = skills.filter((s) => s.isInsufficientEvidence).length
+
+  // Handle completely unattempted assessment
+  if (attemptedCount === 0) {
+    const unattemptedActivity: RecommendedActivity = {
+      id: 'act-oral-baseline',
+      dayNumber: 1,
+      title: 'Foundational Baseline Screening Check (1-on-1)',
+      titleGu: 'પાયાનું નિદાન મૂલ્યાંકન (૧-ઓન-૧ મૌખિક ચકાસણી)',
+      duration: '5 mins',
+      focusSkill: 'Oral Foundational Assessment',
+      description:
+        'Conduct a 5-minute 1-on-1 oral check using concrete counters and picture flashcards to establish baseline literacy and numeracy competencies.',
+      materialsNeeded: 'FLN flashcard set and counting counters.',
+      teacherScript: 'વિદ્યાર્થી સાથે શાંતિથી બેસો અને ચિત્ર તથા સંખ્યા કાર્ડ બતાવી મૌખિક પ્રશ્નો પૂછો.',
+      status: 'ready',
+    }
+
+    return {
+      overallScore: 0,
+      accuracyPercent: 0,
+      evidenceCoveragePercent: 0,
+      totalQuestions,
+      attemptedQuestionsCount: 0,
+      correctAnswersCount: 0,
+      skills,
+      evidences,
+      learningSequence: ['Step 1: Administer 1-on-1 oral screening check to establish baseline evidence'],
+      recommendedActivities: [unattemptedActivity],
+      probableGapsCount: 0,
+      insufficientEvidenceCount: skills.length,
+      validatedGapsCount: 0,
+      pedagogicalSummary:
+        'Assessment submitted with 0 attempted questions (0% evidence coverage). Insufficient diagnostic evidence to deduce learning gaps. Schedule a brief 1-on-1 oral check with the student.',
+      clearNextStep: {
+        title: 'Conduct 1-on-1 Oral Baseline Screening',
+        actionText: 'Start Oral Screening',
+        dueText: 'Immediate priority for foundational baseline',
+        activityId: unattemptedActivity.id,
+      },
+    }
+  }
 
   // Build logical recommended learning sequence based on observed gaps
   const learningSequence: string[] = []
@@ -625,6 +673,8 @@ export function evaluateFLNDiagnostic(
 
   return {
     overallScore,
+    accuracyPercent,
+    evidenceCoveragePercent,
     totalQuestions,
     attemptedQuestionsCount: attemptedCount,
     correctAnswersCount: correctCount,

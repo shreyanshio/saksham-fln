@@ -64,6 +64,45 @@
   }
 }
 
+/* Indic Typography: Ensure diacritics (matras) never clip */
+:lang(gu), [lang="gu"], .font-gujarati {
+  line-height: 1.75;
+}
+:lang(hi), [lang="hi"], .font-hindi {
+  line-height: 1.75;
+}
+
+/* Glassmorphism Tokens: Calm Glass, Clear Learning */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(23, 50, 77, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+.glass-panel-navy {
+  background: rgba(23, 50, 77, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(23, 50, 77, 0.25);
+}
+
+.glass-panel-teal {
+  background: rgba(223, 244, 239, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(191, 226, 218, 0.85);
+}
+
 /* Custom scrollbar for dense tables and drawers */
 ::-webkit-scrollbar {
   width: 6px;

@@ -25,6 +25,7 @@ import { useI18n } from '@/lib/i18n/context'
 import { learningActivityService } from '@/lib/services/learningActivityService'
 import { classService } from '@/lib/services/classService'
 import { studentService } from '@/lib/services/studentService'
+import { learningPlanService } from '@/lib/services/learningPlanService'
 import { auditService } from '@/lib/services/auditService'
 import { LearningActivity, SkillCategory, StudentRecord } from '@/lib/types'
 
@@ -67,19 +68,13 @@ export default function ResourcesPage() {
   function handleConfirmAssign() {
     if (!selectedActivity) return
     const student = studentService.getStudentById(selectedStudentId)
-    const targetName = student ? student.name : 'Selected Students'
+    const targetStudentId = student ? student.id : selectedStudentId
+    const targetName = student ? student.fullName : 'Selected Student'
 
-    auditService.logEvent({
-      actorId: 'usr-tea-01',
-      actorName: 'Asha Shah',
-      role: 'teacher',
-      eventType: 'activity_completed',
-      entityType: 'activity',
-      entityId: selectedActivity.id,
-      summary: `Assigned remedial activity "${selectedActivity.title}" to ${targetName} (${selectedStudentId})`,
-    })
+    // Connect assigned resource directly to the student's learning plan and generate teacher action
+    learningPlanService.assignActivityToPlan(targetStudentId, selectedActivity)
 
-    setAssignSuccessMessage(`Activity successfully assigned to ${targetName}. Added to 5-day remedial schedule.`)
+    setAssignSuccessMessage(`Activity successfully assigned to ${targetName}. Added to remedial plan and teacher action queue.`)
     setTimeout(() => {
       setAssignModalOpen(false)
       setAssignSuccessMessage(null)

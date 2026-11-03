@@ -96,7 +96,7 @@ export function AppSidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-60 flex-col justify-between bg-[#17324D] text-white transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-60 flex-col justify-between bg-[#17324D]/95 backdrop-blur-lg border-r border-white/10 shadow-xl text-white transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

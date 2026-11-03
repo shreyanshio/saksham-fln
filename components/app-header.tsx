@@ -35,6 +35,7 @@ const ROLES_LIST: Array<{ id: Role; labelEn: string; labelGu: string; labelHi: s
   { id: 'head_teacher', labelEn: 'Head Teacher (Govindbhai)', labelGu: 'મુખ્ય શિક્ષક (ગોવિંદભાઈ)', labelHi: 'પ્રધાનાધ્યાપક (ગોવિંદભાઈ)' },
   { id: 'crc_coordinator', labelEn: 'CRC Coordinator (Khambhalia)', labelGu: 'સી.આર.સી. સંયોજક', labelHi: 'સી.આર.સી. સમન્વયક' },
   { id: 'deo', labelEn: 'DEO (Devbhumi Dwarka)', labelGu: 'જિલ્લા શિક્ષણાધિકારી (DEO)', labelHi: 'જિલ્લા શિક્ષા અધિકારી' },
+  { id: 'admin', labelEn: 'Collectorate Cell (Admin)', labelGu: 'કલેક્ટર કચેરી (વહીવટી સેલ)', labelHi: 'कलेक्ट्रेट शिक्षा प्रकोष्ठ (एडमिन)' },
   { id: 'parent', labelEn: 'Parent (Rameshbhai)', labelGu: 'વાલી પોર્ટલ (રમેશભાઈ)', labelHi: 'અભિભાવક (રમેશભાઈ)' },
 ]
 
@@ -65,7 +66,7 @@ export function AppHeader({
   }
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#E2E8F0] bg-white px-4 sm:px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#E2E8F0]/80 bg-white/85 px-4 sm:px-6 backdrop-blur-md shadow-xs">
       {/* Toast alert on presentation reset */}
       {resetToast && (
         <div className="fixed right-6 top-16 z-50 rounded-lg border border-[#BFE2DA] bg-[#DFF4EF] px-4 py-2 text-xs font-bold text-[#087F75] shadow-lg animate-in fade-in">

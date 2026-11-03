@@ -14,6 +14,7 @@ import {
   Volume2,
   VolumeX,
   X,
+  Zap,
 } from 'lucide-react'
 import { Student } from '@/lib/demo-data'
 import {
@@ -21,6 +22,7 @@ import {
   FLNQuestion,
 } from '@/lib/fln-scoring-engine'
 import { Button } from './ui/button'
+import { useI18n } from '@/lib/i18n/context'
 
 interface AssessmentModalProps {
   student: Student
@@ -37,28 +39,41 @@ const REASSURING_MESSAGES = [
 ]
 
 export function AssessmentModal({ student, onClose, onSubmitAssessment }: AssessmentModalProps) {
+  const { locale } = useI18n()
   const [currentStep, setCurrentStep] = useState(0)
-  // Default answers pre-fill to realistic scenario:
-  // Q1 correct, Q2 correct, Q3 incorrect (pos inversion), Q4 incorrect (face value), Q5 correct
-  const [answers, setAnswers] = useState<Record<string, string>>({
-    q1: 'opt-1a',
-    q2: 'opt-2a',
-    q3: 'opt-3b', // Intentional typical place-value error: 43 instead of 34
-    q4: 'opt-4b', // Intentional error: 4 + 7 instead of 40 + 7
-  })
-
-  const [teacherNotes, setTeacherNotes] = useState(
-    'Aarav was calm and confident during Gujarati phonics questions. Hesitated on place-value bundling when abstract numerals were presented.'
-  )
+  
+  // Normal assessments start blank without pre-baked contamination
+  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [teacherNotes, setTeacherNotes] = useState('')
   const [showNotes, setShowNotes] = useState(false)
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [showTranscript, setShowTranscript] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [demoLoadedToast, setDemoLoadedToast] = useState(false)
+
+  // Explicit demo sample scenario loader for jury presentation
+  function handleLoadDemoScenario() {
+    setAnswers({
+      q1: 'opt-1a',
+      q2: 'opt-2a',
+      q3: 'opt-3b',
+      q4: 'opt-4b',
+      q5: 'opt-5a',
+    })
+    setTeacherNotes(
+      'Aarav was calm and confident during phonics decoding, but hesitated on place-value bundling when abstract numerals were presented.'
+    )
+    setShowNotes(true)
+    setErrorMsg('')
+    setDemoLoadedToast(true)
+    setTimeout(() => setDemoLoadedToast(false), 3000)
+  }
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const activeQuestion: FLNQuestion = FLN_DIAGNOSTIC_QUESTIONS[currentStep]
   const totalQuestions = FLN_DIAGNOSTIC_QUESTIONS.length
   const progressPercent = Math.round(((currentStep + 1) / totalQuestions) * 100)
+  const attemptedCount = Object.keys(answers).length
 
   // Handle Text-to-Speech audio control
   function toggleAudio() {
@@ -76,14 +91,28 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
     }
 
     window.speechSynthesis.cancel()
-    const textToSpeak = `${activeQuestion.questionGu}. ${activeQuestion.questionEn}`
+
+    // Speak single appropriate text matching current locale (no audio collision)
+    const textToSpeak =
+      locale === 'gu'
+        ? activeQuestion.questionGu
+        : locale === 'hi'
+        ? activeQuestion.questionGu
+        : activeQuestion.questionEn
+
     const utterance = new SpeechSynthesisUtterance(textToSpeak)
     utterance.rate = 0.85 // Calm, slower child-friendly pace
 
     // Try finding Gujarati or Hindi/Indian English voice
     const voices = window.speechSynthesis.getVoices()
-    const guVoice = voices.find((v) => v.lang.includes('gu') || v.lang.includes('hi'))
-    if (guVoice) utterance.voice = guVoice
+    const targetLang = locale === 'gu' ? 'gu' : locale === 'hi' ? 'hi' : 'en'
+    const guVoice = voices.find((v) => v.lang.toLowerCase().includes(targetLang))
+    if (guVoice) {
+      utterance.voice = guVoice
+    } else if (locale !== 'en') {
+      // If voice is missing, cleanly reveal visual transcript drawer
+      setShowTranscript(true)
+    }
 
     utterance.onend = () => setIsPlayingAudio(false)
     utterance.onerror = () => setIsPlayingAudio(false)
@@ -101,16 +130,20 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
     setShowTranscript(false)
   }, [currentStep])
 
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.speechSynthesis?.cancel()
+      }
+    }
+  }, [])
+
   function handleSelectOption(optionId: string) {
     setAnswers((prev) => ({ ...prev, [activeQuestion.id]: optionId }))
     if (errorMsg) setErrorMsg('')
   }
 
   function handleNext() {
-    if (!answers[activeQuestion.id]) {
-      setErrorMsg('કૃપા કરીને આગળ વધતા પહેલાં એક જવાબ પસંદ કરો · Please select an answer before proceeding.')
-      return
-    }
     setErrorMsg('')
     if (currentStep < totalQuestions - 1) {
       setCurrentStep(currentStep + 1)
@@ -125,16 +158,6 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
   }
 
   function handleSubmit() {
-    // Validate all questions answered
-    const unansweredIndex = FLN_DIAGNOSTIC_QUESTIONS.findIndex((q) => !answers[q.id])
-    if (unansweredIndex !== -1) {
-      setCurrentStep(unansweredIndex)
-      setErrorMsg(
-        `કૃપા કરીને પ્રશ્ન ${unansweredIndex + 1} નો જવાબ આપો · Please answer Question ${unansweredIndex + 1} to complete the check.`
-      )
-      return
-    }
-
     setIsSubmitting(true)
     setErrorMsg('')
 
@@ -144,14 +167,14 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
 
     setTimeout(() => {
       onSubmitAssessment(answers, teacherNotes)
-    }, 700)
+    }, 600)
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4 backdrop-blur-xs">
       <div className="relative max-h-[95vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-[#d8e2df] bg-white p-5 shadow-2xl sm:p-8">
         {/* Child-Friendly Header */}
-        <div className="flex items-center justify-between border-b border-[#e8efed] pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e8efed] pb-4">
           <div className="flex items-center gap-3">
             <div className="flex size-11 items-center justify-center rounded-2xl bg-[#dff4ef] text-base font-bold text-[#087f75]">
               {student.avatar}
@@ -162,24 +185,42 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                   FLN નિદાન ચકાસણી · Diagnostic Check
                 </span>
                 <span className="rounded-full bg-[#f1f5f3] px-2 py-0.5 text-[10px] font-medium text-[#64748b]">
-                  {student.grade}
+                  {student.grade} · Roll #{student.rollNo}
                 </span>
               </div>
               <h3 className="mt-0.5 text-base font-bold text-[#17324d] sm:text-lg">
-                વિદ્યાર્થી: {student.fullName} (Aarav Kumar)
+                વિદ્યાર્થી: {student.fullName}
               </h3>
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex size-9 items-center justify-center rounded-xl text-[#64748b] transition hover:bg-[#f1f5f3]"
-            aria-label="Close assessment"
-          >
-            <X size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleLoadDemoScenario}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#bfe2da] bg-[#eef7f4] px-3 py-1.5 text-xs font-semibold text-[#087f75] transition hover:bg-[#dff4ef]"
+              title="Preload sample responses for Aarav K. presentation scenario"
+            >
+              <Zap size={13} className="text-[#0d9488]" />
+              <span>Load Demo Scenario</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex size-9 items-center justify-center rounded-xl text-[#64748b] transition hover:bg-[#f1f5f3]"
+              aria-label="Close assessment"
+            >
+              <X size={20} />
+            </button>
+          </div>
         </div>
+
+        {demoLoadedToast && (
+          <div className="mt-3 rounded-xl border border-[#bfe2da] bg-[#dff4ef] p-2.5 text-xs font-semibold text-[#087f75] animate-in fade-in">
+            ⚡ Sample responses loaded for presentation evaluation (5 questions ready for review).
+          </div>
+        )}
 
         {/* Readable Child Progress Stepper */}
         <div className="mt-4 rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-4">
@@ -412,6 +453,16 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
           </Button>
 
           <div className="flex items-center gap-2">
+            {currentStep < totalQuestions - 1 && (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="text-xs font-semibold text-[#64748b] hover:text-[#17324d] px-3 py-2"
+              >
+                Skip / છોડો
+              </button>
+            )}
+
             {currentStep < totalQuestions - 1 ? (
               <Button
                 type="button"
@@ -420,24 +471,31 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
               >
                 આગળ વધો / Next Question <ArrowRight size={15} className="ml-1.5" />
               </Button>
-            ) : (
-              <Button
-                type="button"
-                disabled={isSubmitting}
-                onClick={handleSubmit}
-                className="h-11 rounded-xl bg-[#0d9488] px-6 text-xs font-semibold text-white shadow-sm hover:bg-[#087f75]"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={15} className="mr-2 animate-spin" /> પરિણામ વિશ્લેષણ… Evaluating…
-                  </>
-                ) : (
-                  <>
-                    <Sparkles size={15} className="mr-1.5" /> તપાસણી પૂર્ણ કરો / Submit & Diagnose
-                  </>
-                )}
-              </Button>
-            )}
+            ) : null}
+
+            <Button
+              type="button"
+              disabled={isSubmitting}
+              onClick={handleSubmit}
+              className={`h-11 rounded-xl px-6 text-xs font-semibold text-white shadow-sm ${
+                currentStep === totalQuestions - 1
+                  ? 'bg-[#0d9488] hover:bg-[#087f75]'
+                  : 'bg-[#17324d] hover:bg-[#102438]'
+              }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={15} className="mr-2 animate-spin" /> પરિણામ વિશ્લેષણ… Evaluating…
+                </>
+              ) : (
+                <>
+                  <Sparkles size={15} className="mr-1.5" />{' '}
+                  {currentStep === totalQuestions - 1
+                    ? 'તપાસણી પૂર્ણ કરો / Submit & Diagnose'
+                    : `Submit Screening (${attemptedCount}/${totalQuestions})`}
+                </>
+              )}
+            </Button>
           </div>
         </div>
       </div>
