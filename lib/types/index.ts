@@ -1,6 +1,6 @@
 export type Role =
   | 'teacher'
-  | 'head_teacher'
+  | 'head_teacher' 
   | 'crc_coordinator'
   | 'deo'
   | 'parent'
