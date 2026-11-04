@@ -30,13 +30,13 @@ export default function HomePage() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#f7f9f6] text-[#263238]">
+    <main className="min-h-screen bg-transparent text-[#263238]">
       {/* Top prototype indicator */}
-      <div className="border-b border-[#dce8e4] bg-[#17324d] px-5 py-2 text-center text-xs font-medium tracking-wide text-white/90">
+      <div className="border-b border-[#dce8e4] bg-[#142B45] px-5 py-2 text-center text-xs font-medium tracking-wide text-white/90">
         Problem ID: PS000034 · Collector Office, Devbhumi Dwarka · Synthetic FLN Demo
       </div>
 
-      <header className="sticky top-0 z-20 border-b border-[#e2e8e5] bg-[#f7f9f6]/95 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-[#e2e8e5] bg-transparent/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="Saksham FLN home">
             <BrandMark />
@@ -172,7 +172,7 @@ export default function HomePage() {
               <MiniStat label={t.landing.studentsAssessed} value="24" note={t.landing.ofLearners} tone="teal" />
               <MiniStat label={t.landing.activePathways} value="17" note={t.landing.prerequisitePlans} tone="navy" />
             </div>
-            <div className="mt-5 rounded-2xl bg-[#f7f9f6] p-4">
+            <div className="mt-5 rounded-2xl bg-transparent p-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold text-[#17324d]">{t.landing.milestoneCompletion}</span>
                 <span className="text-xs text-[#64748b]">{t.landing.last6Weeks}</span>
@@ -216,9 +216,9 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
             {steps.map(({ number, title, text, icon: Icon }) => (
-              <div key={title} className="relative rounded-2xl border border-[#e2e8e5] bg-[#f7f9f6] p-6">
+              <div key={title} className="relative rounded-2xl border border-[#e2e8e5] bg-transparent p-6">
                 <span className="text-xs font-bold text-[#0d9488]">{number}</span>
-                <div className="mt-5 flex size-11 items-center justify-center rounded-xl bg-[#17324d] text-white">
+                <div className="mt-5 flex size-11 items-center justify-center rounded-xl bg-[#142B45] text-white">
                   <Icon size={20} />
                 </div>
                 <h3 className="mt-5 text-base font-semibold text-[#17324d]">{title}</h3>
@@ -262,7 +262,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div id="teachers" className="rounded-3xl bg-[#17324d] p-8 text-white lg:p-10">
+        <div id="teachers" className="rounded-3xl bg-[#142B45] p-8 text-white lg:p-10">
           <div className="flex size-12 items-center justify-center rounded-2xl bg-[#0d9488]">
             <GraduationCap size={24} />
           </div>
@@ -297,7 +297,7 @@ export default function HomePage() {
 
 function BrandMark() {
   return (
-    <div className="flex size-10 items-center justify-center rounded-xl bg-[#17324d] text-white">
+    <div className="flex size-10 items-center justify-center rounded-xl bg-[#142B45] text-white">
       <svg viewBox="0 0 32 32" className="size-6" fill="none" aria-hidden="true">
         <path d="M5 9.5 16 14l11-4.5v13L16 27 5 22.5v-13Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
         <path d="M16 14v13M9 11l7 3 7-3" stroke="#8acfc4" strokeWidth="2" strokeLinecap="round" />

@@ -104,7 +104,7 @@ export default function ParentPortalPage() {
       </div>
 
       {/* Today's 5-Minute Fun Home Activity Card */}
-      <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+      <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF5D9] px-2.5 py-0.5 text-[11px] font-bold text-[#8A6200]">
@@ -186,7 +186,7 @@ export default function ParentPortalPage() {
 
       {/* Child's Strengths & School Focus */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-xs font-bold text-[#15803D]">
             <Heart size={14} className="text-[#15803D]" />
             <span>બાળકની વિશેષ શક્તિઓ (Strengths)</span>
@@ -196,7 +196,7 @@ export default function ParentPortalPage() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-xs font-bold text-[#0D9488]">
             <BookOpen size={14} className="text-[#0D9488]" />
             <span>આ અઠવાડિયે શાળામાં શું શીખી રહ્યા છે?</span>
@@ -208,7 +208,7 @@ export default function ParentPortalPage() {
       </div>
 
       {/* Message Teacher Note Box */}
-      <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+      <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-sm font-bold text-[#17324D]">શિક્ષકશ્રીને સંદેશ મોકલો (Message Teacher)</h2>

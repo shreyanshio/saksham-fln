@@ -79,26 +79,26 @@ export default function AuditHistoryPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Total Logged Events</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">{events.length}</div>
           <div className="mt-0.5 text-[11px] text-[#0D9488]">Append-only storage</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Assessment Events</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">
             {events.filter((e) => e.eventType.includes('assessment')).length}
           </div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Diagnostics recorded</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Remedial Approvals</div>
           <div className="mt-1 text-xl font-bold text-[#15803D]">
             {events.filter((e) => e.eventType === 'plan_approved').length}
           </div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Teacher authorizations</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Curriculum Actions</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">
             {events.filter((e) => e.eventType === 'content_published').length}
@@ -108,7 +108,7 @@ export default function AuditHistoryPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px] sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]" size={15} />
           <input

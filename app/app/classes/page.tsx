@@ -138,17 +138,17 @@ export default function ClassesPage() {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/85 glass-panel p-4 shadow-xs">
         <div className="flex flex-wrap items-center gap-2.5 min-w-0 flex-1">
           {/* Search Box */}
           <div className="relative min-w-[180px] sm:min-w-[220px]">
-            <Search className="absolute left-2.5 top-2.5 text-[#94A3B8]" size={14} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" size={14} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by class or teacher..."
-              className="h-8 w-full rounded-lg border border-[#CBD5E1] bg-white pl-8 pr-3 text-xs text-[#17324D] outline-none focus:border-[#0D9488]"
+              className="h-9 w-full rounded-xl glass-input pl-9 pr-3 text-xs text-[#142B45] outline-none"
             />
           </div>
 
@@ -159,7 +159,7 @@ export default function ClassesPage() {
               value={selectedStandard}
               onChange={(e) => setSelectedStandard(e.target.value)}
               aria-label="Filter by standard"
-              className="h-8 rounded-lg border border-[#CBD5E1] bg-white px-2 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All Standards</option>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((std) => (
@@ -177,7 +177,7 @@ export default function ClassesPage() {
               value={selectedMedium}
               onChange={(e) => setSelectedMedium(e.target.value)}
               aria-label="Filter by medium"
-              className="h-8 rounded-lg border border-[#CBD5E1] bg-white px-2 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All Mediums</option>
               <option value="Gujarati">Gujarati</option>
@@ -188,12 +188,12 @@ export default function ClassesPage() {
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex items-center rounded-lg border border-[#CBD5E1] bg-[#F7F9F6] p-0.5 text-xs">
+        <div className="flex items-center rounded-xl border border-white/80 glass-panel-subtle p-0.5 text-xs">
           <button
             type="button"
             onClick={() => setViewMode('grid')}
-            className={`rounded-md px-2.5 py-1 font-semibold transition ${
-              viewMode === 'grid' ? 'bg-white text-[#0D9488] shadow-xs' : 'text-[#64748B] hover:text-[#17324D]'
+            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+              viewMode === 'grid' ? 'bg-[#0D9488] text-white shadow-2xs' : 'text-[#64748B] hover:text-[#142B45]'
             }`}
           >
             Grid
@@ -201,8 +201,8 @@ export default function ClassesPage() {
           <button
             type="button"
             onClick={() => setViewMode('table')}
-            className={`rounded-md px-2.5 py-1 font-semibold transition ${
-              viewMode === 'table' ? 'bg-white text-[#0D9488] shadow-xs' : 'text-[#64748B] hover:text-[#17324D]'
+            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+              viewMode === 'table' ? 'bg-[#0D9488] text-white shadow-2xs' : 'text-[#64748B] hover:text-[#142B45]'
             }`}
           >
             Table
@@ -216,32 +216,32 @@ export default function ClassesPage() {
           {filtered.map((c) => (
             <div
               key={c.id}
-              className="flex flex-col justify-between rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs transition hover:border-[#0D9488]/40 hover:shadow-sm"
+              className="flex flex-col justify-between rounded-3xl border border-white/85 glass-panel glass-interactive p-5 shadow-xs"
             >
               <div>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="rounded-md bg-[#DFF4EF] px-2 py-0.5 text-xs font-bold text-[#0D9488]">
+                    <span className="rounded-xl bg-[#DFF5EF] border border-[#14A89B]/30 px-2.5 py-0.5 text-xs font-bold text-[#0D9488]">
                       Std {c.standard}-{c.section}
                     </span>
-                    <span className="text-xs text-[#64748B]">{c.medium} Medium</span>
+                    <span className="text-xs text-[#64748B] font-medium">{c.medium} Medium</span>
                   </div>
                   <span className="text-[11px] font-semibold text-[#94A3B8]">AY {c.academicYear}</span>
                 </div>
 
-                <h3 className="mt-2 text-base font-bold text-[#17324D]">{c.name}</h3>
+                <h3 className="mt-2.5 text-base font-bold text-[#142B45] tracking-tight">{c.name}</h3>
                 <p className="text-xs text-[#64748B]">
-                  Class Teacher: <strong className="text-[#263238]">{c.classTeacherName}</strong>
+                  Class Teacher: <strong className="text-[#142B45] font-semibold">{c.classTeacherName}</strong>
                 </p>
 
                 {/* Progress Indicators */}
-                <div className="mt-4 space-y-2 border-t border-[#F1F5F3] pt-3 text-xs">
+                <div className="mt-4 space-y-2 border-t border-[#DCE7E5]/70 pt-3 text-xs">
                   <div>
                     <div className="flex justify-between text-[11px] font-medium text-[#64748B]">
                       <span>{t.classes.literacyCoverage}</span>
-                      <span className="font-bold text-[#17324D]">{c.flnLiteracyPercentage}%</span>
+                      <span className="font-bold text-[#142B45]">{c.flnLiteracyPercentage}%</span>
                     </div>
-                    <div className="mt-1 h-1.5 w-full rounded-full bg-[#EDF2F0]">
+                    <div className="mt-1 h-2 w-full rounded-full bg-black/[0.05]">
                       <div
                         className="h-full rounded-full bg-[#0D9488]"
                         style={{ width: `${c.flnLiteracyPercentage}%` }}
@@ -252,9 +252,9 @@ export default function ClassesPage() {
                   <div>
                     <div className="flex justify-between text-[11px] font-medium text-[#64748B]">
                       <span>{t.classes.numeracyCoverage}</span>
-                      <span className="font-bold text-[#17324D]">{c.flnNumeracyPercentage}%</span>
+                      <span className="font-bold text-[#142B45]">{c.flnNumeracyPercentage}%</span>
                     </div>
-                    <div className="mt-1 h-1.5 w-full rounded-full bg-[#EDF2F0]">
+                    <div className="mt-1 h-2 w-full rounded-full bg-black/[0.05]">
                       <div
                         className="h-full rounded-full bg-[#0D9488]"
                         style={{ width: `${c.flnNumeracyPercentage}%` }}
@@ -264,9 +264,9 @@ export default function ClassesPage() {
                 </div>
 
                 {/* Micro Counters */}
-                <div className="mt-3 grid grid-cols-3 gap-1 rounded-lg bg-[#F7F9F6] p-2 text-center text-[10px]">
+                <div className="mt-3.5 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/80 glass-panel-subtle p-2.5 text-center text-[10px]">
                   <div>
-                    <span className="block font-bold text-[#17324D] text-xs">{c.enrolledStudentsCount}</span>
+                    <span className="block font-bold text-[#142B45] text-xs">{c.enrolledStudentsCount}</span>
                     <span className="text-[#64748B]">Enrolled</span>
                   </div>
                   <div>
@@ -274,14 +274,14 @@ export default function ClassesPage() {
                     <span className="text-[#64748B]">Assessed</span>
                   </div>
                   <div>
-                    <span className="block font-bold text-[#B7791F] text-xs">{c.activeSupportPlansCount}</span>
+                    <span className="block font-bold text-[#C58A32] text-xs">{c.activeSupportPlansCount}</span>
                     <span className="text-[#64748B]">Active Plans</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 border-t border-[#F1F5F3] pt-3">
-                <Button asChild className="h-8.5 w-full rounded-lg bg-[#17324D] text-xs font-bold text-white hover:bg-[#23425F]">
+              <div className="mt-4 border-t border-[#DCE7E5]/70 pt-3">
+                <Button asChild className="h-9 w-full rounded-xl bg-[#142B45] text-xs font-bold text-white hover:bg-[#0D1E33] shadow-xs">
                   <Link href={`/app/classes/${c.id}`} className="flex items-center justify-center gap-1.5">
                     <span>Open Class Workspace</span>
                     <ChevronRight size={13} />
@@ -293,38 +293,38 @@ export default function ClassesPage() {
         </div>
       ) : (
         /* View: Table */
-        <div className="overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-xs">
-          <table className="w-full text-left text-xs text-[#263238]">
-            <thead className="border-b border-[#E2E8F0] bg-[#F8FAFC] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+        <div className="overflow-hidden rounded-3xl border border-white/85 glass-panel-solid shadow-xs">
+          <table className="w-full text-left text-xs text-[#172B3A]">
+            <thead className="border-b border-[#DCE7E5] bg-black/[0.02] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
               <tr>
-                <th className="px-4 py-3">{t.classes.classRoster}</th>
-                <th className="px-4 py-3">{t.classes.classTeacher}</th>
-                <th className="px-4 py-3">Medium</th>
-                <th className="px-4 py-3 text-center">Enrolled</th>
-                <th className="px-4 py-3 text-center">Assessed</th>
-                <th className="px-4 py-3 text-center">Active Plans</th>
-                <th className="px-4 py-3">FLN Literacy</th>
-                <th className="px-4 py-3">FLN Numeracy</th>
-                <th className="px-4 py-3 text-right">Action</th>
+                <th className="px-4 py-3.5">{t.classes.classRoster}</th>
+                <th className="px-4 py-3.5">{t.classes.classTeacher}</th>
+                <th className="px-4 py-3.5">Medium</th>
+                <th className="px-4 py-3.5 text-center">Enrolled</th>
+                <th className="px-4 py-3.5 text-center">Assessed</th>
+                <th className="px-4 py-3.5 text-center">Active Plans</th>
+                <th className="px-4 py-3.5">FLN Literacy</th>
+                <th className="px-4 py-3.5">FLN Numeracy</th>
+                <th className="px-4 py-3.5 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E2E8F0]">
+            <tbody className="divide-y divide-[#DCE7E5]/70">
               {filtered.map((c) => (
-                <tr key={c.id} className="hover:bg-[#F8FAFC]">
-                  <td className="px-4 py-3 font-bold text-[#17324D]">
+                <tr key={c.id} className="hover:bg-white/90 transition-colors">
+                  <td className="px-4 py-3.5 font-bold text-[#142B45]">
                     <Link href={`/app/classes/${c.id}`} className="hover:text-[#0D9488] hover:underline">
                       {c.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-[#526273]">{c.classTeacherName}</td>
-                  <td className="px-4 py-3">{c.medium}</td>
-                  <td className="px-4 py-3 text-center font-semibold text-[#17324D]">{c.enrolledStudentsCount}</td>
-                  <td className="px-4 py-3 text-center font-semibold text-[#0D9488]">{c.studentsAssessedCount}</td>
-                  <td className="px-4 py-3 text-center font-semibold text-[#B7791F]">{c.activeSupportPlansCount}</td>
-                  <td className="px-4 py-3 font-semibold text-[#17324D]">{c.flnLiteracyPercentage}%</td>
-                  <td className="px-4 py-3 font-semibold text-[#17324D]">{c.flnNumeracyPercentage}%</td>
-                  <td className="px-4 py-3 text-right">
-                    <Button asChild variant="outline" className="h-7 rounded-md border-[#CBD5E1] px-2.5 text-xs font-semibold text-[#0D9488] hover:bg-[#F0F9F6]">
+                  <td className="px-4 py-3.5 text-[#526273]">{c.classTeacherName}</td>
+                  <td className="px-4 py-3.5">{c.medium}</td>
+                  <td className="px-4 py-3.5 text-center font-semibold text-[#142B45]">{c.enrolledStudentsCount}</td>
+                  <td className="px-4 py-3.5 text-center font-semibold text-[#0D9488]">{c.studentsAssessedCount}</td>
+                  <td className="px-4 py-3.5 text-center font-semibold text-[#C58A32]">{c.activeSupportPlansCount}</td>
+                  <td className="px-4 py-3.5 font-semibold text-[#142B45]">{c.flnLiteracyPercentage}%</td>
+                  <td className="px-4 py-3.5 font-semibold text-[#142B45]">{c.flnNumeracyPercentage}%</td>
+                  <td className="px-4 py-3.5 text-right">
+                    <Button asChild variant="outline" className="h-7 rounded-xl px-2.5 text-xs font-semibold text-[#0D9488]">
                       <Link href={`/app/classes/${c.id}`}>Open</Link>
                     </Button>
                   </td>
@@ -337,9 +337,9 @@ export default function ClassesPage() {
 
       {/* Modal: Provision New Class */}
       {addClassOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-md rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-xl">
-            <h2 className="text-base font-bold text-[#17324D]">Provision New Classroom</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1E33]/45 p-4 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-3xl border border-white/90 glass-panel-elevated p-6 sm:p-7 shadow-2xl">
+            <h2 className="text-base font-bold text-[#142B45]">Provision New Classroom</h2>
             <p className="text-xs text-[#64748B]">Set up a classroom cohort and assign a class teacher.</p>
 
             <form onSubmit={handleCreateClass} className="mt-4 space-y-3">

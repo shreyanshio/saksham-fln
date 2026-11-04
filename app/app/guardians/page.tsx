@@ -121,24 +121,24 @@ export default function GuardiansPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Enrolled Guardians</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">{guardians.length} Registered</div>
           <div className="mt-0.5 text-[11px] text-[#0D9488]">100% Mobile Linked</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Consent Documented</div>
           <div className="mt-1 text-xl font-bold text-[#15803D]">100%</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Formal parental consent</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Portal Active</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">
             {guardians.filter((g) => g.preferredChannel === 'Portal').length} Families
           </div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Using voice audio web app</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Language Breakdown</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">100% Gujarati</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Localized SMS & Audio</div>
@@ -146,7 +146,7 @@ export default function GuardiansPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px] sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]" size={15} />
           <input

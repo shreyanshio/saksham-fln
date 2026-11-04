@@ -96,7 +96,7 @@ export function AppSidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-60 flex-col justify-between bg-[#17324D]/95 backdrop-blur-lg border-r border-white/10 shadow-xl text-white transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-60 flex-col justify-between glass-sidebar text-white transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -104,20 +104,20 @@ export function AppSidebar({
         <div className="flex flex-col min-h-0 flex-1">
           {/* Brand Header */}
           <div className="flex h-14 shrink-0 items-center justify-between border-b border-white/10 px-4">
-            <Link href="/app/dashboard" className="flex items-center gap-2.5">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-[#0D9488] text-white font-bold text-sm shadow-xs">
+            <Link href="/app/dashboard" className="flex items-center gap-2.5 group">
+              <div className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#0D9488] to-[#14A89B] text-white font-bold text-sm shadow-[0_0_15px_rgba(13,148,136,0.35)] border border-white/20 transition-transform group-hover:scale-105">
                 SF
               </div>
               <div>
-                <div className="text-sm font-bold leading-tight text-white">{t.appName}</div>
-                <div className="text-[9px] uppercase tracking-wider text-[#8ACFC4]">Devbhumi Dwarka</div>
+                <div className="text-sm font-bold leading-tight text-white tracking-tight">{t.appName}</div>
+                <div className="text-[9px] uppercase tracking-wider text-[#14A89B] font-semibold">Devbhumi Dwarka</div>
               </div>
             </Link>
 
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg p-1 text-white/60 hover:bg-white/10 hover:text-white lg:hidden"
+              className="rounded-lg p-1 text-white/60 hover:bg-white/10 hover:text-white lg:hidden transition"
               aria-label={t.common.close}
             >
               <X size={18} />
@@ -128,7 +128,7 @@ export function AppSidebar({
           <nav className="flex-1 overflow-y-auto px-2.5 py-3 space-y-4 text-xs font-medium">
             {/* Core Section */}
             <div>
-              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/40">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/45">
                 {locale === 'gu' ? 'પાયાનું શિક્ષણ' : 'Foundational Learning'}
               </div>
               <div className="flex flex-col gap-0.5">
@@ -143,15 +143,15 @@ export function AppSidebar({
                       key={item.href}
                       href={item.href}
                       onClick={onClose}
-                      className={`flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition ${
+                      className={`flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 transition-all duration-150 ${
                         isActive
-                          ? 'bg-white/15 font-bold text-white shadow-xs'
-                          : 'text-white/70 hover:bg-white/5 hover:text-white'
+                          ? 'bg-[#0D9488]/20 border border-[#14A89B]/40 font-semibold text-white shadow-xs backdrop-blur-xs'
+                          : 'text-white/70 hover:bg-white/[0.08] hover:text-white border border-transparent'
                       }`}
                     >
-                      <Icon size={15} className={isActive ? 'text-[#8ACFC4]' : 'text-white/60'} />
+                      <Icon size={15} className={isActive ? 'text-[#14A89B]' : 'text-white/60'} />
                       <span className="truncate">{item.label}</span>
-                      {isActive && <ChevronRight size={12} className="ml-auto opacity-70" />}
+                      {isActive && <ChevronRight size={12} className="ml-auto text-[#14A89B] opacity-80" />}
                     </Link>
                   )
                 })}
@@ -160,7 +160,7 @@ export function AppSidebar({
 
             {/* Resources Section */}
             <div>
-              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/40">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/45">
                 {locale === 'gu' ? 'સંસાધનો' : 'Instructional Content'}
               </div>
               <div className="flex flex-col gap-0.5">
@@ -173,15 +173,15 @@ export function AppSidebar({
                       key={item.href}
                       href={item.href}
                       onClick={onClose}
-                      className={`flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition ${
+                      className={`flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 transition-all duration-150 ${
                         isActive
-                          ? 'bg-white/15 font-bold text-white shadow-xs'
-                          : 'text-white/70 hover:bg-white/5 hover:text-white'
+                          ? 'bg-[#0D9488]/20 border border-[#14A89B]/40 font-semibold text-white shadow-xs backdrop-blur-xs'
+                          : 'text-white/70 hover:bg-white/[0.08] hover:text-white border border-transparent'
                       }`}
                     >
-                      <Icon size={15} className={isActive ? 'text-[#8ACFC4]' : 'text-white/60'} />
+                      <Icon size={15} className={isActive ? 'text-[#14A89B]' : 'text-white/60'} />
                       <span className="truncate">{item.label}</span>
-                      {isActive && <ChevronRight size={12} className="ml-auto opacity-70" />}
+                      {isActive && <ChevronRight size={12} className="ml-auto text-[#14A89B] opacity-80" />}
                     </Link>
                   )
                 })}
@@ -190,7 +190,7 @@ export function AppSidebar({
 
             {/* Governance & Admin Section */}
             <div>
-              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/40">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-white/45">
                 {locale === 'gu' ? 'પ્રશાસન અને અહેવાલો' : 'Governance & Records'}
               </div>
               <div className="flex flex-col gap-0.5">
@@ -203,15 +203,15 @@ export function AppSidebar({
                       key={item.href}
                       href={item.href}
                       onClick={onClose}
-                      className={`flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition ${
+                      className={`flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 transition-all duration-150 ${
                         isActive
-                          ? 'bg-white/15 font-bold text-white shadow-xs'
-                          : 'text-white/70 hover:bg-white/5 hover:text-white'
+                          ? 'bg-[#0D9488]/20 border border-[#14A89B]/40 font-semibold text-white shadow-xs backdrop-blur-xs'
+                          : 'text-white/70 hover:bg-white/[0.08] hover:text-white border border-transparent'
                       }`}
                     >
-                      <Icon size={15} className={isActive ? 'text-[#8ACFC4]' : 'text-white/60'} />
+                      <Icon size={15} className={isActive ? 'text-[#14A89B]' : 'text-white/60'} />
                       <span className="truncate">{item.label}</span>
-                      {isActive && <ChevronRight size={12} className="ml-auto opacity-70" />}
+                      {isActive && <ChevronRight size={12} className="ml-auto text-[#14A89B] opacity-80" />}
                     </Link>
                   )
                 })}
@@ -221,13 +221,13 @@ export function AppSidebar({
         </div>
 
         {/* Footer Area: Offline Sync & Exit Workspace */}
-        <div className="shrink-0 p-3 border-t border-white/10 bg-[#142b42]">
+        <div className="shrink-0 p-3 border-t border-white/10 bg-[#0A1726]/60 backdrop-blur-md">
           <div
             onClick={onOpenOfflineDrawer}
-            className="cursor-pointer rounded-xl border border-white/10 bg-white/5 p-2.5 text-xs transition hover:bg-white/10"
+            className="cursor-pointer rounded-xl border border-white/10 bg-white/[0.04] p-2.5 text-xs transition-all hover:bg-white/[0.09] hover:border-white/20"
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#8ACFC4]">
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#14A89B]">
                 {syncState.isSimulatedOffline ? <WifiOff size={13} /> : <Wifi size={13} />}
                 <span>
                   {syncState.isSimulatedOffline
@@ -239,12 +239,12 @@ export function AppSidebar({
               </div>
               <span className="text-[10px] text-white/40">Terminal</span>
             </div>
-            <p className="mt-1 text-[11px] font-medium text-white/80 truncate">{t.schoolName}</p>
+            <p className="mt-1 text-[11px] font-medium text-white/85 truncate">{t.schoolName}</p>
           </div>
 
           <Link
             href="/"
-            className="mt-2 flex items-center justify-center gap-1.5 rounded-lg border border-white/10 py-1.5 text-center text-xs font-medium text-white/70 transition hover:bg-white/10 hover:text-white"
+            className="mt-2 flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.02] py-1.5 text-center text-xs font-medium text-white/70 transition-all hover:bg-white/[0.08] hover:text-white hover:border-white/20"
           >
             <LogOut size={13} />
             <span>{t.nav.exitWorkspace}</span>

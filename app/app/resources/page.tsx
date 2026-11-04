@@ -125,30 +125,30 @@ export default function ResourcesPage() {
 
       {/* Key Metric Highlights */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Total Resources</div>
-          <div className="mt-1 text-xl font-bold text-[#17324D]">{activities.length} Available</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Total Resources</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#142B45]">{activities.length} Available</div>
           <div className="mt-0.5 text-[11px] text-[#0D9488]">Class 1–5 Core Focus</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Curriculum Aligned</div>
-          <div className="mt-1 text-xl font-bold text-[#15803D]">100% GCERT</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#16865D]">Curriculum Aligned</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#16865D]">100% GCERT</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Learning Outcomes mapped</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Average Duration</div>
-          <div className="mt-1 text-xl font-bold text-[#17324D]">10–15 Mins</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Average Duration</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#142B45]">10–15 Mins</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Ideal for daily FLN period</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Bilingual Support</div>
-          <div className="mt-1 text-xl font-bold text-[#17324D]">Gujarati & English</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Bilingual Support</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#142B45]">Gujarati & English</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Teacher scripts included</div>
         </div>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+      <div className="glass-panel rounded-2xl p-3.5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]" size={15} />
@@ -157,7 +157,7 @@ export default function ResourcesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by title, target skill, GCERT outcome code, or keyword..."
-              className="w-full rounded-lg border border-[#E2E8F0] bg-[#F7F9F6] py-2 pl-9 pr-3 text-xs text-[#263238] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:bg-white focus:outline-hidden"
+              className="glass-input h-9 w-full rounded-xl pl-9 pr-3 text-xs text-[#142B45] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
             />
           </div>
 
@@ -249,7 +249,7 @@ export default function ResourcesPage() {
             return (
               <div
                 key={act.id}
-                className="flex flex-col justify-between rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs transition hover:border-[#8ACFC4] hover:shadow-sm"
+                className="glass-panel glass-interactive flex flex-col justify-between rounded-2xl p-5"
               >
                 <div>
                   {/* Card Badges */}

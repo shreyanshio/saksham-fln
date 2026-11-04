@@ -208,7 +208,7 @@ export default function SkillsReportPage() {
         {filtered.map((skill) => (
           <div
             key={skill.skillId}
-            className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs space-y-3"
+            className="glass-panel rounded-2xl p-4.5 space-y-3"
           >
             <div className="flex items-start justify-between">
               <div>

@@ -177,22 +177,22 @@ export default function AssessmentReportsPage() {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Total Attempts</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">114 Logged</div>
           <div className="mt-0.5 text-[11px] text-[#0D9488]">93% completion rate</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Average Duration</div>
           <div className="mt-1 text-xl font-bold text-[#17324D]">4.4 Minutes</div>
           <div className="mt-0.5 text-[11px] text-[#15803D]">Non-fatiguing micro-test</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Audio Read-Aloud</div>
           <div className="mt-1 text-xl font-bold text-[#0D9488]">69% Utilized</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Supports emergent readers</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
           <div className="text-xs font-medium text-[#64748B]">Gaps Identified</div>
           <div className="mt-1 text-xl font-bold text-[#B42318]">28 Specific Needs</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Routed to 5-day plans</div>

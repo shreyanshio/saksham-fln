@@ -160,7 +160,7 @@ export default function GuardianProgressCardPage({ params }: PageProps) {
         </div>
 
         {/* Today's 5-Minute Home Learning Card */}
-        <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
+        <div className="glass-panel-solid rounded-2xl p-6 shadow-md">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0D9488]">
             <Home size={15} />
             <span>આજની ૫-મિનિટની સરળ ગૃહ પ્રવૃત્તિ</span>
@@ -211,7 +211,7 @@ export default function GuardianProgressCardPage({ params }: PageProps) {
         </div>
 
         {/* Teacher Contact and Encouragement Box */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs text-xs space-y-2">
+        <div className="glass-panel rounded-2xl p-4.5 shadow-xs text-xs space-y-2">
           <div className="flex items-center gap-2 font-bold text-[#17324D]">
             <Heart size={14} className="text-[#B42318]" />
             <span>શિક્ષિકાનો સંદેશ (Teacher Note)</span>

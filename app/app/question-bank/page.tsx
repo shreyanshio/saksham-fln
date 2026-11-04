@@ -133,36 +133,36 @@ export default function QuestionBankPage() {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#64748B]">Total Items</span>
-          <p className="mt-0.5 text-xl font-bold text-[#17324D]">{questions.length}</p>
-          <p className="text-[10px] text-[#64748B]">Literacy & Numeracy</p>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Total Items</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#142B45]">{questions.length}</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Literacy & Numeracy</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#15803D]">Published</span>
-          <p className="mt-0.5 text-xl font-bold text-[#15803D]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#16865D]">Published</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#16865D]">
             {questions.filter((q) => q.reviewStatus === 'Published').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Available for assessments</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Available for assessments</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#B7791F]">Under Review</span>
-          <p className="mt-0.5 text-xl font-bold text-[#B7791F]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C58A32]">Under Review</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#C58A32]">
             {questions.filter((q) => q.reviewStatus === 'Under Review' || q.reviewStatus === 'Draft').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Curriculum review</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Curriculum review</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#0D9488]">Foundation Tier</span>
-          <p className="mt-0.5 text-xl font-bold text-[#0D9488]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0D9488]">Foundation Tier</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#0D9488]">
             {questions.filter((q) => q.difficulty === 'Foundation').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Core prerequisite check</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Core prerequisite check</p>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 glass-panel rounded-2xl p-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
           <input
@@ -170,7 +170,7 @@ export default function QuestionBankPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search items by prompt, skill domain, or keywords..."
-            className="h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white pl-9 pr-3 text-xs text-[#263238] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 w-full rounded-xl pl-9 pr-3 text-xs text-[#142B45] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
           />
         </div>
 
@@ -206,7 +206,7 @@ export default function QuestionBankPage() {
         {filtered.map((q) => (
           <div
             key={q.id}
-            className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs transition hover:border-[#0D9488]/50"
+            className="glass-panel glass-interactive rounded-2xl p-5"
           >
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
               <div>

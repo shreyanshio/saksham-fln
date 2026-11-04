@@ -72,24 +72,24 @@ export function DiagnosticModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4 backdrop-blur-xs">
-      <div className="relative max-h-[95vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-[#d8e2df] bg-white p-5 shadow-2xl sm:p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1E33]/50 p-3 sm:p-4 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative max-h-[95vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-white/90 glass-panel-elevated p-6 sm:p-8 shadow-2xl">
         {/* Header */}
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#e8efed] pb-5">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#DCE7E5]/70 pb-5">
           <div className="flex items-center gap-3.5">
-            <div className="flex size-12 items-center justify-center rounded-2xl bg-[#dff4ef] text-base font-bold text-[#087f75]">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-[#DFF5EF] text-base font-bold text-[#0D9488] shadow-xs">
               {student.avatar}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-[#dff4ef] px-2.5 py-0.5 text-xs font-semibold text-[#087f75]">
+                <span className="rounded-full bg-[#DFF5EF] px-2.5 py-0.5 text-xs font-semibold text-[#0D9488] border border-[#14A89B]/30">
                   FLN નિદાન પરિણામ · Diagnostic Report
                 </span>
-                <span className="rounded-full bg-[#f1f5f3] px-2 py-0.5 text-[10px] font-semibold text-[#64748b]">
+                <span className="rounded-full bg-black/[0.04] border border-[#DCE7E5] px-2 py-0.5 text-[10px] font-semibold text-[#64748B]">
                   {student.grade} · Roll #{student.rollNo}
                 </span>
               </div>
-              <h3 className="mt-1 text-xl font-bold text-[#17324d]">
+              <h3 className="mt-1 text-xl font-bold text-[#142B45] tracking-tight">
                 નિદાન પરિણામ પત્રક: {student.fullName}
               </h3>
             </div>
@@ -99,7 +99,7 @@ export function DiagnosticModal({
             <button
               type="button"
               onClick={handleSimulatePrint}
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-[#cbd9d5] px-3 py-1.5 text-xs font-semibold text-[#526273] hover:bg-[#f7fbf9]"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-white/80 glass-panel-subtle px-3 py-1.5 text-xs font-semibold text-[#64748B] hover:text-[#142B45] hover:bg-white"
               title="Print diagnostic report summary"
             >
               <Printer size={14} />
@@ -108,7 +108,7 @@ export function DiagnosticModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex size-9 items-center justify-center rounded-xl text-[#64748b] transition hover:bg-[#f1f5f3]"
+              className="flex size-9 items-center justify-center rounded-xl text-[#64748B] transition hover:bg-black/[0.05] hover:text-[#142B45]"
               aria-label="Close diagnostic report"
             >
               <X size={20} />
@@ -117,11 +117,11 @@ export function DiagnosticModal({
         </div>
 
         {/* Critical Pedagogical Distinction Banner */}
-        <div className="mt-5 rounded-2xl border border-[#bfe2da] bg-[#eef7f4] p-4 text-xs leading-5 text-[#17324d]">
+        <div className="mt-5 rounded-2xl border border-[#14A89B]/30 glass-panel-teal p-4 text-xs leading-relaxed text-[#142B45]">
           <div className="flex items-start gap-2.5">
-            <ShieldCheck size={18} className="shrink-0 text-[#0d9488] mt-0.5" />
+            <ShieldCheck size={18} className="shrink-0 text-[#0D9488] mt-0.5" />
             <div>
-              <p className="font-bold text-[#0d9488] text-sm">
+              <p className="font-bold text-[#0D9488] text-sm">
                 Pedagogical Notice: Probable Learning Gap vs. Validated Diagnosis
               </p>
               <p className="mt-1 text-[#526273]">
@@ -136,34 +136,34 @@ export function DiagnosticModal({
 
         {/* Score & Primary Summary Banner */}
         <div className="mt-5 grid gap-4 sm:grid-cols-[1.2fr_1.8fr]">
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-5 text-center">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#64748b]">Accuracy on Attempted Items</span>
-            <div className="mt-2 text-4xl font-extrabold text-[#0d9488]">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-white/80 glass-panel-subtle p-5 text-center">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Accuracy on Attempted Items</span>
+            <div className="mt-2 text-4xl font-extrabold text-[#0D9488]">
               {result.attemptedQuestionsCount > 0 ? `${result.overallScore}%` : 'N/A'}
             </div>
             <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
-              <span className="rounded-full bg-[#dff4ef] px-2.5 py-0.5 text-xs font-semibold text-[#087f75]">
+              <span className="rounded-full bg-[#DFF5EF] px-2.5 py-0.5 text-xs font-semibold text-[#0D9488] border border-[#14A89B]/30">
                 {result.correctAnswersCount} of {result.attemptedQuestionsCount} Correct
               </span>
-              <span className="rounded-full bg-[#edf2f0] px-2.5 py-0.5 text-xs font-medium text-[#526273]">
+              <span className="rounded-full bg-black/[0.04] border border-[#DCE7E5] px-2.5 py-0.5 text-xs font-medium text-[#64748B]">
                 Coverage: {result.evidenceCoveragePercent ?? Math.round((result.attemptedQuestionsCount / result.totalQuestions) * 100)}% ({result.attemptedQuestionsCount}/{result.totalQuestions})
               </span>
             </div>
-            <p className="mt-2 text-[11px] text-[#94a3b8]">Separates student accuracy from evidence coverage</p>
+            <p className="mt-2 text-[11px] text-[#94A3B8]">Separates student accuracy from evidence coverage</p>
           </div>
 
-          <div className="rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-5">
+          <div className="rounded-2xl border border-white/80 glass-panel-subtle p-5">
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#17324d]">
-                <Target size={15} className="text-[#0d9488]" /> Prerequisite Summary
+              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#142B45]">
+                <Target size={15} className="text-[#0D9488]" /> Prerequisite Summary
               </span>
-              <span className="rounded-full bg-[#fff5d9] px-2 py-0.5 text-[10px] font-bold text-[#8a6200]">
+              <span className="rounded-full bg-[#FFF5D9] border border-[#C58A32]/30 px-2.5 py-0.5 text-[10px] font-bold text-[#C58A32]">
                 {result.probableGapsCount} Probable Gap(s) Flagged
               </span>
             </div>
-            <p className="mt-2 text-xs leading-5 text-[#526273]">{result.pedagogicalSummary}</p>
+            <p className="mt-2 text-xs leading-relaxed text-[#526273]">{result.pedagogicalSummary}</p>
             {student.pedagogicalInsight && (
-              <div className="mt-3 rounded-xl bg-white p-3 border border-[#e2e8e5] text-xs text-[#17324d]">
+              <div className="mt-3 rounded-xl glass-panel-solid p-3 border border-[#DCE7E5] text-xs text-[#142B45]">
                 <strong>Teacher Observation Note:</strong> &ldquo;{student.pedagogicalInsight}&rdquo;
               </div>
             )}
@@ -171,14 +171,14 @@ export function DiagnosticModal({
         </div>
 
         {/* Clear Next-Step Action Callout (Direct CTA) */}
-        <div className="mt-5 rounded-2xl bg-[#17324d] p-5 text-white shadow-sm">
+        <div className="mt-5 rounded-2xl glass-panel-navy p-5 text-white shadow-xl">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8acfc4]">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#14A89B]">
                 <Sparkles size={15} /> Immediate Next-Step Action
               </div>
-              <h4 className="mt-1 text-base font-bold sm:text-lg">{result.clearNextStep.title}</h4>
-              <p className="mt-0.5 text-xs text-white/75 leading-relaxed">
+              <h4 className="mt-1 text-base font-bold sm:text-lg text-white">{result.clearNextStep.title}</h4>
+              <p className="mt-0.5 text-xs text-white/80 leading-relaxed">
                 Conduct this targeted hands-on session with {student.name} to validate grouping intuition before moving to advanced worksheets.
               </p>
             </div>
@@ -190,7 +190,7 @@ export function DiagnosticModal({
                   onProceedToPlan(student)
                 }
               }}
-              className="h-11 shrink-0 rounded-xl bg-[#0d9488] px-5 text-xs font-bold text-white shadow-md hover:bg-[#087f75]"
+              className="h-11 shrink-0 rounded-xl bg-[#0D9488] px-5 text-xs font-bold text-white shadow-md hover:bg-[#087F75] transition"
             >
               {result.clearNextStep.actionText} <ArrowRight size={15} className="ml-1.5" />
             </Button>

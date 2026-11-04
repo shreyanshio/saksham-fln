@@ -84,7 +84,7 @@ export default function QuestionDetailPage({
       </div>
 
       {/* Header */}
-      <div className="flex flex-col justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs sm:flex-row sm:items-center">
+      <div className="flex flex-col justify-between gap-3 glass-panel rounded-2xl p-6 sm:flex-row sm:items-center">
         <div>
           <div className="flex items-center gap-2">
             <span className="rounded bg-[#F1F5F3] px-2 py-0.5 text-[10px] font-bold text-[#17324D]">

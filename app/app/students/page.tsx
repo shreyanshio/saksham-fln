@@ -343,28 +343,28 @@ export default function StudentsPage() {
 
       {/* Stats Summary Bar */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#64748B]">Total Learners</span>
-          <p className="mt-0.5 text-xl font-bold text-[#17324D]">{students.length}</p>
+        <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
+          <span className="text-[11px] font-semibold text-[#64748B]">Total Learners</span>
+          <p className="mt-0.5 text-2xl font-extrabold text-[#142B45] tracking-tight">{students.length}</p>
           <p className="text-[10px] text-[#64748B]">Active school cohort</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#B7791F]">Needs Support</span>
-          <p className="mt-0.5 text-xl font-bold text-[#B7791F]">
+        <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
+          <span className="text-[11px] font-semibold text-[#C58A32]">Needs Support</span>
+          <p className="mt-0.5 text-2xl font-extrabold text-[#C58A32] tracking-tight">
             {students.filter((s) => s.overallStatus === 'Needs Support').length}
           </p>
           <p className="text-[10px] text-[#64748B]">Requires micro-pathway</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#0D9488]">Developing</span>
-          <p className="mt-0.5 text-xl font-bold text-[#0D9488]">
+        <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
+          <span className="text-[11px] font-semibold text-[#0D9488]">Developing</span>
+          <p className="mt-0.5 text-2xl font-extrabold text-[#0D9488] tracking-tight">
             {students.filter((s) => s.overallStatus === 'Developing').length}
           </p>
           <p className="text-[10px] text-[#64748B]">Active practice ongoing</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#15803D]">Demonstrated</span>
-          <p className="mt-0.5 text-xl font-bold text-[#15803D]">
+        <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
+          <span className="text-[11px] font-semibold text-[#16865D]">Demonstrated</span>
+          <p className="mt-0.5 text-2xl font-extrabold text-[#16865D] tracking-tight">
             {students.filter((s) => s.overallStatus === 'Demonstrated').length}
           </p>
           <p className="text-[10px] text-[#64748B]">FLN baseline achieved</p>
@@ -372,7 +372,7 @@ export default function StudentsPage() {
       </div>
 
       {/* Filters and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3 shadow-xs">
+      <div className="flex flex-col gap-3 rounded-2xl border border-white/85 glass-panel p-4 shadow-xs">
         <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative flex-1">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
@@ -381,7 +381,7 @@ export default function StudentsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={`${t.common.search} student name, roll number, or focus gap...`}
-              className="h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white pl-9 pr-3 text-xs text-[#263238] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 w-full rounded-xl glass-input pl-9 pr-3 text-xs text-[#142B45] placeholder:text-[#94A3B8] outline-none"
             />
           </div>
 
@@ -391,7 +391,7 @@ export default function StudentsPage() {
               value={standardFilter}
               onChange={(e) => setStandardFilter(e.target.value)}
               aria-label="Filter by standard"
-              className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All Grades (1–8)</option>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((std) => (
@@ -406,7 +406,7 @@ export default function StudentsPage() {
               value={sectionFilter}
               onChange={(e) => setSectionFilter(e.target.value)}
               aria-label="Filter by section"
-              className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All Sections</option>
               <option value="A">Section A</option>
@@ -419,7 +419,7 @@ export default function StudentsPage() {
               value={classFilter}
               onChange={(e) => setClassFilter(e.target.value)}
               aria-label="Filter by class"
-              className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All Classes</option>
               {classesList.map((c) => (
@@ -434,7 +434,7 @@ export default function StudentsPage() {
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               aria-label="Filter by status"
-              className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+              className="h-9 rounded-xl glass-input px-3 text-xs font-semibold text-[#142B45] outline-none"
             >
               <option value="All">All FLN Statuses</option>
               <option value="Needs Support">Needs Support</option>
@@ -443,12 +443,12 @@ export default function StudentsPage() {
             </select>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center rounded-lg border border-[#CBD5E1] bg-[#F7F9F6] p-0.5">
+            <div className="flex items-center rounded-xl border border-white/80 glass-panel-subtle p-0.5">
               <button
                 type="button"
                 onClick={() => setViewMode('table')}
-                className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
-                  viewMode === 'table' ? 'bg-white text-[#0D9488] shadow-xs' : 'text-[#64748B]'
+                className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${
+                  viewMode === 'table' ? 'bg-[#0D9488] text-white shadow-2xs' : 'text-[#64748B] hover:text-[#142B45]'
                 }`}
               >
                 Table
@@ -456,8 +456,8 @@ export default function StudentsPage() {
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
-                className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
-                  viewMode === 'grid' ? 'bg-white text-[#0D9488] shadow-xs' : 'text-[#64748B]'
+                className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${
+                  viewMode === 'grid' ? 'bg-[#0D9488] text-white shadow-2xs' : 'text-[#64748B] hover:text-[#142B45]'
                 }`}
               >
                 Cards
@@ -469,91 +469,91 @@ export default function StudentsPage() {
 
       {/* Main Content: Table or Grid */}
       {filtered.length === 0 ? (
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-12 text-center">
+        <div className="rounded-3xl border border-white/85 glass-panel p-12 text-center">
           <User size={32} className="mx-auto text-[#CBD5E1]" />
-          <h2 className="mt-3 text-base font-bold text-[#17324D]">No students match your filter</h2>
+          <h2 className="mt-3 text-base font-bold text-[#142B45]">No students match your filter</h2>
           <p className="mt-1 text-xs text-[#64748B]">Try selecting &apos;All&apos; or modifying your search terms.</p>
         </div>
       ) : viewMode === 'table' ? (
-        <div className="overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-xs">
-          <table className="w-full text-left text-xs text-[#263238]">
-            <thead className="border-b border-[#E2E8F0] bg-[#F8FAFC] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+        <div className="overflow-hidden rounded-3xl border border-white/85 glass-panel-solid shadow-xs">
+          <table className="w-full text-left text-xs text-[#172B3A]">
+            <thead className="border-b border-[#DCE7E5] bg-black/[0.02] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
               <tr>
-                <th className="px-4 py-3">Learner & ID</th>
-                <th className="px-4 py-3">Class</th>
-                <th className="px-4 py-3">Roll #</th>
-                <th className="px-4 py-3">FLN Status</th>
-                <th className="px-4 py-3">Prerequisite Gap</th>
-                <th className="px-4 py-3">Pathway Progress</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3.5">Learner & ID</th>
+                <th className="px-4 py-3.5">Class</th>
+                <th className="px-4 py-3.5">Roll #</th>
+                <th className="px-4 py-3.5">FLN Status</th>
+                <th className="px-4 py-3.5">Prerequisite Gap</th>
+                <th className="px-4 py-3.5">Pathway Progress</th>
+                <th className="px-4 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E2E8F0]">
+            <tbody className="divide-y divide-[#DCE7E5]/70">
               {filtered.map((s) => (
-                <tr key={s.id} className="hover:bg-[#F8FAFC]">
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#DFF4EF] text-xs font-bold text-[#087F75]">
+                <tr key={s.id} className="hover:bg-white/90 transition-colors">
+                  <td className="px-4 py-3.5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-2xl bg-[#DFF5EF] text-xs font-bold text-[#0D9488] shadow-2xs">
                         {s.avatar}
                       </div>
                       <div>
                         <Link
                           href={`/app/students/${s.id}`}
-                          className="font-bold text-[#17324D] hover:text-[#0D9488] hover:underline"
+                          className="font-bold text-[#142B45] hover:text-[#0D9488] hover:underline"
                         >
                           {s.fullName}
                         </Link>
-                        <div className="font-mono text-[10px] text-[#64748B]">{s.studentId}</div>
+                        <div className="font-mono text-[10px] text-[#94A3B8]">{s.studentId}</div>
                       </div>
                     </div>
                   </td>
 
-                  <td className="px-4 py-3 font-semibold text-[#17324D]">
+                  <td className="px-4 py-3.5 font-semibold text-[#142B45]">
                     Std {s.standard}-{s.section}
                   </td>
 
-                  <td className="px-4 py-3 font-semibold text-[#526273]">#{s.rollNo}</td>
+                  <td className="px-4 py-3.5 font-semibold text-[#64748B]">#{s.rollNo}</td>
 
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3.5">
                     <span
                       className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
                         s.overallStatus === 'Needs Support'
-                          ? 'bg-[#FFF5D9] text-[#8A6200]'
+                          ? 'border border-[#C58A32]/30 bg-[#FFF5D9] text-[#C58A32]'
                           : s.overallStatus === 'Developing'
-                          ? 'bg-[#DFF4EF] text-[#087F75]'
-                          : 'bg-[#DCFCE7] text-[#15803D]'
+                          ? 'border border-[#14A89B]/30 bg-[#DFF5EF] text-[#0D9488]'
+                          : 'border border-[#16865D]/30 bg-[#DFF5EF] text-[#16865D]'
                       }`}
                     >
                       {s.overallStatus}
                     </span>
                   </td>
 
-                  <td className="px-4 py-3 text-[#475569] max-w-xs truncate">{s.prerequisiteGap}</td>
+                  <td className="px-4 py-3.5 text-[#526273] max-w-xs truncate">{s.prerequisiteGap}</td>
 
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3.5">
                     <div className="flex items-center gap-2">
-                      <div className="w-16 rounded-full bg-[#E2E8F0] h-1.5 overflow-hidden">
+                      <div className="w-16 rounded-full bg-black/[0.05] h-1.5 overflow-hidden">
                         <div
                           className="h-full bg-[#0D9488]"
                           style={{ width: `${s.progressPercent}%` }}
                         />
                       </div>
-                      <span className="font-bold text-[11px] text-[#17324D]">{s.progressPercent}%</span>
+                      <span className="font-bold text-[11px] text-[#142B45]">{s.progressPercent}%</span>
                     </div>
                   </td>
 
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-4 py-3.5 text-right">
                     <div className="flex items-center justify-end gap-1.5">
                       <Button
                         variant="outline"
                         onClick={() => handleSelectStudent(s)}
-                        className="h-7 rounded-md border-[#CBD5E1] px-2 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+                        className="h-7 rounded-xl px-2.5 text-xs font-semibold text-[#142B45]"
                       >
                         Profile
                       </Button>
                       <Button
                         onClick={() => handleStartAssessment(s)}
-                        className="h-7 rounded-md bg-[#0D9488] px-2.5 text-xs font-semibold text-white hover:bg-[#087F75]"
+                        className="h-7 rounded-xl bg-[#0D9488] px-3 text-xs font-semibold text-white hover:bg-[#087F75]"
                       >
                         Check
                       </Button>
@@ -566,21 +566,21 @@ export default function StudentsPage() {
         </div>
       ) : (
         /* Cards view */
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((s) => (
             <div
               key={s.id}
-              className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs transition hover:border-[#0D9488]/40"
+              className="rounded-3xl border border-white/85 glass-panel glass-interactive p-5 shadow-xs"
             >
               <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#DFF4EF] text-xs font-bold text-[#087F75]">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#DFF5EF] text-xs font-bold text-[#0D9488] shadow-2xs">
                     {s.avatar}
                   </div>
                   <div>
                     <Link
                       href={`/app/students/${s.id}`}
-                      className="font-bold text-[#17324D] hover:text-[#0D9488] hover:underline"
+                      className="font-bold text-[#142B45] hover:text-[#0D9488] hover:underline"
                     >
                       {s.fullName}
                     </Link>
@@ -591,47 +591,47 @@ export default function StudentsPage() {
                 </div>
 
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                  className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${
                     s.overallStatus === 'Needs Support'
-                      ? 'bg-[#FFF5D9] text-[#8A6200]'
+                      ? 'border border-[#C58A32]/30 bg-[#FFF5D9] text-[#C58A32]'
                       : s.overallStatus === 'Developing'
-                      ? 'bg-[#DFF4EF] text-[#087F75]'
-                      : 'bg-[#F1F5F3] text-[#64748B]'
+                      ? 'border border-[#14A89B]/30 bg-[#DFF5EF] text-[#0D9488]'
+                      : 'border border-[#16865D]/30 bg-[#DFF5EF] text-[#16865D]'
                   }`}
                 >
                   {s.overallStatus}
                 </span>
               </div>
 
-              <div className="mt-3 rounded-lg bg-[#F7F9F6] p-2.5 text-xs">
-                <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+              <div className="mt-3.5 rounded-2xl border border-white/80 glass-panel-subtle p-3 text-xs">
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">
                   Prerequisite Focus
                 </span>
-                <p className="mt-0.5 text-xs text-[#263238] line-clamp-2">{s.prerequisiteGap}</p>
+                <p className="mt-0.5 text-xs text-[#142B45] line-clamp-2 leading-relaxed">{s.prerequisiteGap}</p>
               </div>
 
-              <div className="mt-3 flex items-center justify-between text-xs">
+              <div className="mt-3.5 flex items-center justify-between text-xs">
                 <span className="text-[#64748B]">Pathway Progress:</span>
                 <span className="font-bold text-[#0D9488]">{s.progressPercent}%</span>
               </div>
-              <div className="mt-1 h-1.5 w-full rounded-full bg-[#E2E8F0]">
+              <div className="mt-1.5 h-2 w-full rounded-full bg-black/[0.05]">
                 <div
-                  className="h-1.5 rounded-full bg-[#0D9488]"
+                  className="h-2 rounded-full bg-[#0D9488] transition-all duration-300"
                   style={{ width: `${s.progressPercent}%` }}
                 />
               </div>
 
-              <div className="mt-3.5 flex items-center gap-2 pt-2 border-t border-[#F1F5F3]">
+              <div className="mt-4 flex items-center gap-2 pt-3 border-t border-[#DCE7E5]/70">
                 <Button
                   variant="outline"
                   onClick={() => handleSelectStudent(s)}
-                  className="h-7 flex-1 rounded-lg border-[#CBD5E1] text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+                  className="h-8 flex-1 rounded-xl text-xs font-semibold text-[#142B45]"
                 >
                   View Profile
                 </Button>
                 <Button
                   onClick={() => handleStartAssessment(s)}
-                  className="h-7 flex-1 rounded-lg bg-[#0D9488] text-xs font-semibold text-white hover:bg-[#087F75]"
+                  className="h-8 flex-1 rounded-xl bg-[#0D9488] text-xs font-semibold text-white hover:bg-[#087F75]"
                 >
                   Run Check
                 </Button>
@@ -643,9 +643,9 @@ export default function StudentsPage() {
 
       {/* Modal: Enroll New Student */}
       {addStudentOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-md rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-xl">
-            <h2 className="text-base font-bold text-[#17324D]">Enroll New Student</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1E33]/45 p-4 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-3xl border border-white/90 glass-panel-elevated p-6 sm:p-7 shadow-2xl">
+            <h2 className="text-base font-bold text-[#142B45] tracking-tight">Enroll New Student</h2>
             <p className="text-xs text-[#64748B]">Assign student to class cohort with guardian contact.</p>
 
             <form onSubmit={handleCreateStudent} className="mt-4 space-y-3">

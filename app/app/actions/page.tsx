@@ -116,7 +116,7 @@ export default function TeacherActionsPage() {
             <CheckSquare size={15} />
             <span>{t.nav.teacherActions}</span>
           </div>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#17324D]">
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#142B45]">
             Teacher Action Workspace
           </h1>
           <p className="mt-0.5 text-xs text-[#64748B]">
@@ -127,7 +127,7 @@ export default function TeacherActionsPage() {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => setIsAddingAction(true)}
-            className="h-8.5 rounded-lg bg-[#0D9488] px-3 text-xs font-semibold text-white hover:bg-[#087F75]"
+            className="h-9 rounded-xl bg-[#0D9488] px-3.5 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71] transition-all"
           >
             <Plus size={14} className="mr-1" /> Add Action Item
           </Button>
@@ -136,44 +136,44 @@ export default function TeacherActionsPage() {
 
       {/* Stats Summary Bar */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#64748B]">Total Actions</span>
-          <p className="mt-0.5 text-xl font-bold text-[#17324D]">{actions.length}</p>
-          <p className="text-[10px] text-[#64748B]">Active intervention tasks</p>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Total Actions</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#142B45]">{actions.length}</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Active intervention tasks</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#B42318]">High Priority</span>
-          <p className="mt-0.5 text-xl font-bold text-[#B42318]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C85A52]">High Priority</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#C85A52]">
             {actions.filter((a) => a.priority === 'High' && a.status !== 'Completed').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Urgent prerequisite follow-ups</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Urgent prerequisite follow-ups</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#0D9488]">In Progress</span>
-          <p className="mt-0.5 text-xl font-bold text-[#0D9488]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0D9488]">In Progress</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#0D9488]">
             {actions.filter((a) => a.status === 'In Progress').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Currently underway</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Currently underway</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#15803D]">Completed</span>
-          <p className="mt-0.5 text-xl font-bold text-[#15803D]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#16865D]">Completed</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#16865D]">
             {actions.filter((a) => a.status === 'Completed').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Resolved this week</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Resolved this week</p>
         </div>
       </div>
 
       {/* Filters and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 glass-panel rounded-2xl p-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
+          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search action items by title, student, or description..."
-            className="h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white pl-9 pr-3 text-xs text-[#263238] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 w-full rounded-xl pl-9 pr-3 text-xs text-[#142B45] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
           />
         </div>
 
@@ -183,7 +183,7 @@ export default function TeacherActionsPage() {
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
             aria-label="Filter by priority"
-            className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
           >
             <option value="All">All Priorities</option>
             <option value="High">High Priority</option>
@@ -196,7 +196,7 @@ export default function TeacherActionsPage() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             aria-label="Filter by status"
-            className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
           >
             <option value="All">All Statuses</option>
             <option value="Pending">Pending</option>
@@ -208,13 +208,13 @@ export default function TeacherActionsPage() {
 
       {/* Actions List */}
       {filtered.length === 0 ? (
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-12 text-center">
-          <CheckSquare size={32} className="mx-auto text-[#CBD5E1]" />
-          <p className="mt-3 text-sm font-semibold text-[#17324D]">{t.common.noRecordsFound}</p>
+        <div className="glass-panel rounded-2xl p-12 text-center">
+          <CheckSquare size={32} className="mx-auto text-[#94A3B8]" />
+          <p className="mt-3 text-sm font-semibold text-[#142B45]">{t.common.noRecordsFound}</p>
           <p className="mt-1 text-xs text-[#64748B]">No teacher action items match your selected filters.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {filtered.map((action) => {
             const isCompleted = action.status === 'Completed'
             const isGujarati = locale === 'gu' && action.titleGu
@@ -222,10 +222,10 @@ export default function TeacherActionsPage() {
             return (
               <div
                 key={action.id}
-                className={`rounded-xl border p-4 transition ${
+                className={`rounded-2xl border p-4.5 transition-all ${
                   isCompleted
-                    ? 'border-[#E2E8F0] bg-[#F7F9F6]/80 text-[#94A3B8]'
-                    : 'border-[#E2E8F0] bg-white shadow-xs hover:border-[#0D9488]/40'
+                    ? 'border-[#DCE7E5]/50 bg-white/40 text-[#94A3B8]'
+                    : 'glass-panel glass-interactive'
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -240,31 +240,31 @@ export default function TeacherActionsPage() {
                       <div className="flex flex-wrap items-center gap-2">
                         <h2
                           className={`text-sm font-bold leading-snug ${
-                            isCompleted ? 'line-through text-[#94A3B8]' : 'text-[#17324D]'
+                            isCompleted ? 'line-through text-[#94A3B8]' : 'text-[#142B45]'
                           }`}
                         >
                           {isGujarati ? action.titleGu : action.title}
                         </h2>
 
                         <span
-                          className={`rounded px-1.5 py-0.2 text-[10px] font-bold ${
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-bold border ${
                             action.priority === 'High'
-                              ? 'bg-[#FEE2E2] text-[#B42318]'
+                              ? 'bg-[#FEE2E2] text-[#C85A52] border-[#C85A52]/20'
                               : action.priority === 'Medium'
-                              ? 'bg-[#FFF5D9] text-[#8A6200]'
-                              : 'bg-[#F1F5F3] text-[#64748B]'
+                              ? 'bg-[#FFF5D9] text-[#C58A32] border-[#C58A32]/20'
+                              : 'bg-white/70 text-[#64748B] border-[#DCE7E5]'
                           }`}
                         >
                           {action.priority}
                         </span>
 
                         <span
-                          className={`rounded px-1.5 py-0.2 text-[10px] font-semibold ${
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-semibold border ${
                             action.status === 'Completed'
-                              ? 'bg-[#DFF4EF] text-[#087F75]'
+                              ? 'bg-[#DFF5EF] text-[#16865D] border-[#16865D]/20'
                               : action.status === 'In Progress'
-                              ? 'bg-[#E0F2FE] text-[#0284C7]'
-                              : 'bg-[#F1F5F3] text-[#64748B]'
+                              ? 'bg-[#E0F2FE] text-[#0284C7] border-[#0284C7]/20'
+                              : 'bg-white/70 text-[#64748B] border-[#DCE7E5]'
                           }`}
                         >
                           {action.status}
@@ -277,25 +277,25 @@ export default function TeacherActionsPage() {
 
                       <div className="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] text-[#64748B]">
                         <span className="flex items-center gap-1">
-                          <Clock size={12} /> Due: <strong className="text-[#263238]">{action.dueDate}</strong>
+                          <Clock size={12} className="text-[#0D9488]" /> Due: <strong className="text-[#142B45]">{action.dueDate}</strong>
                         </span>
                         {action.relatedStudentName && (
                           <span className="flex items-center gap-1">
-                            <User size={12} /> Learner:{' '}
-                            <strong className="text-[#17324D]">{action.relatedStudentName}</strong>
+                            <User size={12} className="text-[#0D9488]" /> Learner:{' '}
+                            <strong className="text-[#142B45]">{action.relatedStudentName}</strong>
                           </span>
                         )}
                         {action.className && (
                           <span className="flex items-center gap-1">
-                            <Users size={12} /> {action.className}
+                            <Users size={12} className="text-[#0D9488]" /> {action.className}
                           </span>
                         )}
                       </div>
 
                       {action.recommendedNextStep && (
-                        <div className="mt-2.5 rounded-lg bg-[#F7F9F6] p-2 text-xs">
+                        <div className="mt-2.5 rounded-xl border border-white/80 bg-white/70 p-2.5 text-xs">
                           <span className="font-semibold text-[#0D9488]">Next Step: </span>
-                          <span className="text-[#263238]">{action.recommendedNextStep}</span>
+                          <span className="text-[#142B45]">{action.recommendedNextStep}</span>
                         </div>
                       )}
                     </div>
@@ -308,7 +308,7 @@ export default function TeacherActionsPage() {
                         handleStatusChange(action.id, e.target.value as TeacherActionRecord['status'])
                       }
                       aria-label="Change action status"
-                      className="h-7 rounded-md border border-[#CBD5E1] bg-white px-2 text-[11px] font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+                      className="glass-input h-7.5 rounded-xl px-2.5 text-[11px] font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
                     >
                       <option value="Pending">Pending</option>
                       <option value="In Progress">In Progress</option>

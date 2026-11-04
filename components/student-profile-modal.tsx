@@ -35,22 +35,22 @@ export function StudentProfileModal({
   if (!student) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-      <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-[#d8e2df] bg-white p-6 shadow-2xl sm:p-7">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1E33]/50 p-4 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/90 glass-panel-elevated p-6 sm:p-7 shadow-2xl">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-[#e8efed] pb-5">
+        <div className="flex items-start justify-between border-b border-[#DCE7E5]/70 pb-5">
           <div className="flex items-center gap-4">
-            <div className="flex size-14 items-center justify-center rounded-2xl bg-[#dff4ef] text-xl font-bold text-[#087f75]">
+            <div className="flex size-14 items-center justify-center rounded-2xl bg-[#DFF5EF] text-xl font-bold text-[#0D9488] shadow-xs">
               {student.avatar}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold text-[#17324d]">{student.fullName}</h3>
-                <span className="rounded-full bg-[#f1f5f3] px-2.5 py-0.5 text-xs font-semibold text-[#526273]">
+                <h3 className="text-xl font-bold text-[#142B45] tracking-tight">{student.fullName}</h3>
+                <span className="rounded-full bg-black/[0.04] border border-[#DCE7E5] px-2.5 py-0.5 text-xs font-semibold text-[#64748B]">
                   Roll #{student.rollNo}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-[#64748b]">
+              <p className="mt-1 text-xs text-[#64748B]">
                 {student.grade} · Asha Primary School · Prerequisite Focus: {student.focusSkill}
               </p>
             </div>
@@ -58,7 +58,7 @@ export function StudentProfileModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl p-1.5 text-[#64748b] hover:bg-[#f1f5f3] hover:text-[#17324d]"
+            className="rounded-xl p-1.5 text-[#64748B] hover:bg-black/[0.05] hover:text-[#142B45] transition"
             aria-label="Close dialog"
           >
             <X size={20} />
@@ -67,62 +67,62 @@ export function StudentProfileModal({
 
         {/* Status bar */}
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl border border-[#e2e8e5] bg-[#f7f9f6] p-3.5">
-            <span className="text-[11px] font-medium text-[#64748b]">Current FLN Status</span>
-            <p className="mt-1 text-sm font-semibold text-[#17324d]">{student.status}</p>
+          <div className="rounded-2xl border border-white/80 glass-panel-subtle p-3.5">
+            <span className="text-[11px] font-medium text-[#64748B]">Current FLN Status</span>
+            <p className="mt-1 text-sm font-semibold text-[#142B45]">{student.status}</p>
           </div>
-          <div className="rounded-2xl border border-[#e2e8e5] bg-[#f7f9f6] p-3.5">
-            <span className="text-[11px] font-medium text-[#64748b]">Diagnostic Assessment</span>
-            <p className="mt-1 text-sm font-semibold text-[#0d9488]">{student.diagnosticStatus}</p>
+          <div className="rounded-2xl border border-white/80 glass-panel-subtle p-3.5">
+            <span className="text-[11px] font-medium text-[#64748B]">Diagnostic Assessment</span>
+            <p className="mt-1 text-sm font-semibold text-[#0D9488]">{student.diagnosticStatus}</p>
           </div>
-          <div className="col-span-2 rounded-2xl border border-[#e2e8e5] bg-[#f7f9f6] p-3.5 sm:col-span-1">
-            <span className="text-[11px] font-medium text-[#64748b]">Remedial Pathway</span>
-            <p className="mt-1 text-sm font-semibold text-[#17324d]">{student.planStatus}</p>
+          <div className="col-span-2 rounded-2xl border border-white/80 glass-panel-subtle p-3.5 sm:col-span-1">
+            <span className="text-[11px] font-medium text-[#64748B]">Remedial Pathway</span>
+            <p className="mt-1 text-sm font-semibold text-[#142B45]">{student.planStatus}</p>
           </div>
         </div>
 
         {/* Prerequisite gap callout */}
-        <div className="mt-5 rounded-2xl border border-[#bfe2da] bg-[#dff4ef]/60 p-4">
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#087f75]">
+        <div className="mt-5 rounded-2xl border border-[#14A89B]/30 glass-panel-teal p-4">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#0D9488]">
             <Target size={16} /> Prerequisite Skill Diagnosis
           </div>
-          <p className="mt-1.5 text-sm font-medium text-[#17324d]">{student.prerequisiteGap}</p>
+          <p className="mt-1.5 text-sm font-semibold text-[#142B45]">{student.prerequisiteGap}</p>
           {student.pedagogicalInsight && (
-            <p className="mt-2 text-xs leading-5 text-[#526273]">{student.pedagogicalInsight}</p>
+            <p className="mt-2 text-xs leading-relaxed text-[#526273]">{student.pedagogicalInsight}</p>
           )}
         </div>
 
         {/* Progress bar */}
-        <div className="mt-5 rounded-2xl border border-[#e2e8e5] p-4">
-          <div className="flex items-center justify-between text-xs font-semibold text-[#17324d]">
+        <div className="mt-5 rounded-2xl border border-white/80 glass-panel-subtle p-4">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#142B45]">
             <span>Foundational Milestone Completion</span>
-            <span className="text-[#0d9488]">{student.progressPercent}%</span>
+            <span className="text-[#0D9488]">{student.progressPercent}%</span>
           </div>
-          <div className="mt-2.5 h-2.5 w-full overflow-hidden rounded-full bg-[#edf2f0]">
+          <div className="mt-2.5 h-2.5 w-full overflow-hidden rounded-full bg-black/[0.06]">
             <div
-              className="h-full rounded-full bg-[#0d9488] transition-all duration-500"
+              className="h-full rounded-full bg-[#0D9488] transition-all duration-500"
               style={{ width: `${student.progressPercent}%` }}
             />
           </div>
         </div>
 
         {/* Demo Journey Primary Action CTA */}
-        <div className="mt-6 rounded-2xl bg-[#17324d] p-5 text-white">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8acfc4]">
+        <div className="mt-6 rounded-2xl glass-panel-navy p-5 text-white shadow-xl">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#14A89B]">
             <Sparkles size={15} /> Demo Journey Next Action
           </div>
 
           {student.diagnosticStatus === 'Pending assessment' && (
             <div className="mt-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
               <div>
-                <h4 className="text-base font-semibold">Run Foundational Numeracy Diagnostic</h4>
-                <p className="mt-0.5 text-xs text-white/70">
+                <h4 className="text-base font-semibold text-white">Run Foundational Numeracy Diagnostic</h4>
+                <p className="mt-0.5 text-xs text-white/75">
                   Child-friendly 3-question check to verify place-value bundling intuition.
                 </p>
               </div>
               <Button
                 onClick={() => onStartAssessment(student)}
-                className="h-10 shrink-0 rounded-xl bg-[#0d9488] px-4 text-xs font-semibold text-white hover:bg-[#087f75]"
+                className="h-10 shrink-0 rounded-xl bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75] transition"
               >
                 Start Diagnostic <ArrowRight size={14} className="ml-1.5" />
               </Button>
@@ -132,14 +132,14 @@ export function StudentProfileModal({
           {student.diagnosticStatus === 'Completed' && student.planStatus !== 'Approved' && (
             <div className="mt-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
               <div>
-                <h4 className="text-base font-semibold">Review Diagnostic & Approve Learning Plan</h4>
-                <p className="mt-0.5 text-xs text-white/70">
+                <h4 className="text-base font-semibold text-white">Review Diagnostic & Approve Learning Plan</h4>
+                <p className="mt-0.5 text-xs text-white/75">
                   Diagnostic completed ({student.diagnosticScore || 67}%). Review recommended activities.
                 </p>
               </div>
               <Button
                 onClick={() => onReviewPlan(student)}
-                className="h-10 shrink-0 rounded-xl bg-[#0d9488] px-4 text-xs font-semibold text-white hover:bg-[#087f75]"
+                className="h-10 shrink-0 rounded-xl bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75] transition"
               >
                 Review & Approve Plan <ArrowRight size={14} className="ml-1.5" />
               </Button>
@@ -149,8 +149,8 @@ export function StudentProfileModal({
           {student.planStatus === 'Approved' && (
             <div className="mt-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
               <div>
-                <h4 className="text-base font-semibold">Learning Plan Approved & Active</h4>
-                <p className="mt-0.5 text-xs text-white/70">
+                <h4 className="text-base font-semibold text-white">Learning Plan Approved & Active</h4>
+                <p className="mt-0.5 text-xs text-white/75">
                   {student.activities.filter((a) => a.status === 'completed').length} of {student.activities.length} practice
                   activities completed.
                 </p>

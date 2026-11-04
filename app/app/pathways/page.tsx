@@ -105,11 +105,11 @@ export default function PathwaysPage() {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* Toast Feedback */}
       {toastMessage && (
-        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 rounded-lg border border-[#BFE2DA] bg-[#DFF4EF] px-3.5 py-2 text-xs font-semibold text-[#087F75] shadow-md animate-in fade-in slide-in-from-top-2">
-          <CheckCircle2 size={16} />
+        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 rounded-xl border border-[#0D9488]/30 glass-panel-solid px-4 py-2.5 text-xs font-semibold text-[#0D9488] shadow-lg animate-in fade-in slide-in-from-top-2">
+          <CheckCircle2 size={16} className="text-[#0D9488]" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -121,7 +121,7 @@ export default function PathwaysPage() {
             <BookOpen size={15} />
             <span>{t.nav.learningPathways}</span>
           </div>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#17324D]">
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#142B45]">
             Adaptive Remedial Pathways
           </h1>
           <p className="mt-0.5 text-xs text-[#64748B]">
@@ -132,7 +132,7 @@ export default function PathwaysPage() {
         <div className="flex items-center gap-2">
           <Link
             href="/app/assessments"
-            className="flex h-8.5 items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+            className="flex h-9 items-center gap-1.5 rounded-xl border border-[#DCE7E5] bg-white/70 px-3.5 text-xs font-semibold text-[#142B45] hover:bg-white transition-colors"
           >
             <span>Assessments</span>
             <ChevronRight size={13} />
@@ -142,43 +142,43 @@ export default function PathwaysPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#64748B]">Active Pathways</span>
-          <p className="mt-0.5 text-xl font-bold text-[#17324D]">{plans.length}</p>
-          <p className="text-[10px] text-[#64748B]">Individualized 5-day plans</p>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold tracking-wider text-[#64748B] uppercase">Active Pathways</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#142B45]">{plans.length}</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Individualized 5-day plans</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#B7791F]">Pending Approval</span>
-          <p className="mt-0.5 text-xl font-bold text-[#B7791F]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold tracking-wider text-[#C58A32] uppercase">Pending Approval</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#C58A32]">
             {plans.filter((p) => p.status === 'Pending approval').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Requires teacher review</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Requires teacher review</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#0D9488]">In Progress</span>
-          <p className="mt-0.5 text-xl font-bold text-[#0D9488]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold tracking-wider text-[#0D9488] uppercase">In Progress</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#0D9488]">
             {plans.filter((p) => p.status === 'Approved' || p.status === 'In progress').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Active classroom practice</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Active classroom practice</p>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3">
-          <span className="text-[11px] font-medium text-[#15803D]">Completed</span>
-          <p className="mt-0.5 text-xl font-bold text-[#15803D]">
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <span className="text-[11px] font-semibold tracking-wider text-[#16865D] uppercase">Completed</span>
+          <p className="mt-1 text-2xl font-extrabold text-[#16865D]">
             {plans.filter((p) => p.status === 'Completed').length}
           </p>
-          <p className="text-[10px] text-[#64748B]">Milestones verified</p>
+          <p className="text-[11px] text-[#64748B] mt-0.5">Milestones verified</p>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 glass-panel rounded-2xl p-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search pathways by student, title, or target skill..."
-            className="h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs text-[#263238] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 w-full rounded-xl px-3.5 text-xs text-[#142B45] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
           />
         </div>
 
@@ -187,7 +187,7 @@ export default function PathwaysPage() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             aria-label="Filter by pathway status"
-            className="h-8.5 rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
           >
             <option value="All">All Statuses</option>
             <option value="Pending approval">Pending Approval</option>
@@ -200,9 +200,9 @@ export default function PathwaysPage() {
 
       {/* Active Learning Pathways Cards */}
       {filtered.length === 0 ? (
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-12 text-center">
-          <BookOpen size={32} className="mx-auto text-[#CBD5E1]" />
-          <p className="mt-3 text-sm font-semibold text-[#17324D]">{t.common.noRecordsFound}</p>
+        <div className="glass-panel rounded-2xl p-12 text-center">
+          <BookOpen size={32} className="mx-auto text-[#94A3B8]" />
+          <p className="mt-3 text-sm font-semibold text-[#142B45]">{t.common.noRecordsFound}</p>
           <p className="mt-1 text-xs text-[#64748B]">No learning pathways match your filter criteria.</p>
         </div>
       ) : (
@@ -216,41 +216,41 @@ export default function PathwaysPage() {
             return (
               <div
                 key={plan.id}
-                className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs transition hover:border-[#0D9488]/40"
+                className="glass-panel glass-interactive rounded-2xl p-6"
               >
                 <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <h2 className="text-base font-bold text-[#17324D]">
+                      <h2 className="text-base font-bold text-[#142B45]">
                         {isGujarati ? plan.titleGu : plan.title}
                       </h2>
                       <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                        className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold border ${
                           plan.status === 'Approved'
-                            ? 'bg-[#DFF4EF] text-[#087F75]'
+                            ? 'bg-[#DFF5EF] text-[#16865D] border-[#16865D]/20'
                             : plan.status === 'Pending approval'
-                            ? 'bg-[#FFF5D9] text-[#8A6200]'
+                            ? 'bg-[#FFF5D9] text-[#C58A32] border-[#C58A32]/20'
                             : plan.status === 'Completed'
-                            ? 'bg-[#E0F2FE] text-[#0284C7]'
-                            : 'bg-[#F1F5F3] text-[#64748B]'
+                            ? 'bg-[#E0F2FE] text-[#0284C7] border-[#0284C7]/20'
+                            : 'bg-white/60 text-[#64748B] border-[#DCE7E5]'
                         }`}
                       >
                         {plan.status}
                       </span>
                     </div>
 
-                    <p className="mt-1 text-xs text-[#64748B]">
+                    <p className="mt-1.5 text-xs text-[#64748B]">
                       Learner:{' '}
                       <Link
                         href={`/app/students/${plan.studentId}`}
-                        className="font-bold text-[#17324D] hover:text-[#0D9488] hover:underline"
+                        className="font-bold text-[#142B45] hover:text-[#0D9488] hover:underline"
                       >
                         {plan.studentName}
                       </Link>{' '}
-                      · Target Skill: <strong className="text-[#263238]">{plan.targetSkill}</strong>
+                      · Target Skill: <strong className="text-[#142B45]">{plan.targetSkill}</strong>
                     </p>
                     <p className="mt-0.5 text-xs text-[#64748B]">
-                      Prerequisite addressed: <span className="text-[#526273]">{plan.prerequisiteGap}</span>
+                      Prerequisite addressed: <span className="text-[#475569]">{plan.prerequisiteGap}</span>
                     </p>
                   </div>
 
@@ -258,7 +258,7 @@ export default function PathwaysPage() {
                     {plan.status === 'Pending approval' ? (
                       <Button
                         onClick={() => handleReviewPlan(plan)}
-                        className="h-8 rounded-lg bg-[#0D9488] px-3 text-xs font-semibold text-white hover:bg-[#087F75]"
+                        className="h-8.5 rounded-xl bg-[#0D9488] px-3.5 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71]"
                       >
                         Review & Approve
                       </Button>
@@ -266,7 +266,7 @@ export default function PathwaysPage() {
                       <Button
                         variant="outline"
                         onClick={() => handleReviewPlan(plan)}
-                        className="h-8 rounded-lg border-[#CBD5E1] px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+                        className="h-8.5 rounded-xl border-[#DCE7E5] bg-white/70 px-3.5 text-xs font-semibold text-[#142B45] hover:bg-white"
                       >
                         Adjust Pathway
                       </Button>
@@ -276,13 +276,13 @@ export default function PathwaysPage() {
 
                 {/* Progress bar */}
                 <div className="mt-4">
-                  <div className="flex items-center justify-between text-xs text-[#64748B]">
+                  <div className="flex items-center justify-between text-xs text-[#64748B] mb-1">
                     <span>Pathway Completion</span>
                     <span className="font-bold text-[#0D9488]">{percent}% ({completedCount}/{totalCount} activities)</span>
                   </div>
-                  <div className="mt-1 h-1.5 w-full rounded-full bg-[#E2E8F0]">
+                  <div className="h-1.5 w-full rounded-full bg-[#DCE7E5]/70 overflow-hidden">
                     <div
-                      className="h-1.5 rounded-full bg-[#0D9488] transition-all"
+                      className="h-1.5 rounded-full bg-[#0D9488] transition-all duration-300"
                       style={{ width: `${percent}%` }}
                     />
                   </div>
@@ -290,21 +290,21 @@ export default function PathwaysPage() {
 
                 {/* 5-Day Weekly Schedule Grid */}
                 <div className="mt-4 grid gap-2 sm:grid-cols-5">
-                  {plan.weeklySchedule.map((day, idx) => (
+                  {plan.weeklySchedule.map((day) => (
                     <div
                       key={day.day}
-                      className={`rounded-lg border p-2 text-xs ${
+                      className={`rounded-xl border p-2.5 text-xs transition-all ${
                         day.status === 'completed'
-                          ? 'border-[#BFE2DA] bg-[#DFF4EF]/40'
+                          ? 'border-[#0D9488]/30 bg-[#DFF5EF]/60'
                           : day.status === 'scheduled'
-                          ? 'border-[#E2E8F0] bg-[#F7F9F6]'
-                          : 'border-[#CBD5E1] bg-white'
+                          ? 'border-white/80 bg-white/50'
+                          : 'border-[#DCE7E5] bg-white/80'
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-[#17324D]">{day.day}</span>
+                        <span className="font-bold text-[#142B45]">{day.day}</span>
                         {day.status === 'completed' && (
-                          <CheckCircle2 size={12} className="text-[#15803D]" />
+                          <CheckCircle2 size={13} className="text-[#16865D]" />
                         )}
                       </div>
                       <p className="mt-1 text-[11px] text-[#64748B] line-clamp-2" title={day.activityTitle}>
@@ -318,24 +318,24 @@ export default function PathwaysPage() {
                 </div>
 
                 {/* Activities Row with Action Buttons */}
-                <div className="mt-4 divide-y divide-[#F1F5F3] pt-2 border-t border-[#F1F5F3]">
+                <div className="mt-4 divide-y divide-[#DCE7E5]/50 pt-2 border-t border-[#DCE7E5]/50">
                   {plan.activities.map((act, i) => (
                     <div
                       key={act.id}
-                      className="flex flex-col justify-between gap-2 py-2.5 sm:flex-row sm:items-center"
+                      className="flex flex-col justify-between gap-2 py-3 sm:flex-row sm:items-center"
                     >
                       <div className="flex items-start gap-2.5">
-                        <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[#E2E8F0] text-[10px] font-bold text-[#17324D]">
+                        <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-white/80 border border-[#DCE7E5] text-[10px] font-bold text-[#142B45]">
                           {i + 1}
                         </span>
                         <div>
                           <div className="flex items-center gap-2">
-                            <p className="text-xs font-bold text-[#17324D]">{act.title}</p>
-                            <span className="rounded bg-[#F1F5F3] px-1.5 py-0.2 text-[9px] text-[#64748B]">
+                            <p className="text-xs font-bold text-[#142B45]">{act.title}</p>
+                            <span className="rounded-md bg-white/70 px-1.5 py-0.5 text-[9px] text-[#64748B] border border-[#DCE7E5]">
                               {act.format}
                             </span>
                           </div>
-                          <p className="text-[11px] text-[#64748B]">{act.description}</p>
+                          <p className="text-[11px] text-[#64748B] mt-0.5">{act.description}</p>
                         </div>
                       </div>
 
@@ -343,15 +343,15 @@ export default function PathwaysPage() {
                         <span className="text-[11px] text-[#64748B]">{act.duration}</span>
 
                         {act.status === 'completed' ? (
-                          <span className="flex items-center gap-1 rounded bg-[#DFF4EF] px-2 py-0.5 text-[10px] font-bold text-[#087F75]">
+                          <span className="flex items-center gap-1 rounded-full border border-[#16865D]/20 bg-[#DFF5EF] px-2.5 py-0.5 text-[10px] font-bold text-[#16865D]">
                             <CheckCircle2 size={11} /> Done
                           </span>
                         ) : act.status === 'ready' || act.status === 'in_progress' ? (
                           <Button
                             onClick={() => handleStartActivity(plan, act)}
-                            className="h-6.5 rounded-md bg-[#0D9488] px-2 text-[10px] font-semibold text-white hover:bg-[#087F75]"
+                            className="h-7 rounded-xl bg-[#0D9488] px-2.5 text-[10px] font-semibold text-white shadow-xs hover:bg-[#0b7c71]"
                           >
-                            <Play size={10} className="mr-1" /> Launch Activity
+                            <Play size={10} className="mr-1 fill-white" /> Launch Activity
                           </Button>
                         ) : (
                           <span className="text-[10px] text-[#94A3B8]">Locked (prerequisite)</span>

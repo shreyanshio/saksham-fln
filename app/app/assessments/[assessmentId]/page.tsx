@@ -353,8 +353,8 @@ export default function AssessmentRunnerPage({
     <div className="mx-auto max-w-3xl space-y-5">
       {/* Toast Feedback */}
       {toastMessage && (
-        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 rounded-lg border border-[#BFE2DA] bg-[#DFF4EF] px-3.5 py-2 text-xs font-semibold text-[#087F75] shadow-md animate-in fade-in slide-in-from-top-2">
-          <CheckCircle2 size={16} />
+        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 rounded-xl border border-[#0D9488]/30 glass-panel-solid px-4 py-2.5 text-xs font-semibold text-[#0D9488] shadow-lg animate-in fade-in slide-in-from-top-2">
+          <CheckCircle2 size={16} className="text-[#0D9488]" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -365,26 +365,26 @@ export default function AssessmentRunnerPage({
           Assessments Directory
         </Link>
         <ChevronRight size={13} className="text-[#94A3B8]" />
-        <span className="font-semibold text-[#17324D]">{asmt.title}</span>
+        <span className="font-semibold text-[#142B45]">{asmt.title}</span>
       </div>
 
       {/* Header Bar */}
-      <div className="flex flex-col justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs sm:flex-row sm:items-center">
+      <div className="flex flex-col justify-between gap-3 rounded-2xl glass-panel p-4.5 sm:flex-row sm:items-center">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-[#F1F5F3] px-2 py-0.5 text-[10px] font-bold text-[#17324D]">
+            <span className="rounded-lg bg-white/70 px-2.5 py-0.5 text-[10px] font-bold text-[#142B45] border border-white/80">
               Class {asmt.standard}
             </span>
-            <span className="rounded bg-[#DFF4EF] px-2 py-0.5 text-[10px] font-bold text-[#087F75]">
+            <span className="rounded-lg bg-[#DFF5EF]/80 px-2.5 py-0.5 text-[10px] font-bold text-[#0D9488] border border-[#0D9488]/20">
               {asmt.subject === 'numeracy' ? 'Foundational Numeracy' : 'Foundational Literacy'}
             </span>
           </div>
-          <h1 className="mt-1 text-base font-bold text-[#17324D] sm:text-lg">{asmt.title}</h1>
+          <h1 className="mt-1.5 text-base font-bold text-[#142B45] sm:text-lg">{asmt.title}</h1>
         </div>
 
         {/* Student Selector */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-[#64748B]">Active Learner:</span>
+          <span className="text-xs text-[#64748B] font-medium">Active Learner:</span>
           <select
             value={selectedStudentId}
             onChange={(e) => {
@@ -393,7 +393,7 @@ export default function AssessmentRunnerPage({
               setAnswers({})
               setEvaluationResult(null)
             }}
-            className="h-8 rounded-lg border border-[#CBD5E1] bg-white px-2 text-xs font-semibold text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-9 rounded-xl px-3 text-xs font-semibold text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
           >
             {asmt.targetStudentIds.map((sId) => {
               const s = studentService.getStudentById(sId)
@@ -409,15 +409,15 @@ export default function AssessmentRunnerPage({
 
       {/* Resume Banner */}
       {resumedBanner && !evaluationResult && (
-        <div className="flex items-center justify-between rounded-lg border border-[#BFE2DA] bg-[#F0FAF7] px-3.5 py-2 text-xs text-[#087F75]">
+        <div className="flex items-center justify-between rounded-xl border border-[#0D9488]/30 glass-panel-solid px-4 py-2.5 text-xs text-[#0D9488]">
           <div className="flex items-center gap-2">
-            <Sparkles size={14} className="shrink-0" />
+            <Sparkles size={14} className="shrink-0 text-[#0D9488]" />
             <span>{resumedBanner}</span>
           </div>
           <button
             type="button"
             onClick={handleResetAttempt}
-            className="text-[11px] font-bold text-[#64748B] hover:text-[#B91C1C] underline"
+            className="text-[11px] font-bold text-[#64748B] hover:text-[#C85A52] underline transition-colors"
           >
             Start Fresh
           </button>
@@ -426,16 +426,16 @@ export default function AssessmentRunnerPage({
 
       {!evaluationResult ? (
         /* Question Screen (Child-Friendly, One at a Time) */
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 sm:p-6 shadow-xs">
+        <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
           {/* Progress Header */}
           <div className="flex items-center justify-between text-xs text-[#64748B]">
             <span className="font-semibold text-[#0D9488]">
               પ્રશ્ન {currentQuestionIndex + 1} of {FLN_DIAGNOSTIC_QUESTIONS.length}
             </span>
-            <span>Skill Domain: <strong className="text-[#17324D]">{currentQ.skillCategory}</strong></span>
+            <span>Skill Domain: <strong className="text-[#142B45]">{currentQ.skillCategory}</strong></span>
           </div>
 
-          <div className="mt-2 h-2 w-full rounded-full bg-[#E2E8F0]">
+          <div className="mt-2.5 h-2 w-full rounded-full bg-[#DCE7E5]/70 overflow-hidden">
             <div
               className="h-2 rounded-full bg-[#0D9488] transition-all duration-300"
               style={{
@@ -445,10 +445,10 @@ export default function AssessmentRunnerPage({
           </div>
 
           {/* Question Prompt */}
-          <div className="mt-6 rounded-xl bg-[#F7F9F6] p-4 sm:p-5">
+          <div className="mt-6 rounded-2xl border border-white/90 bg-white/70 p-5 shadow-xs">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-lg font-bold text-[#17324D] leading-snug sm:text-xl">
+                <p className="text-lg font-bold text-[#142B45] leading-snug sm:text-xl">
                   {currentQ.questionGu}
                 </p>
                 <p className="mt-1 text-xs text-[#64748B]">{currentQ.questionEn}</p>
@@ -458,10 +458,10 @@ export default function AssessmentRunnerPage({
                 type="button"
                 onClick={handleReadAloud}
                 aria-label="Read prompt aloud"
-                className={`flex size-10 shrink-0 items-center justify-center rounded-lg border transition ${
+                className={`flex size-10 shrink-0 items-center justify-center rounded-xl border transition-all ${
                   isSpeaking
-                    ? 'border-[#0D9488] bg-[#DFF4EF] text-[#087F75] animate-pulse'
-                    : 'border-[#CBD5E1] bg-white text-[#17324D] hover:bg-[#F1F5F3]'
+                    ? 'border-[#0D9488] bg-[#DFF5EF] text-[#0D9488] animate-pulse'
+                    : 'border-[#DCE7E5] bg-white text-[#142B45] hover:bg-[#F5F8F7]'
                 }`}
               >
                 <Volume2 size={18} />
@@ -479,22 +479,22 @@ export default function AssessmentRunnerPage({
                   key={opt.id}
                   type="button"
                   onClick={() => handleSelectOption(opt.id)}
-                  className={`flex items-center justify-between rounded-xl border p-4 text-left transition ${
+                  className={`flex items-center justify-between rounded-xl border p-4 text-left transition-all ${
                     isSelected
-                      ? 'border-[#0D9488] bg-[#DFF4EF]/40 ring-2 ring-[#0D9488] ring-offset-1'
-                      : 'border-[#CBD5E1] bg-white hover:border-[#0D9488]/60 hover:bg-[#F7F9F6]'
+                      ? 'border-[#0D9488] bg-[#DFF5EF]/60 ring-2 ring-[#0D9488] ring-offset-1'
+                      : 'border-[#DCE7E5] bg-white/80 hover:border-[#0D9488]/60 hover:bg-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span
                       className={`flex size-8 shrink-0 items-center justify-center rounded-lg text-xs font-bold ${
-                        isSelected ? 'bg-[#0D9488] text-white' : 'bg-[#E2E8F0] text-[#17324D]'
+                        isSelected ? 'bg-[#0D9488] text-white' : 'bg-[#DCE7E5]/60 text-[#142B45]'
                       }`}
                     >
                       {opt.id}
                     </span>
                     <div>
-                      <p className="text-sm font-bold text-[#17324D]">{opt.labelGu}</p>
+                      <p className="text-sm font-bold text-[#142B45]">{opt.labelGu}</p>
                       <p className="text-[11px] text-[#64748B]">{opt.labelEn}</p>
                     </div>
                   </div>
@@ -505,7 +505,7 @@ export default function AssessmentRunnerPage({
           </div>
 
           {/* Teacher Quick Note for this Question */}
-          <div className="mt-5 pt-4 border-t border-[#F1F5F3]">
+          <div className="mt-5 pt-4 border-t border-[#DCE7E5]/60">
             <label className="block text-xs font-medium text-[#64748B]">
               Teacher observation note (e.g., student verbal hesitation or counting method):
             </label>
@@ -514,19 +514,19 @@ export default function AssessmentRunnerPage({
               value={teacherNotes}
               onChange={(e) => setTeacherNotes(e.target.value)}
               placeholder="e.g., Aarav counted one-by-one with fingers instead of grouping 10s."
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9 w-full rounded-xl px-3.5 text-xs text-[#142B45] focus:border-[#0D9488] focus:outline-none"
             />
           </div>
 
           {/* Navigation Controls & Save Progress */}
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-2.5 pt-3 border-t border-[#F1F5F3]">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-2.5 pt-4 border-t border-[#DCE7E5]/60">
             <div className="flex items-center gap-2">
               <Button
                 type="button"
                 variant="outline"
                 disabled={currentQuestionIndex === 0}
                 onClick={handlePrevious}
-                className="h-8.5 rounded-lg border-[#CBD5E1] px-3 text-xs font-semibold text-[#17324D]"
+                className="h-9 rounded-xl border-[#DCE7E5] bg-white/70 px-3.5 text-xs font-semibold text-[#142B45] hover:bg-white"
               >
                 <ArrowLeft size={13} className="mr-1" /> Previous
               </Button>
@@ -534,7 +534,7 @@ export default function AssessmentRunnerPage({
                 type="button"
                 variant="outline"
                 onClick={handleSaveDraft}
-                className="h-8.5 rounded-lg border-[#BFE2DA] bg-[#F0FAF7] px-3 text-xs font-semibold text-[#087F75] hover:bg-[#E0F4EE]"
+                className="h-9 rounded-xl border-[#0D9488]/30 bg-[#DFF5EF]/50 px-3.5 text-xs font-semibold text-[#0D9488] hover:bg-[#DFF5EF]"
               >
                 <Save size={13} className="mr-1.5" /> Save Progress & Resume Later
               </Button>
@@ -545,7 +545,7 @@ export default function AssessmentRunnerPage({
                 type="button"
                 disabled={!hasAnsweredCurrent}
                 onClick={handleSubmitAssessment}
-                className="h-8.5 rounded-lg bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75]"
+                className="h-9 rounded-xl bg-[#0D9488] px-4.5 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71]"
               >
                 <CheckCircle2 size={13} className="mr-1.5" /> Complete & Evaluate
               </Button>
@@ -554,7 +554,7 @@ export default function AssessmentRunnerPage({
                 type="button"
                 disabled={!hasAnsweredCurrent}
                 onClick={handleNext}
-                className="h-8.5 rounded-lg bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75]"
+                className="h-9 rounded-xl bg-[#0D9488] px-4.5 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71]"
               >
                 Next Question <ArrowRight size={13} className="ml-1" />
               </Button>
@@ -563,32 +563,32 @@ export default function AssessmentRunnerPage({
         </div>
       ) : (
         /* Post-Assessment Explainable Diagnostic Analysis Screen */
-        <div className="space-y-5 rounded-xl border border-[#E2E8F0] bg-white p-5 sm:p-6 shadow-xs">
+        <div className="space-y-6 glass-panel-solid rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-[#DFF4EF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#087F75]">
+                <span className="rounded-lg bg-[#DFF5EF] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0D9488] border border-[#0D9488]/20">
                   Diagnostic Evaluation Generated
                 </span>
-                <span className="rounded bg-[#F1F5F9] px-2 py-0.5 text-[10px] font-semibold text-[#475569]">
+                <span className="rounded-lg bg-white/80 px-2.5 py-0.5 text-[10px] font-semibold text-[#64748B] border border-[#DCE7E5]">
                   Attempt ID: attempt-{asmt.id}-{selectedStudentId}
                 </span>
               </div>
-              <h2 className="mt-1 text-lg font-bold text-[#17324D]">
+              <h2 className="mt-2 text-lg font-bold text-[#142B45]">
                 FLN Diagnostic Analysis: {activeStudent?.fullName}
               </h2>
             </div>
 
             <div className="text-right">
               <span className="text-xs text-[#64748B] block">Baseline FLN Mastery</span>
-              <span className="text-2xl font-bold text-[#0D9488]">
+              <span className="text-2xl font-black text-[#0D9488]">
                 {evaluationResult.overallScore}%
               </span>
             </div>
           </div>
 
           {/* Explainable Skill Breakdown (Separates Insufficient Evidence from Probable Gap) */}
-          <div className="rounded-xl border border-[#E2E8F0] bg-[#F7F9F6] p-4">
+          <div className="glass-panel rounded-2xl p-4.5">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-wider text-[#64748B]">
                 Skill Domain Breakdown
@@ -598,50 +598,50 @@ export default function AssessmentRunnerPage({
               </span>
             </div>
 
-            <div className="mt-3 space-y-3">
+            <div className="mt-3.5 space-y-3">
               {evaluationResult.skills.map((s) => (
-                <div key={s.skillId} className="rounded-lg border border-[#E2E8F0] bg-white p-3 text-xs">
+                <div key={s.skillId} className="rounded-xl border border-white/80 bg-white/70 p-3.5 text-xs">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="font-bold text-[#17324D]">{s.skillName}</span>
+                    <span className="font-bold text-[#142B45]">{s.skillName}</span>
                     <span
-                      className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                      className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold border ${
                         s.status === 'Mastered'
-                          ? 'bg-[#EAF5EA] text-[#15803D]'
+                          ? 'bg-[#DFF5EF] text-[#16865D] border-[#16865D]/20'
                           : s.status === 'Emerging'
-                          ? 'bg-[#DFF4EF] text-[#087F75]'
+                          ? 'bg-[#E0F2FE] text-[#0284C7] border-[#0284C7]/20'
                           : s.status === 'Insufficient Evidence'
-                          ? 'bg-[#F1F5F9] text-[#64748B]'
-                          : 'bg-[#FEF3C7] text-[#B45309]'
+                          ? 'bg-white/70 text-[#64748B] border-[#DCE7E5]'
+                          : 'bg-[#FFF5D9] text-[#C58A32] border-[#C58A32]/20'
                       }`}
                     >
                       {s.statusBadge}
                     </span>
                   </div>
 
-                  <div className="mt-2 flex items-center gap-3">
-                    <div className="h-1.5 flex-1 rounded-full bg-[#E2E8F0]">
+                  <div className="mt-2.5 flex items-center gap-3">
+                    <div className="h-1.5 flex-1 rounded-full bg-[#DCE7E5]/70 overflow-hidden">
                       <div
                         className={`h-1.5 rounded-full ${
                           s.status === 'Mastered'
-                            ? 'bg-[#15803D]'
+                            ? 'bg-[#16865D]'
                             : s.status === 'Emerging'
                             ? 'bg-[#0D9488]'
                             : s.status === 'Insufficient Evidence'
                             ? 'bg-[#94A3B8]'
-                            : 'bg-[#B45309]'
+                            : 'bg-[#C58A32]'
                         }`}
                         style={{ width: `${s.scorePercent}%` }}
                       />
                     </div>
-                    <span className="font-semibold text-[#17324D] shrink-0">
+                    <span className="font-semibold text-[#142B45] shrink-0">
                       {s.scorePercent}% ({s.correctCount}/{s.questionsCount})
                     </span>
                   </div>
 
                   <p className="mt-2 text-[11px] text-[#64748B] leading-relaxed">
-                    <strong>Observation:</strong> {s.explanation}
+                    <strong className="text-[#142B45]">Observation:</strong> {s.explanation}
                   </p>
-                  <p className="mt-1 text-[11px] text-[#087F75] font-medium leading-relaxed">
+                  <p className="mt-1 text-[11px] text-[#0D9488] font-medium leading-relaxed">
                     <strong>Recommended Next Step:</strong> {s.recommendation}
                   </p>
                 </div>
@@ -650,11 +650,11 @@ export default function AssessmentRunnerPage({
           </div>
 
           {/* Probable Learning Gap vs Validated Diagnosis Notice */}
-          <div className="rounded-xl border border-[#FDE68A] bg-[#FFFBEB] p-4 text-xs text-[#92400E]">
+          <div className="rounded-xl border border-[#C58A32]/30 bg-[#FFFBEB]/80 p-4 text-xs text-[#92400E]">
             <div className="flex items-start gap-2.5">
-              <AlertTriangle size={18} className="mt-0.5 shrink-0 text-[#B45309]" />
+              <AlertTriangle size={18} className="mt-0.5 shrink-0 text-[#C58A32]" />
               <div>
-                <strong className="block font-bold text-[#B45309] text-sm">
+                <strong className="block font-bold text-[#C58A32] text-sm">
                   Pedagogical Clarification: Probable Gap vs Validated Diagnosis
                 </strong>
                 <p className="mt-1 leading-relaxed">
@@ -665,37 +665,37 @@ export default function AssessmentRunnerPage({
           </div>
 
           {/* Itemized Evidence Trail */}
-          <div className="rounded-xl border border-[#E2E8F0] p-4">
+          <div className="glass-panel rounded-2xl p-4.5">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#64748B]">
               Item-Level Evidence Trail & Diagnostic Deductions
             </h3>
-            <div className="mt-3 space-y-2.5">
+            <div className="mt-3.5 space-y-2.5">
               {evaluationResult.evidences.map((ev, i) => (
                 <div
                   key={ev.questionId}
-                  className="rounded-lg border border-[#F1F5F3] bg-[#FAFCFB] p-3 text-xs space-y-1.5"
+                  className="rounded-xl border border-white/80 bg-white/70 p-3.5 text-xs space-y-1.5"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-[#17324D]">
+                    <span className="font-bold text-[#142B45]">
                       Item {i + 1}: {ev.skillName}
                     </span>
                     <span
-                      className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                      className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold border ${
                         ev.isCorrect
-                          ? 'bg-[#EAF5EA] text-[#15803D]'
+                          ? 'bg-[#DFF5EF] text-[#16865D] border-[#16865D]/20'
                           : !ev.isAttempted
-                          ? 'bg-[#F1F5F9] text-[#64748B]'
-                          : 'bg-[#FEE2E2] text-[#B91C1C]'
+                          ? 'bg-white/70 text-[#64748B] border-[#DCE7E5]'
+                          : 'bg-[#FEE2E2] text-[#C85A52] border-[#C85A52]/20'
                       }`}
                     >
                       {ev.isCorrect ? 'Correct' : !ev.isAttempted ? 'Insufficient Evidence' : 'Demonstrated Error'}
                     </span>
                   </div>
-                  <p className="text-[#475569]">{ev.questionText}</p>
+                  <p className="text-[#142B45]">{ev.questionText}</p>
                   <div className="grid gap-1 pt-1 text-[11px] sm:grid-cols-2">
                     <div>
                       <span className="text-[#64748B]">Submitted Response:</span>{' '}
-                      <span className="font-semibold text-[#17324D]">{ev.chosenOptionLabel}</span>
+                      <span className="font-semibold text-[#142B45]">{ev.chosenOptionLabel}</span>
                     </div>
                     <div>
                       <span className="text-[#64748B]">Expected Benchmark:</span>{' '}
@@ -703,7 +703,7 @@ export default function AssessmentRunnerPage({
                     </div>
                   </div>
                   <p className="text-[11px] text-[#64748B] pt-1">
-                    <strong className="text-[#17324D]">Diagnostic Deduction:</strong> {ev.misconceptionDiagnosis}
+                    <strong className="text-[#142B45]">Diagnostic Deduction:</strong> {ev.misconceptionDiagnosis}
                   </p>
                 </div>
               ))}
@@ -725,19 +725,19 @@ export default function AssessmentRunnerPage({
               {evaluationResult.recommendedActivities.map((act, i: number) => (
                 <div
                   key={act.id}
-                  className="flex items-center justify-between rounded-lg border border-[#E2E8F0] p-3 text-xs"
+                  className="flex items-center justify-between rounded-xl border border-white/80 bg-white/70 p-3.5 text-xs shadow-xs"
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#DFF4EF] text-xs font-bold text-[#087F75]">
+                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#DFF5EF] text-xs font-bold text-[#0D9488]">
                       {i + 1}
                     </span>
                     <div>
-                      <p className="font-bold text-[#17324D]">{act.title}</p>
+                      <p className="font-bold text-[#142B45]">{act.title}</p>
                       <p className="text-[11px] text-[#64748B]">{act.description}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="rounded bg-[#F1F5F3] px-2 py-0.5 text-[10px] font-semibold text-[#17324D]">
+                    <span className="rounded-lg bg-white/80 px-2 py-0.5 text-[10px] font-semibold text-[#142B45] border border-[#DCE7E5]">
                       {act.duration}
                     </span>
                   </div>
@@ -747,7 +747,7 @@ export default function AssessmentRunnerPage({
           </div>
 
           {/* Teacher Review & Approval Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#F1F5F3] pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#DCE7E5]/60 pt-4">
             <Button
               variant="outline"
               onClick={() => {
@@ -755,7 +755,7 @@ export default function AssessmentRunnerPage({
                 setCurrentQuestionIndex(0)
                 setAnswers({})
               }}
-              className="h-8.5 rounded-lg border-[#CBD5E1] text-xs font-semibold text-[#17324D]"
+              className="h-9 rounded-xl border-[#DCE7E5] bg-white/70 text-xs font-semibold text-[#142B45] hover:bg-white"
             >
               <RotateCcw size={12} className="mr-1.5" /> Retake Diagnostic
             </Button>
@@ -763,7 +763,7 @@ export default function AssessmentRunnerPage({
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="/app/assessments"
-                className="flex h-8.5 items-center rounded-lg border border-[#CBD5E1] px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+                className="flex h-9 items-center rounded-xl border border-[#DCE7E5] bg-white/70 px-3.5 text-xs font-semibold text-[#142B45] hover:bg-white transition-colors"
               >
                 Back to Assessments
               </Link>
@@ -771,7 +771,7 @@ export default function AssessmentRunnerPage({
               {planApproved && activeStudent && (
                 <Link
                   href={`/app/learning-plans/plan-${activeStudent.id}`}
-                  className="flex h-8.5 items-center gap-1.5 rounded-lg border border-[#BFE2DA] bg-[#F0FAF7] px-3 text-xs font-semibold text-[#087F75] hover:bg-[#E0F4EE]"
+                  className="flex h-9 items-center gap-1.5 rounded-xl border border-[#0D9488]/30 bg-[#DFF5EF]/60 px-3.5 text-xs font-semibold text-[#0D9488] hover:bg-[#DFF5EF] transition-colors"
                 >
                   <ExternalLink size={13} /> View Active Plan
                 </Link>
@@ -780,10 +780,10 @@ export default function AssessmentRunnerPage({
               <Button
                 onClick={handleApprovePathway}
                 disabled={planApproved}
-                className={`h-8.5 rounded-lg px-4 text-xs font-semibold text-white transition ${
+                className={`h-9 rounded-xl px-4 text-xs font-semibold text-white shadow-xs transition-all ${
                   planApproved
-                    ? 'bg-[#15803D] hover:bg-[#15803D]'
-                    : 'bg-[#0D9488] hover:bg-[#087F75]'
+                    ? 'bg-[#16865D] hover:bg-[#16865D]'
+                    : 'bg-[#0D9488] hover:bg-[#0b7c71]'
                 }`}
               >
                 <CheckCircle2 size={13} className="mr-1.5" />

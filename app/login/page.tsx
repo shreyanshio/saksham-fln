@@ -94,9 +94,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="grid min-h-screen bg-[#F7F9F6] lg:grid-cols-[1.05fr_0.95fr]">
+    <main className="grid min-h-screen bg-transparent lg:grid-cols-[1.05fr_0.95fr]">
       {/* Left branding pillar */}
-      <section className="relative hidden overflow-hidden bg-[#17324D] p-10 text-white lg:flex lg:flex-col lg:justify-between xl:p-14">
+      <section className="relative hidden overflow-hidden bg-[#142B45] p-10 text-white lg:flex lg:flex-col lg:justify-between xl:p-14">
         <div className="flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-xl bg-[#0D9488] font-bold text-white text-base">
             SF
@@ -180,7 +180,7 @@ export default function LoginPage() {
                 id="role"
                 value={selectedRole}
                 onChange={(e) => handleRoleChange(e.target.value as Role)}
-                className="mt-1.5 h-10 w-full rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs font-medium text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+                className="mt-1.5 h-10 w-full rounded-lg glass-input px-3 text-xs font-medium text-[#17324D] focus:border-[#0D9488] focus:outline-none"
               >
                 {roleOptions.map((opt) => (
                   <option key={opt.id} value={opt.id}>
@@ -224,7 +224,7 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-10 w-full rounded-lg border border-[#CBD5E1] bg-white pl-9 pr-10 text-xs text-[#17324D] focus:border-[#0D9488] focus:outline-none"
+                  className="h-10 w-full rounded-lg glass-input pl-9 pr-10 text-xs text-[#17324D] focus:border-[#0D9488] focus:outline-none"
                 />
                 <button
                   type="button"
@@ -306,7 +306,7 @@ export default function LoginPage() {
       {/* Prototype Preview Information Modal */}
       {modalType && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-md rounded-2xl border border-[#CBD5E1] bg-white p-6 shadow-xl">
+          <div className="w-full max-w-md rounded-2xl glass-input p-6 shadow-xl">
             <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
               <span className="font-bold text-[#17324D] text-sm">
                 Prototype Evaluation Environment Notice

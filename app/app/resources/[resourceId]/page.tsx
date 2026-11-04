@@ -193,7 +193,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
         <div className="lg:col-span-7 space-y-6">
           {/* 1. Guided Math / Bundling Manipulative Simulator */}
           {activity.contentType === 'guided_math' && (
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-xs">
+            <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="rounded-lg bg-[#DFF4EF] p-2 text-[#0D9488]">
@@ -299,7 +299,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
 
           {/* 2. Number Line Simulator */}
           {activity.contentType === 'number_line' && (
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-xs">
+            <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="rounded-lg bg-[#DFF4EF] p-2 text-[#0D9488]">
@@ -383,7 +383,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
 
           {/* 3. Phonics & Matra Flashcard Simulator */}
           {activity.contentType === 'flashcards' && (
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-xs">
+            <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="rounded-lg bg-[#DFF4EF] p-2 text-[#0D9488]">
@@ -468,7 +468,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
 
           {/* 4. Audio Decodable Story */}
           {activity.contentType === 'audio_practice' && (
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-xs">
+            <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="rounded-lg bg-[#DFF4EF] p-2 text-[#0D9488]">
@@ -526,7 +526,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
 
           {/* 5. Printable Worksheet Preview */}
           {activity.contentType === 'worksheet' && (
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-xs">
+            <div className="glass-panel-solid rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="rounded-lg bg-[#DFF4EF] p-2 text-[#0D9488]">
@@ -596,7 +596,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
           )}
 
           {/* Formative Classroom Observation & Completion */}
-          <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+          <div className="glass-panel rounded-2xl p-5">
             <h3 className="text-sm font-bold text-[#17324D]">Log In-Class Practice Outcome</h3>
             <p className="text-xs text-[#64748B]">Record observational notes for the student’s continuous FLN portfolio.</p>
 

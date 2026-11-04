@@ -188,36 +188,36 @@ export default function ReassessmentsPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Upcoming Scheduled</div>
-          <div className="mt-1 text-xl font-bold text-[#17324D]">{upcomingList.length}</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Upcoming Scheduled</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#142B45]">{upcomingList.length}</div>
           <div className="mt-0.5 text-[11px] text-[#0D9488]">Next 7 days</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Overdue Rechecks</div>
-          <div className="mt-1 text-xl font-bold text-[#B42318]">{overdueList.length}</div>
-          <div className="mt-0.5 text-[11px] text-[#B42318]">Action required</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#C85A52]">Overdue Rechecks</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#C85A52]">{overdueList.length}</div>
+          <div className="mt-0.5 text-[11px] text-[#C85A52]">Action required</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Completed & Verified</div>
-          <div className="mt-1 text-xl font-bold text-[#15803D]">{completedList.length}</div>
-          <div className="mt-0.5 text-[11px] text-[#15803D]">Demonstrated mastery</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#16865D]">Completed & Verified</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#16865D]">{completedList.length}</div>
+          <div className="mt-0.5 text-[11px] text-[#16865D]">Demonstrated mastery</div>
         </div>
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
-          <div className="text-xs font-medium text-[#64748B]">Average Learning Gain</div>
-          <div className="mt-1 text-xl font-bold text-[#17324D]">+48% Gain</div>
+        <div className="glass-panel rounded-2xl p-4 transition-all hover:translate-y-[-1px]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">Average Learning Gain</div>
+          <div className="mt-1 text-2xl font-extrabold text-[#142B45]">+48% Gain</div>
           <div className="mt-0.5 text-[11px] text-[#64748B]">Post-remedial uplift</div>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex border-b border-[#E2E8F0]">
+      <div className="flex border-b border-[#DCE7E5]">
         <button
           onClick={() => setActiveTab('upcoming')}
-          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition ${
+          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'upcoming'
               ? 'border-[#0D9488] text-[#0D9488]'
-              : 'border-transparent text-[#64748B] hover:text-[#17324D]'
+              : 'border-transparent text-[#64748B] hover:text-[#142B45]'
           }`}
         >
           <Calendar size={14} />
@@ -226,10 +226,10 @@ export default function ReassessmentsPage() {
 
         <button
           onClick={() => setActiveTab('overdue')}
-          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition ${
+          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'overdue'
-              ? 'border-[#B42318] text-[#B42318]'
-              : 'border-transparent text-[#64748B] hover:text-[#17324D]'
+              ? 'border-[#C85A52] text-[#C85A52]'
+              : 'border-transparent text-[#64748B] hover:text-[#142B45]'
           }`}
         >
           <AlertCircle size={14} />
@@ -238,10 +238,10 @@ export default function ReassessmentsPage() {
 
         <button
           onClick={() => setActiveTab('completed')}
-          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition ${
+          className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'completed'
-              ? 'border-[#15803D] text-[#15803D]'
-              : 'border-transparent text-[#64748B] hover:text-[#17324D]'
+              ? 'border-[#16865D] text-[#16865D]'
+              : 'border-transparent text-[#64748B] hover:text-[#142B45]'
           }`}
         >
           <FileCheck size={14} />
@@ -250,46 +250,46 @@ export default function ReassessmentsPage() {
       </div>
 
       {/* Search Input */}
-      <div className="rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-xs">
+      <div className="glass-panel rounded-2xl p-3">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]" size={15} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8]" size={15} />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search student name, ID, or target competency..."
-            className="w-full rounded-lg border border-[#E2E8F0] bg-[#F7F9F6] py-2 pl-9 pr-3 text-xs text-[#263238] focus:border-[#0D9488] focus:bg-white focus:outline-hidden"
+            className="glass-input h-9 w-full rounded-xl pl-9 pr-3 text-xs text-[#142B45] placeholder:text-[#94A3B8] focus:border-[#0D9488] focus:outline-none"
           />
         </div>
       </div>
 
       {/* List */}
-      <div className="space-y-3">
+      <div className="space-y-3.5">
         {filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[#E2E8F0] bg-white py-12 text-center">
-            <CheckCircle2 size={36} className="text-[#64748B]/40" />
-            <h3 className="mt-3 text-sm font-semibold text-[#17324D]">No reassessments in this view</h3>
+          <div className="glass-panel rounded-2xl py-12 text-center">
+            <CheckCircle2 size={36} className="mx-auto text-[#94A3B8]" />
+            <h3 className="mt-3 text-sm font-semibold text-[#142B45]">No reassessments in this view</h3>
             <p className="mt-1 text-xs text-[#64748B]">All students are up to date or no matches found.</p>
           </div>
         ) : (
           filtered.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col justify-between gap-4 rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs sm:flex-row sm:items-center"
+              className="glass-panel glass-interactive flex flex-col justify-between gap-4 rounded-2xl p-4.5 sm:flex-row sm:items-center"
             >
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-[#17324D]">{item.studentName}</h3>
-                  <span className="rounded-md bg-[#F1F5F9] px-2 py-0.5 text-[10px] font-semibold text-[#475569]">
+                  <h3 className="text-sm font-bold text-[#142B45]">{item.studentName}</h3>
+                  <span className="rounded-lg bg-white/70 border border-[#DCE7E5] px-2 py-0.5 text-[10px] font-semibold text-[#142B45]">
                     Class {item.standard}{item.section} • {item.studentId}
                   </span>
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold border ${
                       item.status === 'Completed'
-                        ? 'bg-[#DCFCE7] text-[#15803D]'
+                        ? 'bg-[#DFF5EF] text-[#16865D] border-[#16865D]/20'
                         : item.status === 'Overdue'
-                        ? 'bg-[#FEE2E2] text-[#B42318]'
-                        : 'bg-[#FEF9C3] text-[#A16207]'
+                        ? 'bg-[#FEE2E2] text-[#C85A52] border-[#C85A52]/20'
+                        : 'bg-[#FFF5D9] text-[#C58A32] border-[#C58A32]/20'
                     }`}
                   >
                     {item.status}
@@ -298,24 +298,24 @@ export default function ReassessmentsPage() {
 
                 <div className="text-xs text-[#64748B]">
                   Target Gap Rechecked:{' '}
-                  <span className="font-semibold text-[#17324D]">{item.targetSkill}</span>
+                  <span className="font-semibold text-[#142B45]">{item.targetSkill}</span>
                 </div>
 
                 <div className="flex items-center gap-3 text-[11px] text-[#64748B]">
                   <span>
-                    Remedial Progress: <strong>{item.remedialDaysCompleted}/{item.remedialDaysTotal} days</strong> completed
+                    Remedial Progress: <strong className="text-[#142B45]">{item.remedialDaysCompleted}/{item.remedialDaysTotal} days</strong> completed
                   </span>
                   <span>•</span>
                   <span>
-                    Scheduled: <strong>{item.scheduledDate}</strong>
+                    Scheduled: <strong className="text-[#142B45]">{item.scheduledDate}</strong>
                   </span>
                 </div>
               </div>
 
               {/* Score Comparison & CTA */}
-              <div className="flex items-center gap-4 border-t border-[#E2E8F0] pt-3 sm:border-t-0 sm:pt-0">
+              <div className="flex items-center gap-4 border-t border-[#DCE7E5]/50 pt-3 sm:border-t-0 sm:pt-0">
                 <div className="flex items-center gap-3 text-center">
-                  <div className="rounded-lg bg-[#F8FAFC] p-2 border border-[#E2E8F0]">
+                  <div className="rounded-xl bg-white/70 p-2 border border-[#DCE7E5]">
                     <div className="text-[10px] text-[#64748B]">Baseline</div>
                     <div className="text-xs font-bold text-[#64748B]">{item.baselineScore}%</div>
                   </div>
@@ -323,11 +323,11 @@ export default function ReassessmentsPage() {
                   {item.reassessmentScore !== undefined ? (
                     <>
                       <ArrowRight size={14} className="text-[#0D9488]" />
-                      <div className="rounded-lg bg-[#DFF4EF] p-2 border border-[#8ACFC4]">
-                        <div className="text-[10px] text-[#0D9488]">Reassessed</div>
+                      <div className="rounded-xl bg-[#DFF5EF]/60 p-2 border border-[#0D9488]/30">
+                        <div className="text-[10px] text-[#0D9488] font-medium">Reassessed</div>
                         <div className="text-xs font-bold text-[#0D9488]">{item.reassessmentScore}%</div>
                       </div>
-                      <div className="rounded-full bg-[#15803D] px-2 py-1 text-[11px] font-bold text-white">
+                      <div className="rounded-full bg-[#16865D] px-2.5 py-1 text-[11px] font-bold text-white shadow-xs">
                         +{item.growthGainPercent}%
                       </div>
                     </>
@@ -339,7 +339,7 @@ export default function ReassessmentsPage() {
                 {item.status !== 'Completed' ? (
                   <Link
                     href={`/app/assessments/new?studentId=${item.studentId}&mode=reassessment`}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#0D9488] px-3.5 py-2 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c72]"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-[#0D9488] px-3.5 py-2 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71] transition-all"
                   >
                     <span>Begin Check</span>
                     <ArrowRight size={13} />
@@ -347,7 +347,7 @@ export default function ReassessmentsPage() {
                 ) : (
                   <Link
                     href={`/app/students/${item.studentId}`}
-                    className="inline-flex items-center gap-1 rounded-lg border border-[#E2E8F0] bg-white px-3 py-1.5 text-xs font-semibold text-[#17324D] hover:bg-[#F8FAFC]"
+                    className="inline-flex items-center gap-1 rounded-xl border border-[#DCE7E5] bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-[#142B45] hover:bg-white transition-colors"
                   >
                     <UserCheck size={13} className="text-[#0D9488]" />
                     <span>View Portfolio</span>

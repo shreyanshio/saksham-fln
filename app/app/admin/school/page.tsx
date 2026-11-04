@@ -123,7 +123,7 @@ export default function SchoolAdminPage() {
       </div>
 
       {/* Details & Editable Contact Info */}
-      <form onSubmit={handleSave} className="space-y-5 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+      <form onSubmit={handleSave} className="space-y-5 glass-panel-solid rounded-2xl p-6 shadow-sm">
         <h2 className="text-sm font-bold text-[#17324D]">Administrative & Geospatial Location</h2>
 
         <div className="grid gap-4 sm:grid-cols-3">

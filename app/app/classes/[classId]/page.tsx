@@ -191,60 +191,62 @@ export default function ClassDetailPage({ params }: PageProps) {
           <span>Back to Classes Directory</span>
         </Link>
 
-        <div className="mt-2 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="rounded-md bg-[#DFF4EF] px-2.5 py-0.5 text-xs font-bold text-[#0D9488]">
-                Standard {classRoom.standard} - Section {classRoom.section}
-              </span>
-              <span className="text-xs text-[#64748B]">
-                Academic Year {classRoom.academicYear} · {classRoom.medium} Medium
-              </span>
+        <div className="mt-3 rounded-3xl border border-white/85 glass-panel p-6 sm:p-7 shadow-xs">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-xl bg-[#DFF5EF] border border-[#14A89B]/30 px-2.5 py-0.5 text-xs font-bold text-[#0D9488]">
+                  Standard {classRoom.standard} - Section {classRoom.section}
+                </span>
+                <span className="text-xs text-[#64748B]">
+                  Academic Year {classRoom.academicYear} · {classRoom.medium} Medium
+                </span>
+              </div>
+              <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-[#142B45]">{classRoom.name}</h1>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#64748B]">
+                <span>
+                  Class Teacher: <strong className="text-[#142B45] font-semibold">{classRoom.classTeacherName}</strong>
+                </span>
+                <button
+                  onClick={() => {
+                    setNewTeacherName(classRoom.classTeacherName)
+                    setEditTeacherOpen(true)
+                  }}
+                  className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-semibold text-[#0D9488] hover:bg-[#DFF5EF] transition"
+                >
+                  <Edit2 size={11} /> Edit Teacher
+                </button>
+                <span>·</span>
+                <span>
+                  Enrolled: <strong className="text-[#142B45] font-semibold">{students.length} Learners</strong>
+                </span>
+              </div>
             </div>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-[#17324D]">{classRoom.name}</h1>
-            <div className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[#64748B]">
-              <span>
-                Class Teacher: <strong className="text-[#263238]">{classRoom.classTeacherName}</strong>
-              </span>
-              <button
-                onClick={() => {
-                  setNewTeacherName(classRoom.classTeacherName)
-                  setEditTeacherOpen(true)
-                }}
-                className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-semibold text-[#0D9488] hover:bg-[#DFF4EF]"
+
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => classService.exportClassCsv(classRoom.id)}
+                className="h-9 rounded-xl px-3.5 text-xs font-semibold text-[#142B45]"
               >
-                <Edit2 size={11} /> Edit Teacher
-              </button>
-              <span>·</span>
-              <span>
-                Enrolled: <strong className="text-[#17324D]">{students.length} Learners</strong>
-              </span>
+                <Download size={13} className="mr-1.5" />
+                <span>{t.classes.exportClassReport}</span>
+              </Button>
+
+              <Button asChild className="h-9 rounded-xl bg-[#0D9488] px-4 text-xs font-bold text-white shadow-xs hover:bg-[#087F75]">
+                <Link href={`/app/assessments/new?classId=${classRoom.id}`}>
+                  <Play size={13} className="mr-1.5" />
+                  <span>{t.classes.startClassAssessment}</span>
+                </Link>
+              </Button>
             </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => classService.exportClassCsv(classRoom.id)}
-              className="h-9 rounded-lg border-[#CBD5E1] px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
-            >
-              <Download size={13} className="mr-1.5" />
-              <span>{t.classes.exportClassReport}</span>
-            </Button>
-
-            <Button asChild className="h-9 rounded-lg bg-[#0D9488] px-3.5 text-xs font-bold text-white shadow-xs hover:bg-[#087F75]">
-              <Link href={`/app/assessments/new?classId=${classRoom.id}`}>
-                <Play size={13} className="mr-1.5" />
-                <span>{t.classes.startClassAssessment}</span>
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-[#E2E8F0]">
+      <div className="border-b border-[#DCE7E5]/70">
         <nav className="flex space-x-6 text-xs font-semibold">
           {[
             { id: 'overview', label: t.classes.tabs.overview },
@@ -262,7 +264,7 @@ export default function ClassDetailPage({ params }: PageProps) {
                 className={`border-b-2 pb-2.5 transition ${
                   isActive
                     ? 'border-[#0D9488] font-bold text-[#0D9488]'
-                    : 'border-transparent text-[#64748B] hover:text-[#17324D]'
+                    : 'border-transparent text-[#64748B] hover:text-[#142B45]'
                 }`}
               >
                 {tab.label}
@@ -276,44 +278,44 @@ export default function ClassDetailPage({ params }: PageProps) {
       {activeTab === 'overview' && (
         <div className="space-y-5">
           {/* 4 Overview Metric Cards */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+            <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
               <span className="text-[11px] font-semibold text-[#64748B]">Total Learners</span>
-              <p className="mt-1 text-2xl font-bold text-[#17324D]">{students.length}</p>
+              <p className="mt-1 text-2xl font-extrabold text-[#142B45] tracking-tight">{students.length}</p>
               <span className="text-[10px] text-[#0D9488]">Active cohort</span>
             </div>
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+            <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
               <span className="text-[11px] font-semibold text-[#64748B]">Assessed</span>
-              <p className="mt-1 text-2xl font-bold text-[#17324D]">{classRoom.studentsAssessedCount}</p>
-              <span className="text-[10px] text-[#15803D]">
+              <p className="mt-1 text-2xl font-extrabold text-[#142B45] tracking-tight">{classRoom.studentsAssessedCount}</p>
+              <span className="text-[10px] text-[#16865D]">
                 {Math.round((classRoom.studentsAssessedCount / (students.length || 1)) * 100)}% coverage
               </span>
             </div>
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+            <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
               <span className="text-[11px] font-semibold text-[#64748B]">{t.common.activePlans}</span>
-              <p className="mt-1 text-2xl font-bold text-[#17324D]">{classRoom.activeSupportPlansCount}</p>
+              <p className="mt-1 text-2xl font-extrabold text-[#142B45] tracking-tight">{classRoom.activeSupportPlansCount}</p>
               <span className="text-[10px] text-[#0D9488]">Weekly remediation</span>
             </div>
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+            <div className="rounded-2xl border border-white/85 glass-panel glass-interactive p-4 shadow-xs">
               <span className="text-[11px] font-semibold text-[#64748B]">Pending Actions</span>
-              <p className="mt-1 text-2xl font-bold text-[#B7791F]">{classRoom.pendingTeacherActionsCount}</p>
+              <p className="mt-1 text-2xl font-extrabold text-[#C58A32] tracking-tight">{classRoom.pendingTeacherActionsCount}</p>
               <span className="text-[10px] text-[#64748B]">Scheduled this week</span>
             </div>
           </div>
 
           {/* FLN Literacy & Numeracy Progress Panels */}
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+            <div className="rounded-3xl border border-white/85 glass-panel p-6 shadow-xs">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-bold text-[#17324D] text-sm">{t.classes.literacyCoverage}</h3>
+                  <h3 className="font-bold text-[#142B45] text-sm tracking-tight">{t.classes.literacyCoverage}</h3>
                   <p className="text-xs text-[#64748B]">Gujarati Phonics, Decoding & Comprehension</p>
                 </div>
-                <span className="text-lg font-bold text-[#0D9488]">{classRoom.flnLiteracyPercentage}%</span>
+                <span className="text-lg font-extrabold text-[#0D9488]">{classRoom.flnLiteracyPercentage}%</span>
               </div>
-              <div className="mt-3 h-2 w-full rounded-full bg-[#EDF2F0]">
+              <div className="mt-3.5 h-2 w-full rounded-full bg-black/[0.05]">
                 <div
-                  className="h-full rounded-full bg-[#0D9488]"
+                  className="h-2 rounded-full bg-[#0D9488]"
                   style={{ width: `${classRoom.flnLiteracyPercentage}%` }}
                 />
               </div>

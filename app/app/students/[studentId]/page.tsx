@@ -206,25 +206,25 @@ export default function StudentDetailPage({
       </div>
 
       {/* Main Student Profile Card */}
-      <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+      <div className="rounded-3xl border border-white/85 glass-panel p-6 sm:p-7 shadow-xs">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
           <div className="flex items-start gap-4">
-            <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-[#DFF4EF] text-lg font-bold text-[#087F75]">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-[#DFF5EF] text-lg font-bold text-[#0D9488] shadow-2xs">
               {student.avatar}
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <h1 className="text-xl font-bold text-[#17324D]">{student.fullName}</h1>
-                <span className="rounded bg-[#F1F5F3] px-2 py-0.5 text-xs font-semibold text-[#64748B]">
+                <h1 className="text-xl sm:text-2xl font-extrabold text-[#142B45] tracking-tight">{student.fullName}</h1>
+                <span className="rounded-lg bg-black/[0.04] border border-[#DCE7E5] px-2 py-0.5 text-xs font-semibold text-[#64748B]">
                   Roll #{student.rollNo}
                 </span>
                 <span
                   className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                     student.overallStatus === 'Needs Support'
-                      ? 'bg-[#FFF5D9] text-[#8A6200]'
+                      ? 'border border-[#C58A32]/30 bg-[#FFF5D9] text-[#C58A32]'
                       : student.overallStatus === 'Developing'
-                      ? 'bg-[#DFF4EF] text-[#087F75]'
-                      : 'bg-[#F1F5F3] text-[#64748B]'
+                      ? 'border border-[#14A89B]/30 bg-[#DFF5EF] text-[#0D9488]'
+                      : 'border border-[#16865D]/30 bg-[#DFF5EF] text-[#16865D]'
                   }`}
                 >
                   {student.overallStatus}
@@ -233,12 +233,12 @@ export default function StudentDetailPage({
               <p className="mt-1 text-xs text-[#64748B]">
                 Class {student.standard}, Section {student.section} · Student ID: {student.studentId} · Devbhumi Dwarka
               </p>
-              <div className="mt-2 flex flex-wrap items-center gap-4 text-xs text-[#263238]">
+              <div className="mt-2.5 flex flex-wrap items-center gap-4 text-xs text-[#172B3A]">
                 <span className="flex items-center gap-1.5 text-[#64748B]">
-                  <User size={13} /> Guardian: <strong className="text-[#17324D]">{student.guardianName}</strong>
+                  <User size={13} className="text-[#0D9488]" /> Guardian: <strong className="text-[#142B45] font-semibold">{student.guardianName}</strong>
                 </span>
                 <span className="flex items-center gap-1.5 text-[#64748B]">
-                  <Phone size={13} /> Phone: <strong className="text-[#17324D]">{student.guardianPhone}</strong>
+                  <Phone size={13} className="text-[#0D9488]" /> Phone: <strong className="text-[#142B45] font-semibold">{student.guardianPhone}</strong>
                 </span>
               </div>
             </div>
@@ -247,13 +247,13 @@ export default function StudentDetailPage({
           <div className="flex flex-wrap items-center gap-2">
             <Button
               onClick={() => setModalMode('assessment')}
-              className="h-8.5 rounded-lg bg-[#0D9488] px-3 text-xs font-semibold text-white hover:bg-[#087F75]"
+              className="h-9 rounded-xl bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75] shadow-xs"
             >
               <ClipboardCheck size={14} className="mr-1.5" /> Run Diagnostic Check
             </Button>
             <Link
               href="/app/parent"
-              className="flex h-8.5 items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-white/80 glass-panel-subtle glass-interactive px-3.5 text-xs font-semibold text-[#142B45] hover:text-[#0D9488]"
             >
               <HeartHandshake size={14} className="text-[#0D9488]" /> Guardian Portal
             </Link>
@@ -264,40 +264,40 @@ export default function StudentDetailPage({
       {/* Grid: Diagnostic Assessment on Left, Remedial Pathway on Right */}
       <div className="grid gap-5 lg:grid-cols-2">
         {/* Diagnostic Assessment Record */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+        <div className="rounded-3xl border border-white/85 glass-panel p-6 shadow-xs">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-sm font-bold text-[#17324D]">FLN Diagnostic Assessment</h2>
+              <h2 className="text-sm font-bold text-[#142B45] tracking-tight">FLN Diagnostic Assessment</h2>
               <p className="text-xs text-[#64748B]">Prerequisite screening and skill evaluation</p>
             </div>
-            <span className="rounded-md bg-[#DFF4EF] px-2 py-0.5 text-xs font-bold text-[#087F75]">
+            <span className="rounded-xl border border-[#14A89B]/30 bg-[#DFF5EF] px-2.5 py-0.5 text-xs font-bold text-[#0D9488]">
               Score: {student.diagnosticScore || 0}%
             </span>
           </div>
 
           <div className="mt-4 space-y-3.5">
-            <div className="rounded-lg bg-[#F7F9F6] p-3 text-xs">
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+            <div className="rounded-2xl border border-white/80 glass-panel-subtle p-3.5 text-xs">
+              <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">
                 Identified Prerequisite Learning Gap
               </span>
-              <p className="mt-1 font-medium text-[#17324D]">{student.prerequisiteGap}</p>
+              <p className="mt-1 font-semibold text-[#142B45]">{student.prerequisiteGap}</p>
             </div>
 
-            <div className="rounded-lg bg-[#F7F9F6] p-3 text-xs">
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+            <div className="rounded-2xl border border-white/80 glass-panel-subtle p-3.5 text-xs">
+              <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">
                 Teacher Pedagogical Insight
               </span>
-              <p className="mt-1 text-[#263238] leading-relaxed">{student.pedagogicalInsight}</p>
+              <p className="mt-1 text-[#172B3A] leading-relaxed">{student.pedagogicalInsight}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="rounded-lg border border-[#E2E8F0] p-2.5 text-center">
-                <span className="text-[11px] text-[#64748B]">Literacy Status</span>
-                <p className="mt-0.5 font-bold text-[#17324D]">{student.literacyStatus}</p>
+              <div className="rounded-2xl border border-white/80 glass-panel-solid p-3 text-center shadow-2xs">
+                <span className="text-[11px] font-semibold text-[#64748B]">Literacy Status</span>
+                <p className="mt-0.5 font-bold text-[#142B45]">{student.literacyStatus}</p>
               </div>
-              <div className="rounded-lg border border-[#E2E8F0] p-2.5 text-center">
-                <span className="text-[11px] text-[#64748B]">Numeracy Status</span>
-                <p className="mt-0.5 font-bold text-[#17324D]">{student.numeracyStatus}</p>
+              <div className="rounded-2xl border border-white/80 glass-panel-solid p-3 text-center shadow-2xs">
+                <span className="text-[11px] font-semibold text-[#64748B]">Numeracy Status</span>
+                <p className="mt-0.5 font-bold text-[#142B45]">{student.numeracyStatus}</p>
               </div>
             </div>
 
@@ -305,7 +305,7 @@ export default function StudentDetailPage({
               <Button
                 variant="outline"
                 onClick={() => setModalMode('diagnostic')}
-                className="w-full h-8.5 rounded-lg border-[#CBD5E1] text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+                className="w-full h-9 rounded-xl text-xs font-semibold text-[#142B45]"
               >
                 Inspect Diagnostic Questions & Analysis
               </Button>
@@ -314,15 +314,17 @@ export default function StudentDetailPage({
         </div>
 
         {/* Active Remedial Pathway & 5-Day Plan */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+        <div className="rounded-3xl border border-white/85 glass-panel p-6 shadow-xs">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-sm font-bold text-[#17324D]">Remedial Learning Pathway</h2>
+              <h2 className="text-sm font-bold text-[#142B45] tracking-tight">Remedial Learning Pathway</h2>
               <p className="text-xs text-[#64748B]">Structured 5-day classroom micro-activities</p>
             </div>
             <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                student.planStatus === 'Approved' ? 'bg-[#DFF4EF] text-[#087F75]' : 'bg-[#FFF5D9] text-[#8A6200]'
+              className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${
+                student.planStatus === 'Approved'
+                  ? 'border border-[#14A89B]/30 bg-[#DFF5EF] text-[#0D9488]'
+                  : 'border border-[#C58A32]/30 bg-[#FFF5D9] text-[#C58A32]'
               }`}
             >
               {student.planStatus}
@@ -330,12 +332,12 @@ export default function StudentDetailPage({
           </div>
 
           <div className="mt-4">
-            <h3 className="font-bold text-[#17324D] text-sm">{student.planTitle}</h3>
-            <div className="mt-2 flex items-center justify-between text-xs">
+            <h3 className="font-bold text-[#142B45] text-sm">{student.planTitle}</h3>
+            <div className="mt-2.5 flex items-center justify-between text-xs">
               <span className="text-[#64748B]">Pathway Progress:</span>
               <span className="font-bold text-[#0D9488]">{student.progressPercent}%</span>
             </div>
-            <div className="mt-1 h-2 w-full rounded-full bg-[#E2E8F0]">
+            <div className="mt-1.5 h-2 w-full rounded-full bg-black/[0.05]">
               <div
                 className="h-2 rounded-full bg-[#0D9488] transition-all"
                 style={{ width: `${student.progressPercent}%` }}

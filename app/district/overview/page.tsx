@@ -174,7 +174,7 @@ export default function DistrictOverviewPage() {
 
         {/* 4 Key Executive Indicators */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div className="glass-panel rounded-2xl p-4.5">
             <div className="flex items-center justify-between text-xs font-medium text-[#64748B]">
               <span>Government Primary Schools</span>
               <Building size={16} className="text-[#0D9488]" />
@@ -183,7 +183,7 @@ export default function DistrictOverviewPage() {
             <div className="mt-1 text-[11px] text-[#0D9488]">4 Talukas Covered</div>
           </div>
 
-          <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div className="glass-panel rounded-2xl p-4.5">
             <div className="flex items-center justify-between text-xs font-medium text-[#64748B]">
               <span>Diagnostic Coverage</span>
               <Users size={16} className="text-[#0D9488]" />
@@ -194,7 +194,7 @@ export default function DistrictOverviewPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div className="glass-panel rounded-2xl p-4.5">
             <div className="flex items-center justify-between text-xs font-medium text-[#64748B]">
               <span>Gujarati Literacy On-Track</span>
               <BookOpen size={16} className="text-[#15803D]" />
@@ -203,7 +203,7 @@ export default function DistrictOverviewPage() {
             <div className="mt-1 text-[11px] text-[#64748B]">Standards 1–5 Benchmark</div>
           </div>
 
-          <div className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div className="glass-panel rounded-2xl p-4.5">
             <div className="flex items-center justify-between text-xs font-medium text-[#64748B]">
               <span>Numeracy On-Track</span>
               <TrendingUp size={16} className="text-[#0D9488]" />
@@ -214,7 +214,7 @@ export default function DistrictOverviewPage() {
         </div>
 
         {/* Supportive Taluka Distribution Table */}
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+        <div className="glass-panel-solid rounded-2xl p-5 shadow-sm shadow-xs">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[#E2E8F0] pb-3">
             <div>
               <h2 className="text-base font-bold text-[#17324D]">Taluka Disaggregated Progress Matrix</h2>

@@ -116,15 +116,15 @@ export default function NewAssessmentPage() {
       </div>
 
       {/* Form Container */}
-      <form onSubmit={handleSubmit} className="space-y-5 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+      <form onSubmit={handleSubmit} className="space-y-6 glass-panel-solid rounded-2xl p-6 shadow-sm">
         {/* Class and Subject */}
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="block text-xs font-bold text-[#17324D]">Target Class</label>
+            <label className="block text-xs font-bold text-[#142B45]">Target Class</label>
             <select
               value={selectedClassId}
               onChange={(e) => setSelectedClassId(e.target.value)}
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
             >
               {classes.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -135,7 +135,7 @@ export default function NewAssessmentPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#17324D]">Subject Domain</label>
+            <label className="block text-xs font-bold text-[#142B45]">Subject Domain</label>
             <select
               value={subject}
               onChange={(e) => {
@@ -147,7 +147,7 @@ export default function NewAssessmentPage() {
                   setTitle('Class 3 Diagnostic Check: Consonant Blends & Story Comprehension')
                 }
               }}
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
             >
               <option value="numeracy">Foundational Numeracy (ગણિત જ્ઞાન)</option>
               <option value="literacy">Foundational Literacy (ભાષા અને વાચન)</option>
@@ -157,24 +157,24 @@ export default function NewAssessmentPage() {
 
         {/* Assessment Title */}
         <div>
-          <label className="block text-xs font-bold text-[#17324D]">Assessment Title</label>
+          <label className="block text-xs font-bold text-[#142B45]">Assessment Title</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-3 text-xs text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3.5 text-xs text-[#142B45] focus:border-[#0D9488] focus:outline-none"
           />
         </div>
 
         {/* Language, Date, Duration */}
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <label className="block text-xs font-bold text-[#17324D]">Medium / Language</label>
+            <label className="block text-xs font-bold text-[#142B45]">Medium / Language</label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as 'gu' | 'en' | 'hi')}
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3 text-xs font-medium text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
             >
               <option value="gu">Gujarati (ગુજરાતી)</option>
               <option value="en">English</option>
@@ -183,43 +183,43 @@ export default function NewAssessmentPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#17324D]">Scheduled Date</label>
+            <label className="block text-xs font-bold text-[#142B45]">Scheduled Date</label>
             <input
               type="date"
               value={scheduledDate}
               onChange={(e) => setScheduledDate(e.target.value)}
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3 text-xs text-[#142B45] focus:border-[#0D9488] focus:outline-none cursor-pointer"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#17324D]">Est. Minutes per Student</label>
+            <label className="block text-xs font-bold text-[#142B45]">Est. Minutes per Student</label>
             <input
               type="number"
               min="5"
               max="30"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              className="mt-1 h-8.5 w-full rounded-lg border border-[#CBD5E1] bg-white px-2.5 text-xs text-[#263238] focus:border-[#0D9488] focus:outline-none"
+              className="mt-1.5 glass-input h-9.5 w-full rounded-xl px-3 text-xs text-[#142B45] focus:border-[#0D9488] focus:outline-none"
             />
           </div>
         </div>
 
         {/* Pedagogical Objective */}
         <div>
-          <label className="block text-xs font-bold text-[#17324D]">Pedagogical Learning Objective</label>
+          <label className="block text-xs font-bold text-[#142B45]">Pedagogical Learning Objective</label>
           <textarea
             rows={2}
             value={objective}
             onChange={(e) => setObjective(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-[#CBD5E1] bg-white p-2.5 text-xs text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="mt-1.5 glass-input w-full rounded-xl p-3 text-xs text-[#142B45] focus:border-[#0D9488] focus:outline-none leading-relaxed"
           />
         </div>
 
         {/* Target Students Checklist */}
         <div>
           <div className="flex items-center justify-between">
-            <label className="block text-xs font-bold text-[#17324D]">
+            <label className="block text-xs font-bold text-[#142B45]">
               Target Learners ({selectedStudentIds.length} selected)
             </label>
             <button
@@ -231,24 +231,24 @@ export default function NewAssessmentPage() {
             </button>
           </div>
 
-          <div className="mt-2 grid max-h-48 overflow-y-auto gap-2 rounded-lg border border-[#E2E8F0] p-2 sm:grid-cols-2">
+          <div className="mt-2.5 grid max-h-52 overflow-y-auto gap-2 rounded-xl border border-[#DCE7E5] bg-white/60 p-2.5 sm:grid-cols-2">
             {classStudents.map((s) => {
               const isChecked = selectedStudentIds.includes(s.id)
               return (
                 <label
                   key={s.id}
-                  className={`flex cursor-pointer items-center gap-2 rounded-lg border p-2 text-xs transition ${
-                    isChecked ? 'border-[#0D9488] bg-[#DFF4EF]/30' : 'border-[#E2E8F0] bg-white hover:bg-[#F7F9F6]'
+                  className={`flex cursor-pointer items-center gap-2.5 rounded-xl border p-2.5 text-xs transition-all ${
+                    isChecked ? 'border-[#0D9488] bg-[#DFF5EF]/60 shadow-xs' : 'border-[#DCE7E5]/70 bg-white/70 hover:bg-white'
                   }`}
                 >
                   <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => toggleStudent(s.id)}
-                    className="size-3.5 rounded accent-[#0D9488]"
+                    className="size-4 rounded accent-[#0D9488]"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="font-bold text-[#17324D] truncate">{s.fullName}</p>
+                    <p className="font-bold text-[#142B45] truncate">{s.fullName}</p>
                     <p className="text-[10px] text-[#64748B]">
                       Roll #{s.rollNo} · {s.overallStatus}
                     </p>
@@ -260,17 +260,17 @@ export default function NewAssessmentPage() {
         </div>
 
         {/* Submit Actions */}
-        <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#F1F5F3]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DCE7E5]/60">
           <Link
             href="/app/assessments"
-            className="flex h-8.5 items-center rounded-lg border border-[#CBD5E1] px-3 text-xs font-semibold text-[#17324D] hover:bg-[#F1F5F3]"
+            className="flex h-9 items-center rounded-xl border border-[#DCE7E5] bg-white/70 px-4 text-xs font-semibold text-[#142B45] hover:bg-white transition-colors"
           >
             Cancel
           </Link>
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="h-8.5 rounded-lg bg-[#0D9488] px-4 text-xs font-semibold text-white hover:bg-[#087F75]"
+            className="h-9 rounded-xl bg-[#0D9488] px-4 text-xs font-semibold text-white shadow-xs hover:bg-[#0b7c71] transition-all"
           >
             <CheckCircle2 size={13} className="mr-1.5" />
             {isSubmitting ? 'Scheduling...' : 'Save & Schedule Assessment'}

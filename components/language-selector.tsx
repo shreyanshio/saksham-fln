@@ -52,10 +52,10 @@ export function LanguageSelector({
 
   const baseStyle =
     variant === 'pill'
-      ? 'flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] bg-[#F7F9F6] px-2.5 py-1 text-xs font-bold text-[#17324D] hover:border-[#0D9488] transition shadow-2xs'
+      ? 'flex items-center gap-1.5 rounded-xl border border-white/80 glass-panel-subtle glass-interactive px-2.5 py-1 text-xs font-bold text-[#142B45] hover:border-[#0D9488]/40 transition shadow-xs'
       : variant === 'button'
-      ? 'flex items-center gap-2 rounded-lg border border-[#CBD5E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#17324D] hover:border-[#0D9488] hover:bg-[#F8FAFC] transition shadow-xs'
-      : 'flex items-center gap-1 px-2 py-1 text-xs font-semibold text-[#17324D] hover:text-[#0D9488] transition'
+      ? 'flex items-center gap-2 rounded-xl border border-white/80 glass-panel-subtle glass-interactive px-3 py-1.5 text-xs font-semibold text-[#142B45] hover:border-[#0D9488]/40 hover:bg-white/90 transition shadow-xs'
+      : 'flex items-center gap-1 px-2 py-1 text-xs font-semibold text-[#142B45] hover:text-[#0D9488] transition'
 
   return (
     <div className={`relative inline-block text-left ${className}`} ref={menuRef} onKeyDown={handleKeyDown}>
@@ -77,37 +77,39 @@ export function LanguageSelector({
         <div
           role="listbox"
           aria-label="Select preferred language"
-          className="absolute right-0 top-full z-50 mt-1 w-40 rounded-xl border border-[#E2E8F0] bg-white py-1.5 shadow-xl animate-in fade-in slide-in-from-top-1"
+          className="absolute right-0 top-full z-50 mt-1.5 w-44 rounded-2xl border border-white/80 glass-panel-elevated py-1.5 shadow-2xl animate-in fade-in slide-in-from-top-1"
         >
           <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">
-            Select Language · ભાષા પસંદ કરો
+            Language · ભાષા · भाषा
           </div>
-          {LANGUAGES.map((item) => {
-            const isSelected = locale === item.id
-            return (
-              <button
-                key={item.id}
-                type="button"
-                role="option"
-                aria-selected={isSelected}
-                onClick={async () => {
-                  await setLocale(item.id)
-                  setIsOpen(false)
-                }}
-                className={`flex w-full items-center justify-between px-3 py-2 text-left text-xs transition ${
-                  isSelected
-                    ? 'bg-[#DFF4EF] font-bold text-[#0D9488]'
-                    : 'text-[#263238] hover:bg-[#F8FAFC]'
-                }`}
-              >
-                <div>
-                  <div className="font-semibold">{item.label}</div>
-                  <div className="text-[10px] text-[#64748B]">{item.scriptName}</div>
-                </div>
-                {isSelected && <Check size={14} className="text-[#0D9488]" />}
-              </button>
-            )
-          })}
+          <div className="space-y-0.5 px-1 pt-1">
+            {LANGUAGES.map((item) => {
+              const isSelected = locale === item.id
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={async () => {
+                    await setLocale(item.id)
+                    setIsOpen(false)
+                  }}
+                  className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition ${
+                    isSelected
+                      ? 'bg-[#DFF5EF]/90 font-bold text-[#0D9488]'
+                      : 'text-[#172B3A] hover:bg-black/[0.04]'
+                  }`}
+                >
+                  <div>
+                    <div className="font-semibold">{item.label}</div>
+                    <div className="text-[10px] text-[#64748B]">{item.scriptName}</div>
+                  </div>
+                  {isSelected && <Check size={14} className="text-[#0D9488]" />}
+                </button>
+              )
+            })}
+          </div>
         </div>
       )}
     </div>

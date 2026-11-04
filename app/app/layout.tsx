@@ -86,7 +86,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const hasUnread = notifications.some((n) => !n.read)
 
   return (
-    <div className="min-h-screen bg-[#F7F9F6] text-[#263238]">
+    <div className="min-h-screen text-[#172B3A]">
       {/* Sidebar */}
       <AppSidebar
         isOpen={sidebarOpen}

@@ -80,7 +80,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Role Perspective Switcher Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-white p-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 glass-panel rounded-2xl p-3">
         <div className="flex items-center gap-1.5 text-xs text-[#64748B]">
           <ShieldCheck size={15} className="text-[#0D9488]" />
           <span className="font-semibold text-[#17324D]">Perspective:</span>
@@ -114,7 +114,7 @@ export default function ReportsPage() {
             value={timeframe}
             onChange={(e) => setTimeframe(e.target.value as 'term1' | 'term2' | 'annual')}
             aria-label="Filter report timeframe"
-            className="h-7.5 rounded-md border border-[#CBD5E1] bg-white px-2 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
+            className="glass-input h-8 rounded-xl px-2.5 text-xs font-medium text-[#263238] focus:border-[#0D9488] focus:outline-none"
           >
             <option value="term1">Term 1 Baseline (Current)</option>
             <option value="term2">Term 2 Progress</option>
@@ -126,7 +126,7 @@ export default function ReportsPage() {
       {/* 4 Summary Metrics */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {report.summaryMetrics.map((m, i) => (
-          <div key={i} className="rounded-xl border border-[#E2E8F0] bg-white p-4 shadow-xs">
+          <div key={i} className="glass-panel rounded-2xl p-4.5 transition-all hover:translate-y-[-1px]">
             <span className="text-xs font-medium text-[#64748B]">{m.label}</span>
             <p className="mt-1 text-2xl font-bold tracking-tight text-[#17324D]">{m.value}</p>
             <p className="mt-0.5 text-[11px] text-[#0D9488]">{m.note}</p>
@@ -136,7 +136,7 @@ export default function ReportsPage() {
 
       {/* Core Health Rates Grid (Assessment Coverage, Remedial Completion, Offline Sync) */}
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+        <div className="glass-panel rounded-2xl p-4.5">
           <div className="flex justify-between text-xs">
             <span className="font-semibold text-[#17324D]">Diagnostic Assessment Coverage</span>
             <span className="font-bold text-[#0D9488]">{report.assessmentCoverageRate}%</span>
@@ -150,7 +150,7 @@ export default function ReportsPage() {
           <p className="mt-1.5 text-[10px] text-[#64748B]">Enrolled students screened</p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+        <div className="glass-panel rounded-2xl p-4.5">
           <div className="flex justify-between text-xs">
             <span className="font-semibold text-[#17324D]">Remedial Pathway Completion</span>
             <span className="font-bold text-[#0D9488]">{report.remedialPlanCompletionRate}%</span>
@@ -164,7 +164,7 @@ export default function ReportsPage() {
           <p className="mt-1.5 text-[10px] text-[#64748B]">5-day micro-activities validated</p>
         </div>
 
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+        <div className="glass-panel rounded-2xl p-4.5">
           <div className="flex justify-between text-xs">
             <span className="font-semibold text-[#17324D]">Offline Data Sync Health</span>
             <span className="font-bold text-[#15803D]">{report.offlineSyncHealthRate}%</span>
@@ -234,7 +234,7 @@ export default function ReportsPage() {
 
       {/* Cluster / Taluka Trend Cards for CRC & DEO Roles */}
       {report.clusterTrend && report.clusterTrend.length > 0 && (
-        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-xs">
+        <div className="glass-panel-solid rounded-2xl p-5 shadow-sm shadow-xs">
           <h2 className="text-sm font-bold text-[#17324D]">
             {selectedRole === 'deo' ? 'Taluka FLN Progress Comparison' : 'Cluster Schools Coverage Comparison'}
           </h2>

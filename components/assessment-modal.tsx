@@ -171,24 +171,24 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4 backdrop-blur-xs">
-      <div className="relative max-h-[95vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-[#d8e2df] bg-white p-5 shadow-2xl sm:p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D1E33]/50 p-3 sm:p-4 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative max-h-[95vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-white/90 glass-panel-elevated p-6 sm:p-8 shadow-2xl">
         {/* Child-Friendly Header */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e8efed] pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#DCE7E5]/70 pb-4">
           <div className="flex items-center gap-3">
-            <div className="flex size-11 items-center justify-center rounded-2xl bg-[#dff4ef] text-base font-bold text-[#087f75]">
+            <div className="flex size-11 items-center justify-center rounded-2xl bg-[#DFF5EF] text-base font-bold text-[#0D9488] shadow-xs">
               {student.avatar}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-[#dff4ef] px-2.5 py-0.5 text-[11px] font-semibold text-[#087f75]">
+                <span className="rounded-full bg-[#DFF5EF] px-2.5 py-0.5 text-[11px] font-semibold text-[#0D9488] border border-[#14A89B]/30">
                   FLN નિદાન ચકાસણી · Diagnostic Check
                 </span>
-                <span className="rounded-full bg-[#f1f5f3] px-2 py-0.5 text-[10px] font-medium text-[#64748b]">
+                <span className="rounded-full bg-black/[0.04] border border-[#DCE7E5] px-2 py-0.5 text-[10px] font-medium text-[#64748B]">
                   {student.grade} · Roll #{student.rollNo}
                 </span>
               </div>
-              <h3 className="mt-0.5 text-base font-bold text-[#17324d] sm:text-lg">
+              <h3 className="mt-0.5 text-base font-bold text-[#142B45] sm:text-lg">
                 વિદ્યાર્થી: {student.fullName}
               </h3>
             </div>
@@ -198,17 +198,17 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
             <button
               type="button"
               onClick={handleLoadDemoScenario}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#bfe2da] bg-[#eef7f4] px-3 py-1.5 text-xs font-semibold text-[#087f75] transition hover:bg-[#dff4ef]"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#14A89B]/40 glass-panel-teal px-3 py-1.5 text-xs font-semibold text-[#0D9488] transition hover:bg-[#DFF5EF]"
               title="Preload sample responses for Aarav K. presentation scenario"
             >
-              <Zap size={13} className="text-[#0d9488]" />
+              <Zap size={13} className="text-[#0D9488]" />
               <span>Load Demo Scenario</span>
             </button>
 
             <button
               type="button"
               onClick={onClose}
-              className="flex size-9 items-center justify-center rounded-xl text-[#64748b] transition hover:bg-[#f1f5f3]"
+              className="flex size-9 items-center justify-center rounded-xl text-[#64748B] transition hover:bg-black/[0.05] hover:text-[#142B45]"
               aria-label="Close assessment"
             >
               <X size={20} />
@@ -217,24 +217,24 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
         </div>
 
         {demoLoadedToast && (
-          <div className="mt-3 rounded-xl border border-[#bfe2da] bg-[#dff4ef] p-2.5 text-xs font-semibold text-[#087f75] animate-in fade-in">
+          <div className="mt-3 rounded-2xl border border-[#14A89B]/40 glass-panel-teal p-3 text-xs font-semibold text-[#0D9488] animate-in fade-in">
             ⚡ Sample responses loaded for presentation evaluation (5 questions ready for review).
           </div>
         )}
 
         {/* Readable Child Progress Stepper */}
-        <div className="mt-4 rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-4">
+        <div className="mt-4 rounded-2xl border border-white/80 glass-panel-subtle p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#0d9488]">
+            <span className="text-xs font-bold text-[#0D9488]">
               {activeQuestion.stageLabel}
             </span>
-            <span className="text-xs font-semibold text-[#64748b]">{progressPercent}% Completed</span>
+            <span className="text-xs font-semibold text-[#64748B]">{progressPercent}% Completed</span>
           </div>
 
           {/* Progress bar */}
-          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-[#edf2f0]">
+          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-black/[0.06]">
             <div
-              className="h-full rounded-full bg-[#0d9488] transition-all duration-300 ease-out"
+              className="h-full rounded-full bg-[#0D9488] transition-all duration-300 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -254,10 +254,10 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                   }}
                   className={`flex size-8 items-center justify-center rounded-xl text-xs font-bold transition ${
                     isCurrent
-                      ? 'bg-[#0d9488] text-white shadow-xs scale-105'
+                      ? 'bg-[#0D9488] text-white shadow-xs scale-105'
                       : isFilled
-                      ? 'border border-[#bfe2da] bg-[#dff4ef] text-[#087f75]'
-                      : 'border border-[#e2e8e5] bg-white text-[#94a3b8]'
+                      ? 'border border-[#14A89B]/40 glass-panel-teal text-[#0D9488]'
+                      : 'border border-[#DCE7E5] glass-panel-solid text-[#94A3B8]'
                   }`}
                   title={`Question ${idx + 1}`}
                 >
@@ -268,16 +268,16 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
           </div>
 
           {/* Reassuring Feedback Banner */}
-          <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#eef7f4] px-3.5 py-2 text-xs font-medium text-[#087f75]">
-            <Sparkles size={14} className="shrink-0 text-[#0d9488]" />
+          <div className="mt-3 flex items-center gap-2 rounded-xl border border-[#14A89B]/30 glass-panel-teal px-3.5 py-2 text-xs font-medium text-[#0D9488]">
+            <Sparkles size={14} className="shrink-0 text-[#0D9488]" />
             <span>{REASSURING_MESSAGES[currentStep]}</span>
           </div>
         </div>
 
         {/* Single Question per Screen Card */}
-        <div className="mt-5 rounded-3xl border border-[#d8e2df] bg-white p-5 shadow-xs sm:p-7">
+        <div className="mt-5 rounded-3xl border border-white/85 glass-panel-solid p-5 shadow-xs sm:p-7">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="rounded-full bg-[#fff5d9] px-3 py-1 text-xs font-semibold text-[#8a6200]">
+            <span className="rounded-full bg-[#FFF5D9] border border-[#C58A32]/30 px-3 py-1 text-xs font-semibold text-[#C58A32]">
               {activeQuestion.skillName}
             </span>
 
@@ -288,8 +288,8 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                 onClick={toggleAudio}
                 className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition ${
                   isPlayingAudio
-                    ? 'border-[#0d9488] bg-[#0d9488] text-white animate-pulse'
-                    : 'border-[#cbd9d5] bg-white text-[#17324d] hover:border-[#0d9488] hover:bg-[#f0f9f6]'
+                    ? 'border-[#0D9488] bg-[#0D9488] text-white animate-pulse'
+                    : 'border-[#DCE7E5] glass-panel-subtle text-[#142B45] hover:border-[#0D9488] hover:bg-white'
                 }`}
                 title="Listen to question spoken aloud"
               >
@@ -300,7 +300,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                   </>
                 ) : (
                   <>
-                    <Volume2 size={15} className="text-[#0d9488]" />
+                    <Volume2 size={15} className="text-[#0D9488]" />
                     <span>સાંભળો / Listen</span>
                   </>
                 )}
@@ -309,7 +309,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
               <button
                 type="button"
                 onClick={() => setShowTranscript(!showTranscript)}
-                className="text-[11px] text-[#64748b] hover:text-[#0d9488] hover:underline"
+                className="text-[11px] text-[#64748B] hover:text-[#0D9488] hover:underline"
               >
                 {showTranscript ? 'Hide text' : 'Transcript'}
               </button>
@@ -318,36 +318,36 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
 
           {/* Audio Transcript Drawer */}
           {showTranscript && (
-            <div className="mt-3 rounded-2xl border border-[#bfe2da] bg-[#dff4ef]/50 p-3.5 text-xs text-[#087f75]">
+            <div className="mt-3 rounded-2xl border border-[#14A89B]/30 glass-panel-teal p-3.5 text-xs text-[#0D9488]">
               <p className="font-semibold">શ્રાવ્ય સંવાદ (Audio Transcript):</p>
               <p className="mt-1 leading-5">{activeQuestion.audioTranscriptGu}</p>
-              <p className="mt-1 text-[#526273]">{activeQuestion.audioTranscriptEn}</p>
+              <p className="mt-1 text-[#64748B]">{activeQuestion.audioTranscriptEn}</p>
             </div>
           )}
 
           {/* Visual Stimulus Box */}
-          <div className="mt-5 flex flex-col items-center justify-center rounded-2xl border border-[#d8e7e2] bg-[#f7fbf9] p-5 text-center">
+          <div className="mt-5 flex flex-col items-center justify-center rounded-2xl border border-[#DCE7E5] glass-panel-subtle p-5 text-center">
             <div className="text-3xl tracking-widest">{activeQuestion.visualStimulus.badge}</div>
-            <p className="mt-2 text-base font-bold text-[#17324d] sm:text-lg">
+            <p className="mt-2 text-base font-bold text-[#142B45] sm:text-lg">
               {activeQuestion.visualStimulus.titleGu}
             </p>
-            <p className="mt-0.5 text-xs text-[#64748b]">{activeQuestion.visualStimulus.titleEn}</p>
-            <span className="mt-2 inline-block rounded-md bg-[#e3efe9] px-2.5 py-0.5 text-[10px] font-semibold text-[#087f75]">
+            <p className="mt-0.5 text-xs text-[#64748B]">{activeQuestion.visualStimulus.titleEn}</p>
+            <span className="mt-2 inline-block rounded-lg bg-black/[0.04] border border-[#DCE7E5] px-2.5 py-0.5 text-[10px] font-semibold text-[#0D9488]">
               {activeQuestion.visualStimulus.detail}
             </span>
           </div>
 
           {/* Question Text in Gujarati & English */}
           <div className="mt-6">
-            <h4 className="text-lg font-bold leading-relaxed text-[#17324d] sm:text-xl">
+            <h4 className="text-lg font-bold leading-relaxed text-[#142B45] sm:text-xl">
               {activeQuestion.questionGu}
             </h4>
-            <p className="mt-1 text-xs text-[#64748b] leading-5">{activeQuestion.questionEn}</p>
+            <p className="mt-1 text-xs text-[#64748B] leading-5">{activeQuestion.questionEn}</p>
           </div>
 
           {/* Large Child-Friendly Answer Targets */}
           <div className="mt-6 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#64748b]">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">
               નીચેમાંથી સાચો જવાબ પસંદ કરો · Select your answer:
             </p>
 
@@ -360,32 +360,32 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                   onClick={() => handleSelectOption(opt.id)}
                   className={`flex min-h-[68px] cursor-pointer items-center justify-between rounded-2xl border p-4 transition-all duration-150 ${
                     isSelected
-                      ? 'border-[#0d9488] bg-[#dff4ef] text-[#17324d] shadow-sm ring-2 ring-[#0d9488]/30'
-                      : 'border-[#cbd9d5] bg-white text-[#263238] hover:border-[#0d9488]/60 hover:bg-[#f7fbf9]'
+                      ? 'border-[#0D9488] glass-panel-teal text-[#142B45] shadow-xs ring-2 ring-[#0D9488]/30 font-medium'
+                      : 'border-[#DCE7E5] glass-panel-subtle text-[#172B3A] hover:border-[#0D9488]/60 hover:bg-white'
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0 flex-1">
                     <span
                       className={`flex size-8 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition ${
                         isSelected
-                          ? 'bg-[#0d9488] text-white'
-                          : 'border border-[#cbd9d5] bg-[#f7f9f6] text-[#64748b]'
+                          ? 'bg-[#0D9488] text-white shadow-2xs'
+                          : 'border border-[#DCE7E5] bg-white/80 text-[#64748B]'
                       }`}
                     >
                       {String.fromCharCode(65 + oIdx)}
                     </span>
                     <div className="min-w-0">
-                      <p className="text-sm font-bold text-[#17324d] sm:text-base">{opt.labelGu}</p>
-                      <p className="mt-0.5 text-xs text-[#64748b] truncate">{opt.labelEn}</p>
+                      <p className="text-sm font-bold text-[#142B45] sm:text-base">{opt.labelGu}</p>
+                      <p className="mt-0.5 text-xs text-[#64748B] truncate">{opt.labelEn}</p>
                     </div>
                   </div>
 
                   <div className="shrink-0 pl-3">
                     <span
-                      className={`flex size-6 items-center justify-center rounded-full border ${
+                      className={`flex size-6 items-center justify-center rounded-full border transition ${
                         isSelected
-                          ? 'border-[#0d9488] bg-[#0d9488] text-white'
-                          : 'border-[#cbd9d5] bg-white'
+                          ? 'border-[#0D9488] bg-[#0D9488] text-white'
+                          : 'border-[#CBD5E1] bg-white'
                       }`}
                     >
                       {isSelected && '✓'}
@@ -398,7 +398,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
 
           {/* Selection indicator feedback */}
           {answers[activeQuestion.id] && (
-            <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-[#087f75]">
+            <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-[#0D9488]">
               <CheckCircle2 size={15} />
               <span>જવાબ નોંધાયો છે · Answer recorded!</span>
             </div>
@@ -406,11 +406,11 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
         </div>
 
         {/* Collapsible Teacher Observation Notes */}
-        <div className="mt-4 rounded-2xl border border-[#e2e8e5] bg-[#fbfdfc] p-4">
+        <div className="mt-4 rounded-2xl border border-white/80 glass-panel-subtle p-4">
           <button
             type="button"
             onClick={() => setShowNotes(!showNotes)}
-            className="flex w-full items-center justify-between text-xs font-semibold text-[#17324d]"
+            className="flex w-full items-center justify-between text-xs font-semibold text-[#142B45]"
           >
             <span>શિક્ષક અવલોકન નોંધ · Teacher Formative Observation Notes</span>
             {showNotes ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -422,10 +422,10 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
                 rows={2}
                 value={teacherNotes}
                 onChange={(e) => setTeacherNotes(e.target.value)}
-                className="w-full rounded-xl border border-[#cbd9d5] bg-white p-3 text-xs text-[#17324d] outline-none transition focus:border-[#0d9488] focus:ring-2 focus:ring-[#0d9488]/20"
+                className="w-full rounded-xl glass-input p-3 text-xs text-[#142B45] outline-none transition"
                 placeholder="લખો: બાળકની વિશેષ નોંધ, ગણતરી રીત અથવા મુશ્કેલી…"
               />
-              <span className="mt-1 block text-[10px] text-[#94a3b8]">
+              <span className="mt-1 block text-[10px] text-[#94A3B8]">
                 These observation notes are saved directly into the student&apos;s learning profile.
               </span>
             </div>
@@ -434,20 +434,20 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
 
         {/* Error Message */}
         {errorMsg && (
-          <div className="mt-4 flex items-center gap-2 rounded-xl border border-[#f0c2bb] bg-[#fdedeb] p-3 text-xs font-medium text-[#b42318]">
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-[#C85A52]/30 bg-[#FDEDEB]/90 p-3 text-xs font-medium text-[#C85A52]">
             <AlertCircle size={15} className="shrink-0" />
             <span>{errorMsg}</span>
           </div>
         )}
 
         {/* Navigation Controls */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#e8efed] pt-4">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#DCE7E5]/70 pt-4">
           <Button
             type="button"
             variant="outline"
             disabled={currentStep === 0 || isSubmitting}
             onClick={handlePrev}
-            className="h-11 rounded-xl border-[#b9cbc7] px-4 text-xs font-semibold text-[#17324d] hover:bg-[#edf4f2]"
+            className="h-11 rounded-xl px-4 text-xs font-semibold"
           >
             <ArrowLeft size={15} className="mr-1.5" /> પાછળ / Previous
           </Button>
@@ -457,7 +457,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
               <button
                 type="button"
                 onClick={handleNext}
-                className="text-xs font-semibold text-[#64748b] hover:text-[#17324d] px-3 py-2"
+                className="text-xs font-semibold text-[#64748B] hover:text-[#142B45] px-3 py-2"
               >
                 Skip / છોડો
               </button>
@@ -467,7 +467,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
               <Button
                 type="button"
                 onClick={handleNext}
-                className="h-11 rounded-xl bg-[#0d9488] px-6 text-xs font-semibold text-white shadow-sm hover:bg-[#087f75]"
+                className="h-11 rounded-xl bg-[#0D9488] px-6 text-xs font-semibold text-white shadow-xs hover:bg-[#087F75]"
               >
                 આગળ વધો / Next Question <ArrowRight size={15} className="ml-1.5" />
               </Button>
@@ -477,10 +477,10 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
               type="button"
               disabled={isSubmitting}
               onClick={handleSubmit}
-              className={`h-11 rounded-xl px-6 text-xs font-semibold text-white shadow-sm ${
+              className={`h-11 rounded-xl px-6 text-xs font-semibold text-white shadow-xs ${
                 currentStep === totalQuestions - 1
-                  ? 'bg-[#0d9488] hover:bg-[#087f75]'
-                  : 'bg-[#17324d] hover:bg-[#102438]'
+                  ? 'bg-[#0D9488] hover:bg-[#087F75]'
+                  : 'bg-[#142B45] hover:bg-[#0D1E33]'
               }`}
             >
               {isSubmitting ? (
