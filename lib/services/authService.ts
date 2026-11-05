@@ -1,4 +1,4 @@
-import { Role, RolePermissions } from '@/lib/types'
+import type { Role, RolePermissions } from '@/lib/types'
 
 export interface AuthUser {
   id: string

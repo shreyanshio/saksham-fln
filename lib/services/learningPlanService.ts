@@ -1,4 +1,4 @@
-import { LearningActivity, LearningActivityItem, LearningPlanRecord } from '@/lib/types'
+import type { LearningActivity, LearningActivityItem, LearningPlanRecord } from '@/lib/types'
 import { studentService } from '@/lib/services/studentService'
 import { teacherActionService } from '@/lib/services/teacherActionService'
 import { auditService } from '@/lib/services/auditService'

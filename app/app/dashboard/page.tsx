@@ -294,25 +294,42 @@ export default function DashboardPage() {
         currentStage={state.currentStage}
         onReset={handleReset}
         onQuickJump={(stage) => {
+          const aarav = state.students.find((s) => s.id === 'aarav-k') || state.students[0]
           if (stage === 1) {
             window.location.href = '/login'
+          } else if (stage === 2) {
+            setSelectedStudent(null)
+            setModalMode('none')
+            setState((prev) => ({ ...prev, currentStage: 2 }))
           } else if (stage === 3) {
-            const aarav = state.students.find((s) => s.id === 'aarav-k')
             if (aarav) handleSelectStudent(aarav)
+            setState((prev) => ({ ...prev, currentStage: 3 }))
           } else if (stage === 4) {
-            const aarav = state.students.find((s) => s.id === 'aarav-k')
             if (aarav) handleStartAssessment(aarav)
+            setState((prev) => ({ ...prev, currentStage: 4 }))
           } else if (stage === 5) {
-            const aarav = state.students.find((s) => s.id === 'aarav-k')
             if (aarav) {
               setSelectedStudent(aarav)
               setModalMode('diagnostic')
+              setState((prev) => ({ ...prev, currentStage: 5 }))
             }
           } else if (stage === 6) {
-            const aarav = state.students.find((s) => s.id === 'aarav-k')
             if (aarav) {
               setSelectedStudent(aarav)
               setModalMode('plan')
+              setState((prev) => ({ ...prev, currentStage: 6 }))
+            }
+          } else if (stage === 7) {
+            if (aarav) {
+              setSelectedStudent(aarav)
+              setModalMode('plan')
+              setState((prev) => ({ ...prev, currentStage: 7 }))
+            }
+          } else if (stage === 8) {
+            if (aarav) {
+              setSelectedStudent(aarav)
+              setModalMode('profile')
+              setState((prev) => ({ ...prev, currentStage: 8 }))
             }
           }
         }}

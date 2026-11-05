@@ -18,6 +18,7 @@
 [![React](https://img.shields.io/badge/React-19-149ECA?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
+[![pnpm](https://img.shields.io/badge/pnpm-9.15.4-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
@@ -52,12 +53,12 @@ In rural primary and upper-primary government schools (such as in Devbhumi Dwark
 
 ### 1. 🔍 Prerequisite-Level Diagnostic Assessments
 - Child-friendly, distraction-free **one-question-per-screen** runner.
-- **Audio prompt support** (text-to-speech) for emergent readers and non-literate learners.
-- Differentiates between a confirmed misconception, an active practice gap, and insufficient evidence.
+- **Audio prompt support** (text-to-speech in Gujarati, Hindi, and Indian English) with automatic visual transcript fallback.
+- Differentiates between a confirmed misconception, an active practice gap, and insufficient evidence (unattempted questions).
 
 ### 2. 📋 Adaptive 5-Day Remedial Learning Pathways
 - Micro-intervention schedules designed for daily 10–15 minute classroom slots.
-- Focuses on concrete, low-cost manipulatives (bundling sticks, 10s-frame grids, bead strings).
+- Focuses on concrete, low-cost manipulatives (straw bundles, dual-column decade mats, arrow cards).
 - One-click teacher review and sign-off that immediately updates the student's learning trajectory.
 
 ### 3. 📊 Teacher & Classroom Workspace
@@ -82,13 +83,22 @@ In rural primary and upper-primary government schools (such as in Devbhumi Dwark
 
 ---
 
+## 📚 Technical Documentation
+
+- 📐 [**System Architecture**](docs/ARCHITECTURE.md) — Detailed explanation of the FLN diagnostic engine, service layer, multi-student attempt isolation, andIndic typography system.
+- 🎬 [**Demo Guide**](docs/DEMO_GUIDE.md) — Step-by-step walkthrough of the 8-stage jury presentation flow.
+- ⚠️ [**Known Limitations & Roadmap**](docs/KNOWN_LIMITATIONS.md) — Transparent disclosure of current standalone boundaries and production integration roadmap.
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 | :--- | :--- |
 | **Framework** | Next.js 16.4.3 (App Router, Standalone Output) |
 | **Language** | TypeScript 5.7 |
-| **Styling** | Tailwind CSS v4 with WCAG 2.1 AA accessible color tokens |
+| **Package Manager** | pnpm 9.15.4 |
+| **Styling** | Tailwind CSS v4 with Liquid Glassmorphism design tokens |
 | **Typography** | 24 self-hosted static WOFF2 font assets (Inter, Noto Sans Gujarati, Noto Sans Devanagari) |
 | **State & Storage** | Local-first modular persistence layer with offline mutation staging |
 | **Icons & UI** | Lucide React |
@@ -102,11 +112,15 @@ In rural primary and upper-primary government schools (such as in Devbhumi Dwark
 git clone https://github.com/shreyanshio/saksham-fln.git
 cd saksham-fln
 
-# Install dependencies
-npm install
+# Install dependencies using pnpm
+pnpm install
+
+# Run type check and automated tests
+pnpm run typecheck
+pnpm test
 
 # Run the development server
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.

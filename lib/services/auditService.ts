@@ -1,4 +1,4 @@
-import { AuditEvent } from '@/lib/types'
+import type { AuditEvent } from '@/lib/types'
 import { localStore, STORAGE_KEYS } from '@/lib/storage'
 import { authService } from '@/lib/services/authService'
 

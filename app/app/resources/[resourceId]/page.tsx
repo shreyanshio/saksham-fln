@@ -109,7 +109,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
     const targetName = student ? student.name : 'Aarav Kumar'
 
     // Update student progress & completed counts
-    studentService.recordActivityCompletion(selectedStudentId, observationNotes)
+    studentService.recordActivityCompletion(selectedStudentId, activity.id)
 
     // Complete activity in student's learning plan if found
     if (student) {

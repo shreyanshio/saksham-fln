@@ -1,4 +1,4 @@
-import { TeacherActionRecord } from '@/lib/types'
+import type { TeacherActionRecord } from '@/lib/types'
 
 export const INITIAL_ACTIONS: TeacherActionRecord[] = [
   {

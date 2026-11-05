@@ -44,10 +44,10 @@ export function OfflineSyncDrawer({
     setSyncFeedback(null)
 
     try {
-      const updated = await syncService.triggerSync()
-      onSyncUpdated(updated)
-      setSyncFeedback('All offline student assessments and milestone records synced successfully!')
-      setTimeout(() => setSyncFeedback(null), 4000)
+      const res = await syncService.triggerSync()
+      onSyncUpdated(res.state)
+      setSyncFeedback(res.message)
+      setTimeout(() => setSyncFeedback(null), 5000)
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Sync failed'
       setErrorMessage(msg)

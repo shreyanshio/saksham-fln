@@ -17,7 +17,7 @@ import {
   Users,
   Wifi,
 } from 'lucide-react'
-import { reportService, RoleReportData } from '@/lib/services/reportService'
+import { reportService, RoleReportData, ReportDatasetContext } from '@/lib/services/reportService'
 import { Role } from '@/lib/types'
 import { authService } from '@/lib/services/authService'
 import { useI18n } from '@/lib/i18n/context'
@@ -166,13 +166,13 @@ export default function ReportsPage() {
 
         <div className="glass-panel rounded-2xl p-4.5">
           <div className="flex justify-between text-xs">
-            <span className="font-semibold text-[#17324D]">Offline Data Sync Health</span>
-            <span className="font-bold text-[#15803D]">{report.offlineSyncHealthRate}%</span>
+            <span className="font-semibold text-[#17324D]">Local Storage Integrity</span>
+            <span className="font-bold text-[#15803D]">{report.localStorageHealthRate}%</span>
           </div>
           <div className="mt-2 h-2 w-full rounded-full bg-[#E2E8F0]">
             <div
               className="h-2 rounded-full bg-[#15803D]"
-              style={{ width: `${report.offlineSyncHealthRate}%` }}
+              style={{ width: `${report.localStorageHealthRate}%` }}
             />
           </div>
           <p className="mt-1.5 text-[10px] text-[#64748B]">Device queue sync within 24 hours</p>

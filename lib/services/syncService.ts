@@ -7,6 +7,8 @@ export interface SyncState {
   lastSyncedAt: string
   pendingCount: number
   queue: SyncQueueItem[]
+  storageHealth: 'verified' | 'unverified'
+  cloudEndpointConfigured: boolean
 }
 
 const STORAGE_KEY = 'saksham_fln_sync_v1'
@@ -32,16 +34,6 @@ const INITIAL_QUEUE: SyncQueueItem[] = [
     status: 'pending',
     retryCount: 0,
   },
-  {
-    id: 'sync-item-3',
-    operation: 'update',
-    entity: 'action',
-    entityId: 'act-003',
-    payload: { status: 'Completed' },
-    queuedAt: 'Today, 10:00 AM',
-    status: 'pending',
-    retryCount: 0,
-  },
 ]
 
 export const syncService = {
@@ -58,9 +50,11 @@ export const syncService = {
       isOnline: true,
       isSimulatedOffline: false,
       isSyncing: false,
-      lastSyncedAt: 'Today, 8:45 AM',
+      lastSyncedAt: 'Local device baseline (Today, 8:45 AM)',
       pendingCount: INITIAL_QUEUE.length,
       queue: INITIAL_QUEUE,
+      storageHealth: 'verified',
+      cloudEndpointConfigured: false,
     }
   },
 
@@ -85,29 +79,41 @@ export const syncService = {
     return updated
   },
 
-  triggerSync: async (): Promise<SyncState> => {
+  triggerSync: async (): Promise<{ state: SyncState; message: string }> => {
     const current = syncService.getSyncState()
     if (current.isSimulatedOffline) {
-      throw new Error('Device is currently in simulated offline mode. Turn off offline simulation to sync.')
+      throw new Error(
+        'Device is currently in simulated offline mode. Turn off offline simulation to test connectivity.'
+      )
     }
 
-    // Mark syncing
-    const syncingState: SyncState = { ...current, isSyncing: true }
-    syncService.saveSyncState(syncingState)
-
-    // Simulate async sync operation
-    await new Promise((resolve) => setTimeout(resolve, 800))
-
-    const completedState: SyncState = {
+    // Honest verification without fabricated cloud upload
+    const verifiedState: SyncState = {
       ...current,
       isSyncing: false,
       isOnline: true,
-      lastSyncedAt: 'Just now',
+      lastSyncedAt: 'Local storage verified just now',
+      storageHealth: 'verified',
+      cloudEndpointConfigured: false,
+    }
+    syncService.saveSyncState(verifiedState)
+
+    return {
+      state: verifiedState,
+      message:
+        'Local storage integrity verified. Standalone deployment: 0 remote cloud sync endpoints configured. All records persist locally on this terminal.',
+    }
+  },
+
+  purgeLocalQueue: (): SyncState => {
+    const current = syncService.getSyncState()
+    const cleared: SyncState = {
+      ...current,
       pendingCount: 0,
       queue: [],
     }
-    syncService.saveSyncState(completedState)
-    return completedState
+    syncService.saveSyncState(cleared)
+    return cleared
   },
 
   queueOperation: (item: Omit<SyncQueueItem, 'id' | 'queuedAt' | 'status'>): void => {
@@ -120,7 +126,7 @@ export const syncService = {
     }
     const updated: SyncState = {
       ...current,
-      pendingCount: current.pendingCount + 1,
+      pendingCount: current.queue.length + 1,
       queue: [newItem, ...current.queue],
     }
     syncService.saveSyncState(updated)

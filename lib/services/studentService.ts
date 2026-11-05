@@ -1,4 +1,4 @@
-import { StudentRecord } from '@/lib/types'
+import type { StudentRecord } from '@/lib/types'
 import { classService } from '@/lib/services/classService'
 
 export const INITIAL_STUDENTS: StudentRecord[] = [

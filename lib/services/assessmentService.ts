@@ -1,4 +1,4 @@
-import { AssessmentRecord, Locale, SkillCategory } from '@/lib/types'
+import type { AssessmentRecord, Locale, SkillCategory } from '@/lib/types'
 
 export const INITIAL_ASSESSMENTS: AssessmentRecord[] = [
   {

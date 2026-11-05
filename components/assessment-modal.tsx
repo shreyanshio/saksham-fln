@@ -30,13 +30,29 @@ interface AssessmentModalProps {
   onSubmitAssessment: (answers: Record<string, string>, notes: string) => void
 }
 
-const REASSURING_MESSAGES = [
-  'શાંતિથી પ્રશ્ન જુઓ અને જવાબ પસંદ કરો · Take your time and select your answer.',
-  'સરસ! તમે ખૂબ સારો પ્રયાસ કરી રહ્યા છો · Wonderful effort! Keep going.',
-  'શાબાશ! આગળ વધો, બહુ સરસ ચાલે છે · Great job! Keep moving forward calmly.',
-  'લગભગ પૂરું થવા આવ્યું છે, તમે બહુ સારું કર્યું · Almost there! You are doing very well.',
-  'છેલ્લો પ્રશ્ન! ખૂબ જ ઉત્તમ · Final question! Excellent work.',
-]
+const REASSURING_MESSAGES: Record<string, string[]> = {
+  gu: [
+    'શાંતિથી પ્રશ્ન જુઓ અને જવાબ પસંદ કરો · Take your time and select your answer.',
+    'સરસ! તમે ખૂબ સારો પ્રયાસ કરી રહ્યા છો · Wonderful effort! Keep going.',
+    'શાબાશ! આગળ વધો, બહુ સરસ ચાલે છે · Great job! Keep moving forward calmly.',
+    'લગભગ પૂરું થવા આવ્યું છે, તમે બહુ સારું કર્યું · Almost there! You are doing very well.',
+    'છેલ્લો પ્રશ્ન! ખૂબ જ ઉત્તમ · Final question! Excellent work.',
+  ],
+  hi: [
+    'ध्यान से प्रश्न देखें और उत्तर चुनें · Take your time and select your answer.',
+    'बहुत बढ़िया! आपका प्रयास सराहनीय है · Wonderful effort! Keep going.',
+    'शाबाश! आगे बढ़ें, बहुत अच्छा चल रहा है · Great job! Keep moving forward calmly.',
+    'लगभग पूरा होने वाला है, आपने बहुत अच्छा किया · Almost there! You are doing very well.',
+    'अंतिम प्रश्न! बहुत उत्तम · Final question! Excellent work.',
+  ],
+  en: [
+    'Take your time and select your answer calmly.',
+    'Wonderful effort! Keep going.',
+    'Great job! Keep moving forward calmly.',
+    'Almost there! You are doing very well.',
+    'Final question! Excellent work.',
+  ],
+}
 
 export function AssessmentModal({ student, onClose, onSubmitAssessment }: AssessmentModalProps) {
   const { locale } = useI18n()
@@ -270,7 +286,7 @@ export function AssessmentModal({ student, onClose, onSubmitAssessment }: Assess
           {/* Reassuring Feedback Banner */}
           <div className="mt-3 flex items-center gap-2 rounded-xl border border-[#14A89B]/30 glass-panel-teal px-3.5 py-2 text-xs font-medium text-[#0D9488]">
             <Sparkles size={14} className="shrink-0 text-[#0D9488]" />
-            <span>{REASSURING_MESSAGES[currentStep]}</span>
+            <span>{(REASSURING_MESSAGES[locale] || REASSURING_MESSAGES.en)[currentStep]}</span>
           </div>
         </div>
 

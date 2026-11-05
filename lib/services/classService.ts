@@ -1,4 +1,4 @@
-import { ClassRoom } from '@/lib/types'
+import type { ClassRoom } from '@/lib/types'
 
 export const INITIAL_CLASSES: ClassRoom[] = [
   {
